@@ -1,0 +1,27 @@
+---
+title: Auth
+stylesheet: "../../styles/base.scss"
+script: "auth.js"
+---
+
+{{#extend "default"}}
+    {{#content "main"}}
+        <div class="auth">
+            <section class="auth-form">
+                <div class="auth-form__header">
+                    <h2>Вход</h2>
+                </div>
+                <div class="auth-form__main">
+                    <div class="input">
+                        <input type="text" name="login" placeholder=" ">
+                        <label for="login">Логин</label>
+                    </div>
+                </div>
+                <div class="auth-form__footer">
+                    <button>Авторизоваться</button>
+                    <a href="#">Нет аккаунта?</a>
+                </div>
+            </section>
+        </div>
+    {{/content}}
+{{/extend}}
