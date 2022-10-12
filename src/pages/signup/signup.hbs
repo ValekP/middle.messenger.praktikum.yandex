@@ -6,6 +6,27 @@ script: "signup.js"
 
 {{#extend "default"}}
     {{#content "main"}}
-        <h1>Signup</h1>
+        <div class="auth">
+            <section class="auth-form">
+                <div class="auth-form__header">
+                    <h2>Регистрация</h2>
+                </div>
+                <div class="auth-form__main">
+                    {{> input type="email" name="email" label="Почта" }}
+                    {{> input type="text" name="login" label="Логин" }}
+                    {{> input type="text" name="name" label="Имя" }}
+                    {{> input type="text" name="surname" label="Фамилия" }}
+                    {{> input type="text" name="phone" label="Телефон" }}
+                    {{> input type="password" name="password" label="Пароль" text_error=""}}
+                    {{> input type="password" name="password_again" label="Пароль (ещё раз)" text_error="Пароли не совпадают" }}
+                </div>
+                <div class="auth-form__footer">
+                    {{> button title="Зарегистрироваться" }}
+                    <div class="auth-form__footer_link">
+                        <a href="#">Войти</a>
+                    </div>
+                </div>
+            </section>
+        </div>
     {{/content}}
 {{/extend}}

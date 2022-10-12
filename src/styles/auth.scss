@@ -7,16 +7,11 @@
 
   &-form {
     @include box-style;
-    width: 340px;
-    height: 450px;
-    display: flex;
-    flex-direction: column;
-    flex: 0 auto;
-    padding: 30px;
 
     &__header {
-      padding: 20px 0;
+      margin: 20px 0;
       text-align: center;
+
       h2 {
         font-weight: 500;
         font-size: 20px;
@@ -28,7 +23,15 @@
     }
 
     &__footer {
+      margin-top: 40px;
+      &_link {
+        text-align: center;
+        margin-top: 14px;
 
+        a {
+          font-size: 11px;
+        }
+      }
     }
   }
 }

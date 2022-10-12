@@ -1,0 +1,7 @@
+<div class="input{{# if text_error}} error{{/if }}">
+    <input type="{{ type }}" name="{{ name }}" placeholder="{{ label }}">
+    <label for="{{ name }}">{{ label }}</label>
+    {{# if text_error}}
+        <span>{{ text_error }}</span>
+    {{/if }}
+</div>
