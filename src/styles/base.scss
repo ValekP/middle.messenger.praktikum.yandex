@@ -1,0 +1,10 @@
+@import "reset";
+@import "colors";
+@import "fonts";
+
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: $color-text-body;
+}
