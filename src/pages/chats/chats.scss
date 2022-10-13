@@ -1,23 +1,9 @@
-.layout {
-  @include main;
-  display: flex;
-}
-
-.sidebar {
-}
-
-.content {
-  flex: auto 1;
-  background: #fff;
-}
-
 .chats {
   display: flex;
   flex-direction: column;
-  background: $color-style-1;
   width: 310px;
   height: 100%;
-  border-right: 1px solid $color-style-5;
+
 
   &__header {
     padding: 14px 0;
@@ -252,24 +238,6 @@
       font-size: 12px;
       padding: 10px 20px;
       border: none;
-    }
-  }
-
-  &-send {
-    &__btn {
-      @include flex-j-a-center;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: $color-primary;
-
-      &:hover {
-        background: $color-primary-hover;
-      }
-
-      svg {
-        fill: #fff;
-      }
     }
   }
 }
