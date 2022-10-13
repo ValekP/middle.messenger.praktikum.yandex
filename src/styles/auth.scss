@@ -1,9 +1,6 @@
 .auth {
-  min-height: 100vh;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include main;
+  @include flex-j-a-center;
 
   &-form {
     @include box-style;
@@ -24,6 +21,7 @@
 
     &__footer {
       margin-top: 40px;
+
       &_link {
         text-align: center;
         margin-top: 14px;

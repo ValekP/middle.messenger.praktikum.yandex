@@ -6,6 +6,6 @@ script: "500.js"
 
 {{#extend "default"}}
     {{#content "main"}}
-        <h1>500</h1>
+        {{> error code="500" text="Мы уже фиксим" }}
     {{/content}}
 {{/extend}}

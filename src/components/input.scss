@@ -4,7 +4,7 @@
   flex-direction: column;
   margin-top: 25px;
 
-  &.error {
+  &#{&}-error {
     input {
       color: $color-red;
     }
@@ -18,10 +18,6 @@
 
     &::placeholder {
       opacity: 0;
-    }
-
-    &:focus-visible {
-      outline: none;
     }
 
     &:focus ~ label, &:not(:placeholder-shown) ~ label {

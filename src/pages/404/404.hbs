@@ -6,6 +6,6 @@ script: "404.js"
 
 {{#extend "default"}}
     {{#content "main"}}
-        <h1>404</h1>
+        {{> error code="404" text="Не туда попали" }}
     {{/content}}
 {{/extend}}

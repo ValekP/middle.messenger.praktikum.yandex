@@ -6,18 +6,31 @@
 // Pages
 @import "auth";
 @import "src/pages/chats/chats";
-@import "src/pages/500/500";
-@import "src/pages/404/404";
+
 
 // Components
 @import "src/components/input";
 @import "src/components/button";
+@import "src/components/error";
 
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
+  font-weight: 500;
   color: $color-text-body;
 }
 
+.index-menu {
+  @include main;
+  @include flex-j-a-center;
+
+  li {
+    margin: 10px 0;
+  }
+
+  a {
+    font-size: 20px;
+  }
+}
 
 
