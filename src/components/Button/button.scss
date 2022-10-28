@@ -1,3 +1,6 @@
+@import "src/styles/_mixins";
+@import "src/styles/_colors";
+
 .btn {
   display: block;
   background: $color-primary;

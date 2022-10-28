@@ -1,3 +1,6 @@
+@import "src/styles/_mixins";
+@import "src/styles/_colors";
+
 .auth {
   @include main;
   @include flex-j-a-center;
@@ -5,7 +8,7 @@
   &-form {
     @include box-style;
 
-    &__header {
+    &-header {
       margin: 20px 0;
       text-align: center;
 
@@ -13,6 +16,12 @@
         font-weight: 500;
         font-size: 20px;
       }
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      flex: auto;
     }
 
     &__main {

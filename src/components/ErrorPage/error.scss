@@ -1,0 +1,29 @@
+@import "src/styles/_mixins";
+@import "src/styles/_colors";
+
+.error {
+  @include main;
+  @include flex-j-a-center;
+
+  &-content {
+    @include flex-j-a-center;
+    flex-direction: column;
+  }
+
+  &__code {
+    font-size: 40px;
+  }
+
+  &__text {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+
+  &__link {
+    margin-top: 70px;
+
+    a {
+      font-size: 11px;
+    }
+  }
+}

@@ -1,18 +1,8 @@
-@import "colors";
+@import "_mixins";
+@import "_colors";
+
 @import "reset";
 @import "fonts";
-@import "mixins";
-
-// Pages
-@import "auth";
-@import "src/pages/chats/chats";
-@import "src/pages/profile/profile";
-
-
-// Components
-@import "src/components/input";
-@import "src/components/button";
-@import "src/components/error";
 
 body {
   margin: 0;
