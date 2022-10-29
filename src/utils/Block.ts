@@ -2,8 +2,9 @@ import {v4 as makeUUID} from 'uuid';
 import Handlebars from 'handlebars';
 import EventBus from './EventBus';
 
+type TEvents = Record<string, Record<string, () => void>>;
 
-export default class Block<P = any> {
+export default class Block<Props extends {}> {
     static EVENTS = {
         INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
@@ -11,7 +12,7 @@ export default class Block<P = any> {
         FLOW_RENDER: "flow:render"
     };
 
-    public _props: Record<string, any>;
+    public _props: Props;
     private readonly _children;
     private readonly _id;
     public _element!: HTMLElement;
@@ -44,14 +45,11 @@ export default class Block<P = any> {
         this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
     };
 
-    private createDocumentElement(tag: string) {
-        const element = document.createElement(tag);
-
-        if (this._props.settings?.withInternalID) {
-            element.setAttribute('data-id', this._id);
-        }
-
-        return element;
+    public addEvents() {
+        const {events = {}} = this._props as TEvents;
+        Object.keys(events).forEach(eventName => {
+            this._element.addEventListener(eventName, events[eventName]);
+        });
     };
 
     private _render(): void {
@@ -73,25 +71,22 @@ export default class Block<P = any> {
         return this._element;
     };
 
-    public addEvents() {
-        const {events = {}} = this._props;
-        Object.keys(events).forEach(eventName => {
-            this._element.addEventListener(eventName, events[eventName]);
-        });
-    };
-
     public removeEvents() {
-        const {events = {}} = this._props;
+        const {events = {}} = this._props as TEvents;
         Object.keys(events).forEach(eventName => {
             this._element.removeEventListener(eventName, events[eventName]);
         });
     };
 
     public addAttribute() {
-        const {attr = {}} = this._props;
+        const {attr = {}} = this._props as TEvents;
         Object.entries(attr).forEach(([key, value]) => {
-            this._element.setAttribute(key, value as string);
+            this._element.setAttribute(key, value as unknown as string);
         });
+    };
+
+    public componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
+        return true;
     };
 
     private getChildren<T>(propsAndChilds: Record<string, any>) {
@@ -138,9 +133,8 @@ export default class Block<P = any> {
         }
     };
 
-    private _componentDidMount() {
-        this.componentDidMount();
-        Object.values(this._children).forEach((child:any) => child.dispatchComponentDidMount());
+    private createDocumentElement(tag: string) {
+        return document.createElement(tag);
     };
 
     private componentDidMount() {
@@ -153,15 +147,16 @@ export default class Block<P = any> {
         }
     };
 
-    private _componentDidUpdate(oldProps: P, newProps: P) {
+    private _componentDidMount() {
+        this.componentDidMount();
+        Object.values(this._children).forEach((child: any) => child.dispatchComponentDidMount());
+    };
+
+    private _componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
         const isReRender = this.componentDidUpdate(oldProps, newProps);
         if (isReRender) {
             this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
         }
-    };
-
-    public componentDidUpdate(oldProps: P, newProps: P) {
-        return true;
     };
 
     public setProps(newProps: Record<string, any>) {

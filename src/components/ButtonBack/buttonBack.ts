@@ -1,7 +1,7 @@
 import Block from "../../utils/Block";
-import './backSidebar.scss'
+import './buttonBack.scss'
 
-export class BackSidebar extends Block {
+export class ButtonBack extends Block<{}> {
     constructor() {
         super('div',
             {
@@ -27,4 +27,3 @@ export class BackSidebar extends Block {
         `)
     }
 }
-

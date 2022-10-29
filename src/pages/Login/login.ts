@@ -1,12 +1,12 @@
 import Block from "../../utils/Block";
 
 type LoginProps = {
-    inputLogin: any;
-    inputPassword: any;
-    button: any;
+    inputLogin: object | string;
+    inputPassword: object | string;
+    button: object | string;
 };
 
-export default class Login extends Block {
+export default class Login extends Block<LoginProps> {
     constructor(props: LoginProps) {
         super('div',
             {
@@ -32,4 +32,3 @@ export default class Login extends Block {
         `)
     }
 }
-

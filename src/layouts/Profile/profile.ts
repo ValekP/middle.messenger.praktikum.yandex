@@ -2,10 +2,10 @@ import Block from "../../utils/Block";
 import './profile.scss'
 
 type ProfileProps = {
-    main: any;
+    main: object | string;
 };
 
-export class Profile extends Block {
+export class Profile extends Block<ProfileProps> {
     constructor(props: ProfileProps) {
         super('div',
             {
@@ -23,4 +23,3 @@ export class Profile extends Block {
         `)
     }
 }
-

@@ -13,7 +13,7 @@ type InputAuthProps = {
     onChange?: EventListener;
 };
 
-export class InputAuth extends Block {
+export class InputAuth extends Block<InputAuthProps> {
     constructor(props: InputAuthProps) {
         const {onBlur, onFocus, onChange, ...rest} = props;
         super('div',
@@ -30,6 +30,12 @@ export class InputAuth extends Block {
             }
         )
     }
+
+    addEvents() {
+        this._element.querySelectorAll('input').forEach(input => {
+            input.addEventListener('blur', (e) => this.inputValidate());
+        });
+    };
 
     private getInput() {
         return this._element.querySelector('input') as HTMLInputElement
@@ -78,4 +84,3 @@ export class InputAuth extends Block {
         `)
     }
 }
-

@@ -2,7 +2,7 @@ import Block from "../../utils/Block";
 import './chat.scss'
 
 
-export class Chat extends Block {
+export class Chat extends Block<{}> {
     constructor() {
         super('div',
             {
@@ -77,4 +77,3 @@ export class Chat extends Block {
         `)
     }
 }
-

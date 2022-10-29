@@ -6,7 +6,7 @@ type ErrorProps = {
     statusDescription: string;
 };
 
-export class ErrorPage extends Block {
+export class ErrorPage extends Block<ErrorProps> {
     constructor(props: ErrorProps) {
         super('div',
             {
@@ -29,4 +29,3 @@ export class ErrorPage extends Block {
         `)
     }
 }
-

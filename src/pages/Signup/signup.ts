@@ -1,17 +1,17 @@
 import Block from "../../utils/Block";
 
 type SignupProps = {
-    inputEmail: any;
-    inputLogin: any;
-    inputFirstName: any;
-    inputSecondName: any;
-    inputPhone: any;
-    inputPassword: any;
-    inputPasswordAgain: any;
-    button: any;
+    inputEmail: object | string;
+    inputLogin: object | string;
+    inputFirstName: object | string;
+    inputSecondName: object | string;
+    inputPhone: object | string;
+    inputPassword: object | string;
+    inputPasswordAgain: object | string;
+    button: object | string;
 };
 
-export default class Signup extends Block {
+export default class Signup extends Block<SignupProps> {
     constructor(props: SignupProps) {
         super('div',
             {
@@ -43,4 +43,3 @@ export default class Signup extends Block {
         `)
     }
 }
-

@@ -1,13 +1,13 @@
 import Block from "../../utils/Block";
 import './button.scss'
 
-type ErrorProps = {
+type ButtonProps = {
     title: string;
     onClick?: EventListener;
 };
 
-export class Button extends Block {
-    constructor(props: ErrorProps) {
+export class Button extends Block<ButtonProps> {
+    constructor(props: ButtonProps) {
         const {onClick, ...rest} = props;
         super('div',
             {
@@ -27,4 +27,3 @@ export class Button extends Block {
         `)
     }
 }
-

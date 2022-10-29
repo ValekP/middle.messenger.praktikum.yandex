@@ -28,5 +28,4 @@ const ChatsPage = new Page({
     content: chat
 })
 
-
 export default ChatsPage

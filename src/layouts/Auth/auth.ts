@@ -3,10 +3,10 @@ import './auth.scss'
 
 type AuthProps = {
     title: string;
-    content: any;
+    content: object | string;
 };
 
-export class Auth extends Block {
+export class Auth extends Block<AuthProps> {
     constructor(props: AuthProps) {
         super('div',
             {

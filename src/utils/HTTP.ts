@@ -1,35 +1,35 @@
-enum METHODS {
+import queryStringify from "../helpers/queryStringify";
+
+enum Methods {
     GET = 'GET',
     POST = 'POST',
     PUT = 'PUT',
     DELETE = 'DELETE',
 }
 
-function queryStringify(data: any[]) {
-    return data.map((arr) => arr.join('=')).join('&');
-}
 
-type httpOptions = {
+type HttpOptions = {
     headers?: string;
     method?: string;
     timeout?: number;
     data?: any;
 };
 
-type httpMethod = (url: string, options?: httpOptions) => Promise<unknown>
+type HttpMethod = (url: string, options?: HttpOptions) => Promise<unknown>
 
 
 export class HTTP {
-    get: httpMethod = (url, options = {}) => this.request(url, {...options, method: METHODS.GET});
-    post: httpMethod = (url, options = {}) => this.request(url, {...options, method: METHODS.POST});
-    put: httpMethod = (url, options = {}) => this.request(url, {...options, method: METHODS.PUT});
-    delete: httpMethod = (url, options = {}) => this.request(url, {...options, method: METHODS.DELETE});
+    get: HttpMethod = (url, options = {}) => this.request(options.data ? `${url}?${queryStringify(options.data)}` : url, {
+        ...options,
+        method: Methods.GET
+    });
+    post: HttpMethod = (url, options = {}) => this.request(url, {...options, method: Methods.POST});
+    put: HttpMethod = (url, options = {}) => this.request(url, {...options, method: Methods.PUT});
+    delete: HttpMethod = (url, options = {}) => this.request(url, {...options, method: Methods.DELETE});
 
-    request = (url: string, options: httpOptions = {}) => {
+    request = (url: string, options: HttpOptions = {}) => {
         const {method, data} = options;
-        if (data && method === METHODS.GET) {
-            url += `?${queryStringify(data)}`
-        }
+
         return new Promise((resolve, reject) => {
             if (!method) {
                 reject();
@@ -46,7 +46,7 @@ export class HTTP {
             xhr.onerror = reject;
             xhr.ontimeout = reject;
 
-            if (method === METHODS.GET || !data) {
+            if (method === Methods.GET || !data) {
                 xhr.send();
             } else {
                 xhr.send(data);

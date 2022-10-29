@@ -5,7 +5,7 @@ type ChatsListProps = {
     chats: object;
 };
 
-export class ChatsList extends Block {
+export class ChatsList extends Block<ChatsListProps> {
     constructor(props: ChatsListProps) {
         super('div',
             {
@@ -64,4 +64,3 @@ export class ChatsList extends Block {
         `)
     }
 }
-

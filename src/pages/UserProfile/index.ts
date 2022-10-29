@@ -1,11 +1,11 @@
 import Page from "../../layouts/Page";
-import BackSidebar from "../../components/BackSidebar";
+import ButtonBack from "../../components/ButtonBack";
 import Profile from "../../layouts/Profile";
 import UserProfile from "./userProfile";
 import InputProfile from "../../components/InputProfile";
 import Button from "../../components/Button";
 
-const backSidebar = new BackSidebar()
+const buttonBack = new ButtonBack()
 
 const inputEmail = new InputProfile({
     type: "email",
@@ -67,7 +67,7 @@ const profile = new Profile({
 })
 
 const ProfilePage = new Page({
-    sidebar: backSidebar,
+    sidebar: buttonBack,
     content: profile
 })
 

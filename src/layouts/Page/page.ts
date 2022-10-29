@@ -2,11 +2,11 @@ import Block from "../../utils/Block";
 import './page.scss'
 
 type PageProps = {
-    sidebar: any;
-    content: any;
+    sidebar: object | string;
+    content: object | string;
 };
 
-export class Page extends Block {
+export class Page extends Block<PageProps> {
     constructor(props: PageProps) {
         super('div',
             {

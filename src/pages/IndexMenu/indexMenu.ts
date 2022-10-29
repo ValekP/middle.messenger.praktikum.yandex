@@ -7,7 +7,7 @@ type IndexMenuProps = {
     nav: object;
 };
 
-export class IndexMenu extends Block {
+export class IndexMenu extends Block<IndexMenuProps> {
     constructor(props: IndexMenuProps) {
         super('div',
             {
@@ -41,4 +41,3 @@ export class IndexMenu extends Block {
         `)
     }
 }
-
