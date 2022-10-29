@@ -11,6 +11,10 @@
     "useUnknownInCatchVariables": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist",
+    ".parcel-cache",
+    ".github",
+    "src/server.js"
   ]
 }
