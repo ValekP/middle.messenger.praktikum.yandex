@@ -1,4 +1,4 @@
-import Auth from "../../components/Auth";
+import Auth from "../../layouts/Auth";
 import Signup from "./signup";
 import Button from "../../components/Button";
 import InputAuth from "../../components/InputAuth";

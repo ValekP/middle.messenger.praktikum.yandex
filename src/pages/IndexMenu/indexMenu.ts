@@ -1,12 +1,14 @@
 import Block from "../../utils/Block";
 import renderDOM from "../../utils/renderDOM";
+import './indexMenu.scss'
+
 
 type IndexMenuProps = {
     nav: object;
 };
 
 export class IndexMenu extends Block {
-    constructor(props:IndexMenuProps) {
+    constructor(props: IndexMenuProps) {
         super('div',
             {
                 attr: {
@@ -14,10 +16,12 @@ export class IndexMenu extends Block {
                 },
                 ...props,
                 events: {
-                    click: (e:Event) => {
+                    click: (e: Event) => {
                         // @ts-ignore
-                        if('page' in e.target.dataset){
+                        if ('page' in e.target.dataset) {
                             e.preventDefault();
+                            // @ts-ignore
+                            history.pushState(null, null, e.target.dataset.page);
                             // @ts-ignore
                             renderDOM("#root", props.nav[e.target.dataset.page].page)
                         }
@@ -26,6 +30,7 @@ export class IndexMenu extends Block {
             }
         )
     }
+
     render() {
         return this.compile(`
             <ul>

@@ -11,32 +11,5 @@ body {
   color: $color-text-body;
 }
 
-.layout {
-  @include main;
-  display: flex;
-}
-
-.sidebar {
-  border-right: 1px solid $color-style-5;
-  background: $color-style-1;
-}
-
-.content {
-  flex: auto 1;
-  background: #fff;
-}
-
-.index-menu {
-  @include main;
-  @include flex-j-a-center;
-
-  li {
-    margin: 10px 0;
-  }
-
-  a {
-    font-size: 20px;
-  }
-}
 
 

@@ -1,0 +1,15 @@
+@import "src/styles/_mixins";
+@import "src/styles/_colors";
+
+.index-menu {
+  @include main;
+  @include flex-j-a-center;
+
+  li {
+    margin: 10px 0;
+  }
+
+  a {
+    font-size: 20px;
+  }
+}

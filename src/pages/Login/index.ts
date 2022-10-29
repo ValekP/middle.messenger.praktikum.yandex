@@ -1,4 +1,4 @@
-import Auth from "../../components/Auth";
+import Auth from "../../layouts/Auth";
 import Login from "./login";
 import Button from "../../components/Button";
 import InputAuth from "../../components/InputAuth";
@@ -23,7 +23,7 @@ const button = new Button({
     }
 })
 
-const LoginContent = new Login({
+const loginContent = new Login({
     inputLogin,
     inputPassword,
     button
@@ -31,7 +31,7 @@ const LoginContent = new Login({
 
 const LoginAuth = new Auth({
     title: "Вход",
-    main: LoginContent,
+    main: loginContent,
 })
 
 export default LoginAuth

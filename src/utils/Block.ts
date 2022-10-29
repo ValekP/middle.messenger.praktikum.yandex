@@ -116,29 +116,11 @@ export default class Block<P = any> {
 
         const propsAndStubs = {...props};
 
-        const fragment: HTMLElement = this.createDocumentElement('template');
-
-        const childs: HTMLElement[] = [];
-        let containerId: Record<string, any> = [];
-
-        Object.entries(propsAndStubs).forEach(([key, list]) => {
-            if (Array.isArray(propsAndStubs[key])) {
-                containerId.push(propsAndStubs.__id)
-
-                propsAndStubs[key] = `<div data-id="${propsAndStubs.__id}"></div>`;
-
-                Object.entries(list).forEach(([, child]) => {
-                    if (child instanceof Block) {
-                        childs.push(child.getContent());
-                    }
-                });
-            }
-        });
-
         Object.entries(this._children).forEach(([key, child]: [any, any]) => {
             (propsAndStubs[key] as string) = `<div data-id="${child._id}"></div>`;
         });
 
+        const fragment: HTMLElement = this.createDocumentElement('template');
         fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
 
         Object.values(this._children).forEach((child: any) => {
@@ -151,22 +133,10 @@ export default class Block<P = any> {
             }
         });
 
-        Object.entries(propsAndStubs).forEach(([key]) => {
-            if (containerId.includes(propsAndStubs[key])) {
-                if (fragment instanceof HTMLTemplateElement) {
-                    const stub = fragment.content.querySelector(`[data-id="${propsAndStubs[key]}"]`);
-                    if (stub) {
-                        childs.forEach(child => stub.appendChild(child));
-                    }
-                }
-            }
-        });
-
         if (fragment instanceof HTMLTemplateElement) {
             return fragment.content;
         }
     };
-
 
     private _componentDidMount() {
         this.componentDidMount();

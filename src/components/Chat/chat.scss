@@ -1,0 +1,143 @@
+@import "src/styles/_mixins";
+@import "src/styles/_colors";
+
+
+.chat {
+  @mixin btn-svg($svg-fill) {
+    background: none;
+
+    &:hover {
+      svg {
+        fill: $color-primary;
+      }
+    }
+
+    svg {
+      fill: $svg-fill;
+    }
+  }
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0 20px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid $color-style-5;
+
+    &-info {
+      display: flex;
+      align-items: center;
+
+      &_img {
+        @include user-img(34);
+      }
+
+      &_name {
+        font-weight: 600;
+        font-size: 13px;
+        margin: 0 10px;
+      }
+    }
+
+    &-control {
+      @include flex-j-a-center;
+
+      &_btn {
+        @include flex-j-a-center;
+        width: 25px;
+        height: 25px;
+
+        @include btn-svg($color-text-body);
+      }
+    }
+  }
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid $color-style-5;
+  }
+
+  &-attach {
+    &__btn {
+      @include flex-j-a-center;
+      @include btn-svg($color-text-body-light);
+    }
+  }
+
+  &-input {
+    flex: auto;
+    margin: 0 10px;
+
+    input {
+      width: 100%;
+      background: $color-style-3;
+      border-radius: 30px;
+      font-size: 12px;
+      padding: 10px 20px;
+      border: none;
+    }
+  }
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding-bottom: 30px;
+}
+
+.message {
+  display: flex;
+  margin: 5px 0;
+
+  &#{&}-my {
+    justify-content: flex-end;
+  }
+
+  &-my &-inner {
+    background: $color-style-4;
+    border-bottom-right-radius: 0;
+  }
+
+  &-inner {
+    position: relative;
+    background: $color-style-2;
+    border-radius: 12px;
+    max-width: 50%;
+    min-width: 115px;
+  }
+
+  &__media {
+
+  }
+
+  &__text {
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  &-my &__info_time {
+    color: $color-primary;
+  }
+
+  &__info {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    &_time {
+      font-size: 9px;
+    }
+  }
+}
