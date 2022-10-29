@@ -36,8 +36,14 @@ const nav = {
     }
 }
 
-// @ts-ignore
-const root = window.location.pathname.slice(1) in nav ? nav[window.location.pathname.slice(1)].page : new IndexMenu({nav})
 
-renderDOM('#root', root)
+const app = () => {
+    // @ts-ignore
+    const root = window.location.pathname.slice(1) in nav ? nav[window.location.pathname.slice(1)].page : new IndexMenu({nav})
+    renderDOM('#root', root)
+}
+
+app()
+
+window.addEventListener('popstate', app);
 
