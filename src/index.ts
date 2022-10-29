@@ -5,6 +5,7 @@ import LoginAuth from "./pages/Login";
 import IndexMenu from "./pages/IndexMenu";
 import Error404 from "./pages/Error404";
 import Error500 from "./pages/Error500";
+import SignupAuth from "./pages/Signup";
 
 
 const menu = new IndexMenu({
@@ -12,6 +13,10 @@ const menu = new IndexMenu({
         login: {
             title: "Login",
             page: LoginAuth
+        },
+        signup: {
+            title: "Signup",
+            page: SignupAuth
         },
         page404: {
             title: "404",
