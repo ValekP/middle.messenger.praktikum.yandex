@@ -50,7 +50,7 @@ export class ChatsList extends Block {
                             <div class="chats-item__body">
                                 <div class="chats-item__header">
                                     <div class="chats-item__header_name">{{ this.name }}</div>
-                                    <div class="chats-item__header_date">{{ this.date }}</div>
+                                    <div class="chats-item__header_time">{{ this.date }}</div>
                                 </div>
                                 <div class="chats-item__text">{{ this.text }}</div>
                                 {{# if action}}
