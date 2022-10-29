@@ -2,14 +2,14 @@ import './styles/base.scss'
 import renderDOM from "./utils/renderDOM";
 
 import LoginAuth from "./pages/Login";
-import IndexMenu from "./pages/IndexMenu";
+import SignupAuth from "./pages/Signup";
 import Error404 from "./pages/Error404";
 import Error500 from "./pages/Error500";
-import SignupAuth from "./pages/Signup";
+import IndexMenu from "./pages/IndexMenu";
 
 
 const menu = new IndexMenu({
-    nav:{
+    nav: {
         login: {
             title: "Login",
             page: LoginAuth
