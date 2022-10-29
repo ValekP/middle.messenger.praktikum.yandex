@@ -20,11 +20,11 @@ export default class Login extends Block {
     render() {
         return this.compile(`
             <div class="auth-form__main">
-                 {{{inputLogin}}}
-                 {{{inputPassword}}}
+                 {{{ inputLogin }}}
+                 {{{ inputPassword }}}
             </div>
             <div class="auth-form__footer">
-                {{{button}}}
+                {{{ button }}}
                 <div class="auth-form__footer_link">
                     <a href="#">Нет аккаунта?</a>
                 </div>

@@ -3,14 +3,14 @@ import './inputProfile.scss'
 import validateAuth from "../../helpers/validateAuth";
 
 type InputProfileProps = {
-    type?: 'text' | 'password' | 'email',
-    value?: string,
-    name?: string,
-    label?: string,
-    text_error?: string,
-    onBlur?: EventListener,
-    onFocus?: EventListener,
-    onChange?: EventListener,
+    type?: 'text' | 'password' | 'email';
+    value?: string;
+    name?: string;
+    label?: string;
+    text_error?: string;
+    onBlur?: EventListener;
+    onFocus?: EventListener;
+    onChange?: EventListener;
 };
 
 export class InputProfile extends Block {

@@ -6,11 +6,7 @@ export class Chats extends Block {
     constructor(props: ChatsProps) {
         super('div',
             {
-                attr: {
-                    class: ""
-                },
                 ...props,
-
             }
         )
     }

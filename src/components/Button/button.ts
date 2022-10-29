@@ -3,7 +3,7 @@ import './button.scss'
 
 type ErrorProps = {
     title: string;
-    onClick?: EventListener,
+    onClick?: EventListener;
 };
 
 export class Button extends Block {
@@ -23,7 +23,7 @@ export class Button extends Block {
     }
     render() {
         return this.compile(`
-            <button class="btn">{{title}}</button>
+            <button class="btn">{{ title }}</button>
         `)
     }
 }

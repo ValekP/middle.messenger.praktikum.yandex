@@ -22,9 +22,9 @@ export class Auth extends Block {
         return this.compile(`
             <section class="auth-form">
                 <div class="auth-form-header">
-                    <h1>{{title}}</h1>
+                    <h1>{{ title }}</h1>
                 </div>
-                {{{content}}}
+                {{{ content }}}
             </section>
         `)
     }

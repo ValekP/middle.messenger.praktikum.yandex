@@ -3,14 +3,14 @@ import './inputAuth.scss'
 import validateAuth from "../../helpers/validateAuth";
 
 type InputAuthProps = {
-    type?: 'text' | 'password' | 'email',
-    value?: string,
-    name?: string,
-    label?: string,
-    text_error?: string,
-    onBlur?: EventListener,
-    onFocus?: EventListener,
-    onChange?: EventListener,
+    type?: 'text' | 'password' | 'email';
+    value?: string;
+    name?: string;
+    label?: string;
+    text_error?: string;
+    onBlur?: EventListener;
+    onFocus?: EventListener;
+    onChange?: EventListener;
 };
 
 export class InputAuth extends Block {
@@ -70,7 +70,7 @@ export class InputAuth extends Block {
 
     render() {
         return this.compile(`
-            <input type="{{ type }}" name="{{ name }}" value="{{ value}}" placeholder="{{ label }}">
+            <input type="{{ type }}" name="{{ name }}" value="{{ value }}" placeholder="{{ label }}">
             <label for="{{ name }}">{{ label }}</label>
             {{# if text_error}}
                 <span>{{ text_error }}</span>
