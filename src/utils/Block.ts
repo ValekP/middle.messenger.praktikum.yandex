@@ -12,8 +12,8 @@ export default class Block<P = any> {
     };
 
     public _props: Record<string, any>;
-    private _children;
-    private _id;
+    private readonly _children;
+    private readonly _id;
     public _element!: HTMLElement;
     private _meta;
     private _eventBus;
@@ -127,7 +127,7 @@ export default class Block<P = any> {
 
                 propsAndStubs[key] = `<div data-id="${propsAndStubs.__id}"></div>`;
 
-                Object.entries(list).forEach(([i, child]) => {
+                Object.entries(list).forEach(([, child]) => {
                     if (child instanceof Block) {
                         childs.push(child.getContent());
                     }
@@ -151,7 +151,7 @@ export default class Block<P = any> {
             }
         });
 
-        Object.entries(propsAndStubs).forEach(([key, child]) => {
+        Object.entries(propsAndStubs).forEach(([key]) => {
             if (containerId.includes(propsAndStubs[key])) {
                 if (fragment instanceof HTMLTemplateElement) {
                     const stub = fragment.content.querySelector(`[data-id="${propsAndStubs[key]}"]`);
@@ -170,7 +170,7 @@ export default class Block<P = any> {
 
     private _componentDidMount() {
         this.componentDidMount();
-        Object.values(this._children).forEach(child => child.dispatchComponentDidMount());
+        Object.values(this._children).forEach((child:any) => child.dispatchComponentDidMount());
     };
 
     private componentDidMount() {
@@ -194,8 +194,7 @@ export default class Block<P = any> {
         return true;
     };
 
-    public setProps(newProps: P) {
-
+    public setProps(newProps: Record<string, any>) {
         if (!newProps) {
             return;
         }

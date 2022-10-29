@@ -3,20 +3,30 @@ import Login from "./login";
 import Button from "../../components/Button";
 import InputAuth from "../../components/InputAuth";
 
+const inputLogin = new InputAuth({
+    type: "text",
+    name: "login",
+    label: "Логин"
+})
+
+const inputPassword = new InputAuth({
+    type: "password",
+    name: "password",
+    label: "Пароль"
+})
+
+const button = new Button({
+    title: "Войти",
+    onClick: (e) => {
+        inputLogin.inputValidate()
+        inputPassword.inputValidate()
+    }
+})
+
 const LoginContent = new Login({
-    inputLogin: new InputAuth({
-        type: "text",
-        name: "login",
-        label: "Логин"
-    }),
-    inputPassword: new InputAuth({
-        type: "password",
-        name: "password",
-        label: "Пароль"
-    }),
-    button: new Button({
-        title:"Войти"
-    })
+    inputLogin,
+    inputPassword,
+    button
 })
 
 const LoginAuth = new Auth({
