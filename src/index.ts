@@ -6,7 +6,7 @@ import SignupAuth from "./pages/Signup";
 import Error404 from "./pages/Error404";
 import Error500 from "./pages/Error500";
 import ChatsPage from "./pages/Chats";
-import ProfilePage from "./pages/Profile";
+import UserProfile from "./pages/UserProfile";
 
 
 const nav = {
@@ -24,7 +24,7 @@ const nav = {
     },
     profile: {
         title: "Profile",
-        page: ProfilePage,
+        page: UserProfile,
     },
     page404: {
         title: "404",

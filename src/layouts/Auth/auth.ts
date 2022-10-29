@@ -3,7 +3,7 @@ import './auth.scss'
 
 type AuthProps = {
     title: string;
-    main: any;
+    content: any;
 };
 
 export class Auth extends Block {
@@ -24,7 +24,7 @@ export class Auth extends Block {
                 <div class="auth-form-header">
                     <h2>{{title}}</h2>
                 </div>
-                {{{main}}}
+                {{{content}}}
             </section>
         `)
     }

@@ -66,7 +66,7 @@ const LoginContent = new Signup({
 
 const SignupAuth = new Auth({
     title: "Регистрация",
-    main: LoginContent,
+    content: LoginContent,
 })
 
 export default SignupAuth

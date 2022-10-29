@@ -1,0 +1,35 @@
+@import "src/styles/_mixins";
+@import "src/styles/_colors";
+
+.profile-field {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid $color-style-5;
+
+  &:last-child {
+    border: none;
+  }
+
+  &__label {
+    font-size: 13px;
+  }
+
+  &__value {
+    margin-left: 10px;
+    flex: 1;
+    font-size: 13px;
+    text-align: right;
+    color: $color-text-body-light;
+  }
+
+  &__error {
+    font-size: 10px;
+    color: $color-red;
+    margin-left: 10px;
+  }
+
+  input#{&}__value {
+    border: none;
+  }
+}

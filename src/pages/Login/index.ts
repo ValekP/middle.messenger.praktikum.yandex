@@ -31,7 +31,7 @@ const loginContent = new Login({
 
 const LoginAuth = new Auth({
     title: "Вход",
-    main: loginContent,
+    content: loginContent,
 })
 
 export default LoginAuth

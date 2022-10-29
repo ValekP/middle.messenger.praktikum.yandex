@@ -1,4 +1,4 @@
-import ErrorPage from "../../components/ErrorPage";
+import ErrorPage from "../../layouts/Error";
 
 const Error404 = new ErrorPage({
     statusCode: 404,
