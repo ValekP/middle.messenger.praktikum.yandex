@@ -1,0 +1,13 @@
+$font-inter-list: ("Thin", 100) ("ExtraLight", 200) ("Light", 300) ("Regular", 400) ("Medium", 500) ("SemiBold", 600) ("Bold", 700) ("ExtraBold", 800) ("Black", 900);
+
+
+@each $font in $font-inter-list {
+  @font-face {
+    font-family: "Inter";
+    src: url("../assets/fonts/Inter/Inter-#{nth($font, 1)}.ttf") format("woff");
+    font-display: auto;
+    font-style: normal;
+    font-weight: #{nth($font, 2)};
+    font-stretch: normal;
+  }
+}

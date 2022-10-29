@@ -1,0 +1,11 @@
+---
+title: 404
+stylesheet: "../../styles/base.scss"
+script: "404.js"
+---
+
+{{#extend "default"}}
+    {{#content "main"}}
+        {{> error code="404" text="Не туда попали" }}
+    {{/content}}
+{{/extend}}
