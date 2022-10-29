@@ -1,9 +1,9 @@
-type validateAuthProps = {
+type ValidateAuthProps = {
     name: string,
     value: string;
 }
 
-export default function validateAuth(props: validateAuthProps){
+export default function validateInputs(props: ValidateAuthProps) {
     switch (props.name) {
         case "login":
             switch (true) {

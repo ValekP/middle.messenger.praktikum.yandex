@@ -1,13 +1,13 @@
 import Block from "../../utils/Block";
 import './inputProfile.scss'
-import validateAuth from "../../helpers/validateAuth";
+import validateInputs from "../../helpers/validateInputs";
 
 type InputProfileProps = {
     type?: 'text' | 'password' | 'email';
     value?: string;
     name?: string;
     label?: string;
-    text_error?: string;
+    textError?: string;
     onBlur?: EventListener;
     onFocus?: EventListener;
     onChange?: EventListener;
@@ -37,29 +37,9 @@ export class InputProfile extends Block<InputProfileProps> {
         });
     };
 
-    private getInput() {
-        return this._element.querySelector('input') as HTMLInputElement
-    }
-
-    private _inputError(text: string = "", clear: boolean = false) {
-        const {value} = this.getInput()
-        this.setProps({
-            text_error: clear ? '' : text
-        })
-        this.getInput().value = value
-    }
-
-    setError(text: string = "Ошибка") {
-        this._inputError(text)
-    }
-
-    clearError() {
-        this._inputError('', true)
-    }
-
     inputValidate(focus: boolean = false): void {
         const {value, name} = this.getInput()
-        const validate = validateAuth({name, value})
+        const validate = validateInputs({name, value})
         if (validate) {
             this.setError(validate as string)
         } else {
@@ -75,9 +55,29 @@ export class InputProfile extends Block<InputProfileProps> {
             <label for="{{ name }}" class="profile-field__label">{{ label }}</label>
             <input class="profile-field__value" type="{{ type }}" name="{{ name }}" value="{{ value}}" placeholder="{{ label }}">
             
-            {{# if text_error}}
-                <span class="profile-field__error">{{ text_error }}</span>
+            {{# if textError}}
+                <span class="profile-field__error">{{ textError }}</span>
             {{/if }}
         `)
+    }
+
+    setError(text: string = "Ошибка") {
+        this._inputError(text)
+    }
+
+    clearError() {
+        this._inputError('', true)
+    }
+
+    private getInput() {
+        return this._element?.querySelector('input') as HTMLInputElement
+    }
+
+    private _inputError(text: string = "", clear: boolean = false) {
+        const {value} = this.getInput()
+        this.setProps({
+            textError: clear ? '' : text
+        })
+        this.getInput().value = value
     }
 }

@@ -1,8 +1,16 @@
 import Block from "../../utils/Block";
 import './chatsList.scss'
 
+type Chat = {
+    name: string;
+    date: string;
+    text: string;
+    action?: number;
+    active?: boolean;
+}
+
 type ChatsListProps = {
-    chats: object;
+    chats: Chat[];
 };
 
 export class ChatsList extends Block<ChatsListProps> {
@@ -45,7 +53,7 @@ export class ChatsList extends Block<ChatsListProps> {
                     <div class="chats-item{{# if active}} chats-item-active{{/if }}">
                         <div class="chats-item-inner">
                             <div class="chats-item__img">
-                                <!--<img src="" alt="">-->
+                             
                             </div>
                             <div class="chats-item__body">
                                 <div class="chats-item__header">

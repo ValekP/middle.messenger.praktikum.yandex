@@ -33,9 +33,9 @@ export class IndexMenu extends Block<IndexMenuProps> {
 
     render() {
         return this.compile(`
-            <ul>
+            <ul class="index-menu-list">
                 {{#each nav}}
-                    <li><a href="#" data-page="{{ @key }}">{{ title }}</a></li>
+                    <li class="index-menu__item"><a href="#" class="index-menu__item_link" data-page="{{ @key }}">{{ title }}</a></li>
                 {{/each}}
             </ul>
         `)

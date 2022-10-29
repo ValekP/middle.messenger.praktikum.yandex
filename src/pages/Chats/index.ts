@@ -10,8 +10,17 @@ const chatList = new ChatsList({
             text: "В 2008 году художник Jon Rafman начал собирать...",
             action: 4
         },
-        {name: "Вадим", date: "10:49", text: "Изображение", action: false, active: true},
-        {name: "Киноклуб", date: "12:00", text: "Вы: стикер", action: false},
+        {
+            name: "Вадим",
+            date: "10:49",
+            text: "Изображение",
+            active: true
+        },
+        {
+            name: "Киноклуб",
+            date: "12:00",
+            text: "Вы: стикер"
+        },
         {
             name: "тет-а-теты",
             date: "Ср",
