@@ -1,8 +1,8 @@
 import Block from "../../utils/Block";
-import './inputProfile.scss'
+import './input.scss'
 import validateInputs from "../../helpers/validateInputs";
 
-type InputProfileProps = {
+type InputProps = {
     type?: 'text' | 'password' | 'email';
     value?: string;
     name?: string;
@@ -11,17 +11,19 @@ type InputProfileProps = {
     onBlur?: EventListener;
     onFocus?: EventListener;
     onChange?: EventListener;
+    template: 'auth' | 'profile'
 };
 
-export class InputProfile extends Block<InputProfileProps> {
-    constructor(props: InputProfileProps) {
-        const {onBlur, onFocus, onChange, ...rest} = props;
+export class Input extends Block<InputProps> {
+    constructor(props: InputProps) {
+        const {onBlur, onFocus, onChange, template, ...rest} = props;
         super('div',
             {
                 attr: {
-                    class: "profile-field"
+                    class: `input-wrap-${template}`
                 },
                 ...rest,
+                template,
                 events: {
                     blur: onBlur,
                     focus: onFocus,
@@ -32,7 +34,7 @@ export class InputProfile extends Block<InputProfileProps> {
     }
 
     addEvents() {
-        this._element.querySelectorAll('input').forEach(input => {
+        this._element?.querySelectorAll('input').forEach(input => {
             input.addEventListener('blur', (e) => this.inputValidate());
         });
     };
@@ -50,23 +52,26 @@ export class InputProfile extends Block<InputProfileProps> {
         }
     }
 
-    render() {
-        return this.compile(`
-            <label for="{{ name }}" class="profile-field__label">{{ label }}</label>
-            <input class="profile-field__value" type="{{ type }}" name="{{ name }}" value="{{ value}}" placeholder="{{ label }}">
-            
-            {{# if textError}}
-                <span class="profile-field__error">{{ textError }}</span>
-            {{/if }}
-        `)
-    }
-
     setError(text: string = "Ошибка") {
         this._inputError(text)
     }
 
     clearError() {
         this._inputError('', true)
+    }
+
+    render() {
+        const input = `<input class="input" type="{{ type }}" name="{{ name }}" value="{{ value}}" placeholder="{{ label }}">`
+        const label = `<label for="{{ name }}" class="input-label">{{ label }}</label>`
+        const inputTemplate = this._props.template === 'auth' ? `${input}${label}` : `${label}${input}`
+
+        return this.compile(`
+            ${inputTemplate}
+      
+            {{# if textError}}
+                <span class="input-error">{{ textError }}</span>
+            {{/if }}
+        `)
     }
 
     private getInput() {
@@ -78,6 +83,16 @@ export class InputProfile extends Block<InputProfileProps> {
         this.setProps({
             textError: clear ? '' : text
         })
+        console.log(this)
+
+        if (this._props.template === 'auth') {
+            if (clear) {
+                this._element.classList.remove('input-v-error')
+            } else {
+                this._element.classList.add('input-v-error')
+            }
+        }
+
         this.getInput().value = value
     }
 }

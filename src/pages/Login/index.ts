@@ -1,15 +1,17 @@
 import Auth from "../../layouts/Auth";
 import Login from "./login";
 import Button from "../../components/Button";
-import InputAuth from "../../components/InputAuth";
+import Input from "../../components/Input";
 
-const inputLogin = new InputAuth({
+const inputLogin = new Input({
+    template: "auth",
     type: "text",
     name: "login",
     label: "Логин"
 })
 
-const inputPassword = new InputAuth({
+const inputPassword = new Input({
+    template: "auth",
     type: "password",
     name: "password",
     label: "Пароль"

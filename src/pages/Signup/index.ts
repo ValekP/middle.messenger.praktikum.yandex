@@ -1,41 +1,48 @@
 import Auth from "../../layouts/Auth";
 import Signup from "./signup";
 import Button from "../../components/Button";
-import InputAuth from "../../components/InputAuth";
+import Input from "../../components/Input";
 
-const inputEmail = new InputAuth({
+const inputEmail = new Input({
+    template: "auth",
     type: "email",
     name: "email",
     label: "Почта"
 })
 
-const inputLogin = new InputAuth({
+const inputLogin = new Input({
+    template: "auth",
     type: "text",
     name: "login",
     label: "Логин"
 })
 
-const inputFirstName = new InputAuth({
+const inputFirstName = new Input({
+    template: "auth",
     type: "text",
     name: "first_name",
     label: "Имя"
 })
-const inputSecondName = new InputAuth({
+const inputSecondName = new Input({
+    template: "auth",
     type: "text",
     name: "second_name",
     label: "Фамилия"
 })
-const inputPhone = new InputAuth({
+const inputPhone = new Input({
+    template: "auth",
     type: "text",
     name: "phone",
     label: "Телефон"
 })
-const inputPassword = new InputAuth({
+const inputPassword = new Input({
+    template: "auth",
     type: "password",
     name: "password",
     label: "Пароль"
 })
-const inputPasswordAgain = new InputAuth({
+const inputPasswordAgain = new Input({
+    template: "auth",
     type: "password",
     name: "password_again",
     label: "Пароль (ещё раз)"

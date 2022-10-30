@@ -2,39 +2,45 @@ import Page from "../../layouts/Page";
 import ButtonBack from "../../components/ButtonBack";
 import Profile from "../../layouts/Profile";
 import UserProfile from "./userProfile";
-import InputProfile from "../../components/InputProfile";
+import Input from "../../components/Input";
 import Button from "../../components/Button";
 
 const buttonBack = new ButtonBack()
 
-const inputEmail = new InputProfile({
+const inputEmail = new Input({
+    template: "profile",
     type: "email",
     name: "email",
     label: "Почта"
 })
 
-const inputLogin = new InputProfile({
+const inputLogin = new Input({
+    template: "profile",
     type: "text",
     name: "login",
     label: "Логин"
 })
 
-const inputFirstName = new InputProfile({
+const inputFirstName = new Input({
+    template: "profile",
     type: "text",
     name: "first_name",
     label: "Имя"
 })
-const inputSecondName = new InputProfile({
+const inputSecondName = new Input({
+    template: "profile",
     type: "text",
     name: "second_name",
     label: "Фамилия"
 })
-const inputDisplayName = new InputProfile({
+const inputDisplayName = new Input({
+    template: "profile",
     type: "text",
     name: "display_name",
     label: "Имя в чате"
 })
-const inputPhone = new InputProfile({
+const inputPhone = new Input({
+    template: "profile",
     type: "text",
     name: "phone",
     label: "Телефон"
