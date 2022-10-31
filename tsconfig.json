@@ -5,7 +5,7 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
     "strictNullChecks": true,
     "esModuleInterop": true,
     "useUnknownInCatchVariables": true
