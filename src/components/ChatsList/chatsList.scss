@@ -7,46 +7,47 @@
   width: 310px;
   height: 100%;
 
+  &-search {
+    position: relative;
 
-  &__header {
-    padding: 14px 0;
-    margin: 0 10px;
-    border-bottom: 1px solid $color-style-5;
-
-    &-link {
+    label {
+      position: absolute;
       display: flex;
-      justify-content: end;
-      margin-top: 7px;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      top: 0;
+      padding: 10px;
+      font-size: 12px;
+      color: $color-text-body-light;
+      pointer-events: none;
 
-      a {
-        display: flex;
-        align-items: center;
-        color: $color-text-body-light;
-        font-size: 12px;
-
-        &:hover {
-          color: $color-primary;
-
-          svg {
-            stroke: $color-primary;
-          }
-        }
-
-        svg {
-          margin-left: 8px;
-          stroke: $color-text-body-light;
-        }
+      svg {
+        fill: $color-text-body-light;
+        margin-right: 4px;
       }
     }
 
-    &-search {
-      margin-top: 23px;
-    }
-  }
+    input {
+      width: 100%;
+      background: $color-style-3;
+      border-radius: 5px;
+      border: none;
+      padding: 10px 34px 10px;
+      font-size: 12px;
 
-  &__list {
-    flex: 1;
-    overflow-y: auto;
+      &::placeholder {
+        opacity: 0;
+      }
+
+      &:focus ~ label, &:not(:placeholder-shown) ~ label {
+        justify-content: start;
+
+        span {
+          display: none;
+        }
+      }
+    }
   }
 
   &-item {
@@ -112,47 +113,45 @@
     }
   }
 
+  &__header {
+    padding: 14px 0;
+    margin: 0 10px;
+    border-bottom: 1px solid $color-style-5;
 
-  &-search {
-    position: relative;
+    &-link {
+      display: flex;
+      justify-content: end;
+      margin-top: 7px;
 
-    input {
-      width: 100%;
-      background: $color-style-3;
-      border-radius: 5px;
-      border: none;
-      padding: 10px 34px 10px;
-      font-size: 12px;
+      a {
+        display: flex;
+        align-items: center;
+        color: $color-text-body-light;
+        font-size: 12px;
 
-      &::placeholder {
-        opacity: 0;
-      }
+        svg {
+          margin-left: 8px;
+          stroke: $color-text-body-light;
+        }
 
-      &:focus ~ label, &:not(:placeholder-shown) ~ label {
-        justify-content: start;
+        &:hover {
+          color: $color-primary;
 
-        span {
-          display: none;
+          svg {
+            stroke: $color-primary;
+          }
         }
       }
     }
 
-    label {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      top: 0;
-      padding: 10px;
-      font-size: 12px;
-      color: $color-text-body-light;
-      pointer-events: none;
-
-      svg {
-        fill: $color-text-body-light;
-        margin-right: 4px;
-      }
+    &-search {
+      margin-top: 23px;
     }
   }
+
+  &__list {
+    flex: 1;
+    overflow-y: auto;
+  }
+
 }
