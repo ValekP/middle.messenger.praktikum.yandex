@@ -1,0 +1,44 @@
+@import "../../styles/mixins";
+@import "../../styles/colors";
+
+.auth {
+  @include main;
+  @include flex-j-a-center;
+
+  &-form {
+    @include box-style;
+
+    &-header {
+      margin: 20px 0;
+      text-align: center;
+
+      h2 {
+        font-weight: 500;
+        font-size: 20px;
+      }
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      flex: auto;
+    }
+
+    &__main {
+      flex: auto;
+    }
+
+    &__footer {
+      margin-top: 40px;
+
+      &_link {
+        text-align: center;
+        margin-top: 14px;
+
+        a {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+}

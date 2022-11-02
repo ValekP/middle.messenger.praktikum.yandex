@@ -1,0 +1,17 @@
+@import "../../styles/mixins";
+@import "../../styles/colors";
+
+.layout {
+  @include main;
+  display: flex;
+}
+
+.sidebar {
+  border-right: 1px solid $color-style-5;
+  background: $color-style-1;
+}
+
+.content {
+  flex: auto 1;
+  background: #fff;
+}

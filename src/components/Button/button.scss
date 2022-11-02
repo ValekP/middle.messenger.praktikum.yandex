@@ -1,0 +1,33 @@
+@import "src/styles/_mixins";
+@import "src/styles/_colors";
+
+.btn {
+  display: block;
+  background: $color-primary;
+  color: #fff;
+  font-size: 13px;
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  transition: all .3s ease;
+
+  &:hover {
+    background: $color-primary-hover;
+  }
+}
+
+.btn-circle {
+  @include flex-j-a-center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: $color-primary;
+
+  &:hover {
+    background: $color-primary-hover;
+  }
+
+  svg {
+    fill: #fff;
+  }
+}
