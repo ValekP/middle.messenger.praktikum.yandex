@@ -1,8 +1,0 @@
-@import "src/styles/_mixins";
-@import "src/styles/_colors";
-
-.back-sidebar {
-  @include flex-j-a-center;
-  height: 100%;
-  padding: 0 18px;
-}

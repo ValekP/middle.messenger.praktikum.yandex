@@ -32,3 +32,17 @@
     object-fit: contain;
   }
 }
+
+@mixin btn-svg($svg-fill) {
+  background: none;
+
+  svg {
+    fill: $svg-fill;
+  }
+
+  &:hover {
+    svg {
+      fill: $color-primary;
+    }
+  }
+}
