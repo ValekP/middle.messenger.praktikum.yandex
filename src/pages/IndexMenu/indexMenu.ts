@@ -35,19 +35,22 @@ export class IndexMenu extends Block {
                     "/500": {
                         title: "500",
                     }
-                },
-                events: {
-                    click: (e: Event) => {
-                        // @ts-ignore
-                        const attrHref = e.target.attributes.href.value
-                        if (attrHref) {
-                            e.preventDefault()
-                            router.go(attrHref)
-                        }
-                    }
                 }
             }
         )
+    }
+
+    addEvents() {
+        this._element?.querySelectorAll(".index-menu__item_link").forEach(item => {
+            item.addEventListener("click", (e) => {
+                // @ts-ignore
+                const attrHref = e.target.attributes.href.value
+                if (attrHref) {
+                    e.preventDefault()
+                    router.go(attrHref)
+                }
+            })
+        })
     }
 
     render() {
