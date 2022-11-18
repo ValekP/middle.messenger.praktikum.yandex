@@ -1,0 +1,31 @@
+@import "../../../styles/utils";
+
+.conversation {
+  &__footer {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid $color-style-5;
+  }
+
+  &-attach {
+    &__btn {
+      @include flex-j-a-center;
+      @include btn-svg($color-text-body-light);
+    }
+  }
+
+  &-input {
+    flex: auto;
+    margin: 0 10px;
+
+    input {
+      width: 100%;
+      background: $color-style-3;
+      border-radius: 30px;
+      font-size: 12px;
+      padding: 10px 20px;
+      border: none;
+    }
+  }
+}

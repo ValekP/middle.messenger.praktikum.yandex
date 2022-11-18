@@ -1,0 +1,10 @@
+@import "src/styles/utils";
+
+.link {
+  font-weight: 500;
+  font-size: 13px;
+
+  &--red {
+    color: $color-red;
+  }
+}

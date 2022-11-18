@@ -1,0 +1,13 @@
+@import "../../styles/utils";
+
+.chats {
+  display: flex;
+  flex-direction: column;
+  width: 310px;
+  height: 100%;
+
+  &__list {
+    flex: 1;
+    overflow-y: auto;
+  }
+}

@@ -1,0 +1,7 @@
+@import "src/styles/utils";
+
+.back-sidebar {
+  @include flex-j-a-center;
+  height: 100%;
+  padding: 0 18px;
+}

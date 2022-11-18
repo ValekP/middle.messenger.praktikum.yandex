@@ -1,0 +1,79 @@
+@import "../../../styles/utils";
+
+.chats {
+  &__header {
+    padding: 14px 0;
+    margin: 0 10px;
+    border-bottom: 1px solid $color-style-5;
+
+    &-link {
+      display: flex;
+      justify-content: end;
+      margin-top: 7px;
+
+      a {
+        display: flex;
+        align-items: center;
+        color: $color-text-body-light;
+        font-size: 12px;
+
+        svg {
+          margin-left: 8px;
+          stroke: $color-text-body-light;
+        }
+
+        &:hover {
+          color: $color-primary;
+
+          svg {
+            stroke: $color-primary;
+          }
+        }
+      }
+    }
+  }
+
+  &-search {
+    position: relative;
+    margin-top: 23px;
+
+    &__label {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      top: 0;
+      padding: 10px;
+      font-size: 12px;
+      color: $color-text-body-light;
+      pointer-events: none;
+
+      svg {
+        fill: $color-text-body-light;
+        margin-right: 4px;
+      }
+    }
+
+    &__input {
+      width: 100%;
+      background: $color-style-3;
+      border-radius: 5px;
+      border: none;
+      padding: 10px 34px 10px;
+      font-size: 12px;
+
+      &::placeholder {
+        opacity: 0;
+      }
+
+      &:focus ~ label, &:not(:placeholder-shown) ~ label {
+        justify-content: start;
+
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+}

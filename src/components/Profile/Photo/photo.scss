@@ -1,0 +1,8 @@
+@import "src/styles/utils";
+
+.profile-photo {
+  @include flex-j-a-center;
+  @include user-img(130);
+
+  align-self: center;
+}

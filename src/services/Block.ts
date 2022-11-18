@@ -110,7 +110,7 @@ export default class Block {
                 const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
 
                 if (Array.isArray(child) && stub) {
-                    const content: HTMLElement = document.createElement('div')
+                    const content: HTMLElement = document.createElement("div")
                     child.forEach(item => content.appendChild(item.getContent()))
                     stub.replaceWith(...content.childNodes)
                 } else if (stub) {

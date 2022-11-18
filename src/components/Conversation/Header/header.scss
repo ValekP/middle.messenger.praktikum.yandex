@@ -1,0 +1,37 @@
+@import "../../../styles/utils";
+
+.conversation {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid $color-style-5;
+
+    &-info {
+      display: flex;
+      align-items: center;
+
+      &_img {
+        @include user-img(34);
+      }
+
+      &_name {
+        font-weight: 600;
+        font-size: 13px;
+        margin: 0 10px;
+      }
+    }
+
+    &-control {
+      @include flex-j-a-center;
+
+      &_btn {
+        @include flex-j-a-center;
+        width: 25px;
+        height: 25px;
+
+        @include btn-svg($color-text-body);
+      }
+    }
+  }
+}
