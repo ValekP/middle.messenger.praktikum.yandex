@@ -1,5 +1,5 @@
 import {Login} from "./login"
-import Auth from "../../layouts/Auth";
+import Auth from "../../layouts/Auth"
 
 const LoginPage = {
     pathname: "/login",
