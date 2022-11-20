@@ -2,6 +2,19 @@ import Block from "../../services/Block"
 import Input from "../../components/Input"
 import ProfilePhoto from "../../components/Profile/Photo"
 import Link from "../../components/Link"
+import Store from "../../services/Store/Store"
+import {connectProfile} from "../../services/Store/ConnectComponents"
+
+export interface IProfile {
+    id?: number
+    first_name: string
+    second_name: string
+    display_name: string | null
+    login: string
+    email: string
+    phone: string
+    avatar?: string | null
+}
 
 const inputEmail = new Input({
     template: "profile",
@@ -51,7 +64,7 @@ const inputPhone = new Input({
 
 const userPhoto = new ProfilePhoto()
 
-export class UserProfile extends Block {
+class UserProfile extends Block {
     constructor() {
         super("div",
             {
@@ -75,9 +88,19 @@ export class UserProfile extends Block {
         )
     }
 
+    addEvents() {
+        this._element.onclick = () => {
+            //console.log(this)
+            Store.set('profile', Math.random())
+            //console.log(Store)
+        }
+    }
+
     render() {
+        //console.log(this)
         return this.compile(`
             {{{ userPhoto }}}
+            <div>sdf: {{{profile}}}</div>
             <div class="profile__name">{{ userName }}</div>
             <div class="profile__fields-list">
                 {{{ inputEmail }}}
@@ -93,3 +116,5 @@ export class UserProfile extends Block {
         `)
     }
 }
+
+export default connectProfile(UserProfile)

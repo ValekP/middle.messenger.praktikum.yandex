@@ -31,13 +31,13 @@ export class ErrorPage extends Block {
 
     render() {
         return this.compile(`
-            <section class="error-content">
+            <div class="error-content">
                 <div class="error__code">{{ statusCode }}</div>
                 <div class="error__text">{{ statusDescription }}</div>
                 <div class="error__link">
                     <a href="">Назад к чатам</a>
                 </div>
-            </section>
+            </div>
         `)
     }
 }

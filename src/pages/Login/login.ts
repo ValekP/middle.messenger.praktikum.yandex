@@ -1,39 +1,51 @@
 import Block from "../../services/Block"
 import Input from "../../components/Input"
 import Button from "../../components/Button"
+import validateInputsList from "../../helpers/validateInputsList"
+import AuthController from "../../controllers/AuthController"
 
-const inputLogin = new Input({
-    template: "auth",
-    type: "text",
-    name: "login",
-    label: "Логин"
-})
+export type TLogin = {
+    login: object | string
+    password: object | string
+}
 
-const inputPassword = new Input({
-    template: "auth",
-    type: "password",
-    name: "password",
-    label: "Пароль"
-})
+const inputFields: TLogin = {
+    login: new Input({
+        template: "auth",
+        type: "text",
+        name: "login",
+        label: "Логин",
+        value: "Magnus36"
+    }),
+    password: new Input({
+        template: "auth",
+        type: "password",
+        name: "password",
+        label: "Пароль",
+        value: "qwerty123456"
+    })
+}
 
 const button = new Button({
     title: "Войти",
-    onClick: () => {
-        inputLogin.inputValidate()
-        inputPassword.inputValidate()
+    onClick: async (e: Event) => {
+        e.preventDefault()
+        const inputs = validateInputsList(inputFields)
+        if (inputs) {
+            await AuthController.login(inputs as TLogin)
+        }
     }
 })
 
-export class Login extends Block {
+export default class Login extends Block {
     constructor() {
         super("div",
             {
                 attr: {
                     class: "auth-form-content"
                 },
-                inputLogin,
-                inputPassword,
-                button,
+                ...inputFields,
+                button
             }
         )
     }
@@ -41,8 +53,8 @@ export class Login extends Block {
     render() {
         return this.compile(`
             <div class="auth-form__main">
-                 {{{ inputLogin }}}
-                 {{{ inputPassword }}}
+                 {{{ login }}}
+                 {{{ password }}}
             </div>
             <div class="auth-form__footer">
                 {{{ button }}}

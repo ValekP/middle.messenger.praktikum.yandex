@@ -44,14 +44,16 @@ export class Input extends Block {
         }
     }
 
-    inputValidate(): void {
+    inputValidate() {
         if (!this._props.staticTmpl) {
             const {value, name} = this.getInput()
             const validate = validateInputs({name, value})
             if (validate) {
                 this.setError(validate as string)
+                return false
             } else {
                 this.clearError()
+                return value
             }
         }
     }
@@ -80,15 +82,6 @@ export class Input extends Block {
         }
     }
 
-    render() {
-        const inputTemplate = this._props.template === "auth" ? `${this.inputTmpl()}${this.labelTmpl()}` : `${this.labelTmpl()}${this.inputTmpl()}`
-
-        return this.compile(`
-            ${inputTemplate}
-            <span class="input-error">{{ textError }}</span>
-        `)
-    }
-
     private getInput() {
         return this._element?.querySelector('input') as HTMLInputElement
     }
@@ -114,5 +107,14 @@ export class Input extends Block {
                 this._element.classList.add("input-v-error")
             }
         }
+    }
+
+    render() {
+        const inputTemplate = this._props.template === "auth" ? `${this.inputTmpl()}${this.labelTmpl()}` : `${this.labelTmpl()}${this.inputTmpl()}`
+
+        return this.compile(`
+            ${inputTemplate}
+            <span class="input-error">{{ textError }}</span>
+        `)
     }
 }

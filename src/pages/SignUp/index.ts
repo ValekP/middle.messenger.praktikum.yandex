@@ -1,4 +1,4 @@
-import {Signup} from "./signup"
+import SignUp from "./signUp"
 import Auth from "../../layouts/Auth"
 
 const SignupPage = {
@@ -6,7 +6,7 @@ const SignupPage = {
     view: Auth,
     props: {
         title: "Регистрация",
-        content: new Signup(),
+        content: new SignUp(),
     }
 }
 

@@ -2,6 +2,7 @@ import Block from "../../services/Block"
 import Input from "../../components/Input"
 import Button from "../../components/Button"
 import ProfilePhoto from "../../components/Profile/Photo"
+import {connectProfile} from "../../services/Store/ConnectComponents"
 
 const inputEmail = new Input({
     template: "profile",
@@ -56,7 +57,7 @@ const button = new Button({
 
 const userPhoto = new ProfilePhoto()
 
-export class UserProfileEdit extends Block {
+class UserProfileEdit extends Block {
     constructor() {
         super("div",
             {
@@ -92,3 +93,5 @@ export class UserProfileEdit extends Block {
         `)
     }
 }
+
+export default connectProfile(UserProfileEdit)

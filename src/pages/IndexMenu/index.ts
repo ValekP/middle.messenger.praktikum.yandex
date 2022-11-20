@@ -1,4 +1,4 @@
-import {IndexMenu} from "./indexMenu"
+import IndexMenu from "./indexMenu"
 
 const IndexMenuPage = {
     pathname: "/",

@@ -88,7 +88,7 @@ export default class Block {
     }
 
     public componentDidUpdate(oldProps: TProps, newProps: TProps) {
-        return isEqual(oldProps, newProps)
+        return !isEqual(oldProps, newProps)
     }
 
     public compile(template: string, props?: TProps) {
@@ -171,7 +171,7 @@ export default class Block {
         })
     }
 
-    private componentDidMount() {
+    public componentDidMount() {
     }
 
     public setProps(newProps: TProps) {
@@ -182,6 +182,7 @@ export default class Block {
         const {children, props} = this.getChildren(newProps)
 
         if (Object.values(children).length) {
+
             Object.assign(this._children, children)
         }
 
@@ -199,7 +200,6 @@ export default class Block {
 
             set: (target: TProps, prop: string, value: unknown) => {
                 const oldValue = {...target}
-
                 target[prop] = value
                 this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldValue, target)
                 return true

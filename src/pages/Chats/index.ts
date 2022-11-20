@@ -65,6 +65,12 @@ const ChatsPage = {
     props: {
         sidebar: chatsSidebar,
         content: chat
+    },
+    isAuthFn: () => {
+        console.log("auth chatp")
+    },
+    isNotAuthFn: () => {
+        console.log('not auth chatp')
     }
 }
 

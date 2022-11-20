@@ -2,7 +2,7 @@ import "./indexMenu.scss"
 import Block from "../../services/Block"
 import {router} from "../../index"
 
-export class IndexMenu extends Block {
+export default class IndexMenu extends Block {
     constructor() {
         super("div",
             {

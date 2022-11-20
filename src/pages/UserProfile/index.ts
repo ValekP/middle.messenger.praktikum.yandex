@@ -1,7 +1,7 @@
 import ButtonBack from "../../components/ButtonBack"
-import {UserProfile} from "./userProfile"
 import Profile from "../../layouts/Profile"
 import Page from "../../layouts/Page"
+import UserProfile from "./userProfile"
 
 const buttonBack = new ButtonBack()
 

@@ -64,7 +64,7 @@ const button = new Button({
     }
 })
 
-export class Signup extends Block {
+export default class SignUp extends Block {
     constructor() {
         super("div",
             {

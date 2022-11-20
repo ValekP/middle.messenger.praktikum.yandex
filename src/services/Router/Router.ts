@@ -1,10 +1,13 @@
 import {Route} from "./Route"
 import {BlockConstruct} from "../Block"
+import {router} from "../../index"
 
 interface RouterProps {
-    pathname: TPathname,
-    view: BlockConstruct,
+    pathname: TPathname
+    view: BlockConstruct
     props?: TProps
+    isAuthFn?: () => void
+    isNotAuthFn?: () => void
 }
 
 export default class Router {
@@ -27,11 +30,17 @@ export default class Router {
         Router.__instance = this
     }
 
+    public use({pathname, view, isAuthFn, isNotAuthFn, props = {}}: RouterProps) {
+        const route = new Route(pathname, view, isAuthFn, isNotAuthFn, {...props, rootQuery: this._rootQuery})
+        this.routes.push(route)
+        return this
+    }
+
     private _onRoute(pathname: TPathname) {
         const route = this.getRoute(pathname)
 
         if (!route) {
-            this.go("/404")
+            router.go("/404")
             return
         }
 
@@ -39,16 +48,8 @@ export default class Router {
             this._currentRoute.leave()
         }
 
-        console.log(pathname)
-
         this._currentRoute = route
         route.render()
-    }
-
-    public use({pathname, view, props = {}}: RouterProps) {
-        const route = new Route(pathname, view, {...props, rootQuery: this._rootQuery})
-        this.routes.push(route)
-        return this
     }
 
     public start() {

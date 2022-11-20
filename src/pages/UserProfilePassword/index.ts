@@ -1,7 +1,7 @@
 import ButtonBack from "../../components/ButtonBack"
 import Profile from "../../layouts/Profile"
 import Page from "../../layouts/Page"
-import {UserProfilePassword} from "./userProfilePassword"
+import UserProfilePassword from "./userProfilePassword"
 
 const buttonBack = new ButtonBack()
 
