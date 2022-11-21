@@ -7,29 +7,21 @@ export enum StoreEvents {
 }
 
 class Store extends EventBus {
-
+    private _state: TState = {}
+    private readonly _STORE_NAME: string
     static _instance: Store
-    static readonly STORE_NAME = "messengerStore"
-
-    _state: TState = {}
 
     constructor() {
-
         if (Store._instance) {
             return Store._instance
         }
         super()
-
-        const savedState = window.localStorage.getItem(Store.STORE_NAME)
-
+        this._STORE_NAME = "messengerStore"
+        const savedState = window.localStorage.getItem(this._STORE_NAME)
         this._state = savedState ? (JSON.parse(savedState) ?? {}) : {}
-
-        Store._instance = this
-
         this.on(`${StoreEvents.UPDATED}`, () => {
-            window.localStorage.setItem(Store.STORE_NAME, JSON.stringify(this._state))
+            window.localStorage.setItem(this._STORE_NAME, JSON.stringify(this._state))
         })
-
     }
 
     getState() {

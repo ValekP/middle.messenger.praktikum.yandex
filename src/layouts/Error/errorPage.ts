@@ -5,6 +5,7 @@ import {router} from "../../index"
 type ErrorProps = {
     statusCode: number
     statusDescription: string
+    mountFn?: Function
 }
 
 export class ErrorPage extends Block {
@@ -26,6 +27,12 @@ export class ErrorPage extends Block {
                 e.preventDefault()
                 router.back()
             }
+        }
+    }
+
+    componentDidMount() {
+        if (this._props.mountFn) {
+            this._props.mountFn()
         }
     }
 

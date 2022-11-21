@@ -3,6 +3,7 @@ import Input from "../../components/Input"
 import Button from "../../components/Button"
 import validateInputsList from "../../helpers/validateInputsList"
 import AuthController from "../../controllers/AuthController"
+import Link from "../../components/Link"
 
 export type TLogin = {
     login: object | string
@@ -37,6 +38,8 @@ const button = new Button({
     }
 })
 
+const link = new Link({title: "Нет аккаунта?", href: "/signup"})
+
 export default class Login extends Block {
     constructor() {
         super("div",
@@ -45,7 +48,8 @@ export default class Login extends Block {
                     class: "auth-form-content"
                 },
                 ...inputFields,
-                button
+                button,
+                link
             }
         )
     }
@@ -59,7 +63,7 @@ export default class Login extends Block {
             <div class="auth-form__footer">
                 {{{ button }}}
                 <div class="auth-form__footer_link">
-                    <a href="#">Нет аккаунта?</a>
+                    {{{ link }}}
                 </div>
             </div>
         `)

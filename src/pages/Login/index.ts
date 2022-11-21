@@ -1,6 +1,6 @@
 import Login from "./login"
 import Auth from "../../layouts/Auth"
-import {router} from "../../index"
+import {checkAuth} from "../../controllers/AuthActions"
 
 const LoginPage = {
     pathname: "/login",
@@ -9,13 +9,7 @@ const LoginPage = {
     props: {
         title: "Вход",
         content: new Login(),
-    },
-    isAuthFn: () => {
-        console.log("auth loginp")
-        router.go("/messenger")
-    },
-    isNotAuthFn: () => {
-        console.log('not auth loginp')
+        mountFn: checkAuth
     }
 }
 

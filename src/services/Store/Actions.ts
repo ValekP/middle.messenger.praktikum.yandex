@@ -9,7 +9,6 @@ class Actions {
     public getProfileState() {
         const state = Store.getState()
         const profile: IProfile = state.profile ?? {}
-
         return Object.assign(
             {
                 profile:

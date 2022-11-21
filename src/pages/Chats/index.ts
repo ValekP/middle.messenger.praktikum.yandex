@@ -6,6 +6,7 @@ import Conversation from "../../components/Conversation"
 import ConversationMessage from "../../components/Conversation/Message"
 import ConversationHeader from "../../components/Conversation/Header"
 import ConversationFooter from "../../components/Conversation/Footer"
+import {checkNotAuth} from "../../controllers/AuthActions"
 
 const chatsListHeader = new ChatsListHeader({})
 
@@ -64,13 +65,8 @@ const ChatsPage = {
     view: Page,
     props: {
         sidebar: chatsSidebar,
-        content: chat
-    },
-    isAuthFn: () => {
-        console.log("auth chatp")
-    },
-    isNotAuthFn: () => {
-        console.log('not auth chatp')
+        content: chat,
+        mountFn: checkNotAuth
     }
 }
 

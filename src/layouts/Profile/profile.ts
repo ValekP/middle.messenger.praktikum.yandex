@@ -3,6 +3,7 @@ import Block from "../../services/Block"
 
 type ProfileProps = {
     main: object | string
+    mountFn?: Function
 }
 
 export class Profile extends Block {
@@ -15,6 +16,12 @@ export class Profile extends Block {
                 ...props
             }
         )
+    }
+
+    componentDidMount() {
+        if (this._props.mountFn) {
+            this._props.mountFn()
+        }
     }
 
     render() {

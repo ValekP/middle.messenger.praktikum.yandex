@@ -30,8 +30,8 @@ export default class Router {
         Router.__instance = this
     }
 
-    public use({pathname, view, isAuthFn, isNotAuthFn, props = {}}: RouterProps) {
-        const route = new Route(pathname, view, isAuthFn, isNotAuthFn, {...props, rootQuery: this._rootQuery})
+    public use({pathname, view, props = {}}: RouterProps) {
+        const route = new Route(pathname, view, {...props, rootQuery: this._rootQuery})
         this.routes.push(route)
         return this
     }
@@ -44,7 +44,7 @@ export default class Router {
             return
         }
 
-        if (this._currentRoute && this._currentRoute !== route) {
+        if (this._currentRoute) {
             this._currentRoute.leave()
         }
 

@@ -17,7 +17,7 @@ export default abstract class BaseAPI {
         this._url = "https://ya-praktikum.tech/api/v2"
         this._path = props.path
         this._headers = {
-            "Content-type": "application/json; charset=utf-8",
+            "Content-type": "application/json",
             "accept": "application/json"
         }
     }

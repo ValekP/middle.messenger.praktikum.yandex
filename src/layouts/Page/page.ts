@@ -4,6 +4,7 @@ import Block from "../../services/Block"
 type PageProps = {
     sidebar: object | string
     content: object | string
+    mountFn?: Function
 }
 
 export class Page extends Block {
@@ -16,6 +17,12 @@ export class Page extends Block {
                 ...props
             }
         )
+    }
+
+    componentDidMount() {
+        if (this._props.mountFn) {
+            this._props.mountFn()
+        }
     }
 
     render() {

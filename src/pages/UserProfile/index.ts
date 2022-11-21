@@ -2,6 +2,7 @@ import ButtonBack from "../../components/ButtonBack"
 import Profile from "../../layouts/Profile"
 import Page from "../../layouts/Page"
 import UserProfile from "./userProfile"
+import {checkNotAuth} from "../../controllers/AuthActions"
 
 const buttonBack = new ButtonBack()
 
@@ -14,7 +15,8 @@ const ProfilePage = {
     view: Page,
     props: {
         sidebar: buttonBack,
-        content: profile
+        content: profile,
+        mountFn: checkNotAuth
     }
 }
 
