@@ -3,8 +3,8 @@ import Input from "../../components/Input"
 import Button from "../../components/Button"
 import ProfilePhoto from "../../components/Profile/Photo"
 import {connectProfile} from "../../services/Store/ConnectComponents"
-import Actions from "../../services/Store/Actions"
 import validateInputsList from "../../helpers/validateInputsList"
+import Actions from "../../services/Store/Actions";
 
 const inputFields = {
     email: new Input({
@@ -79,9 +79,12 @@ class UserProfileEdit extends Block {
         )
     }
 
-    componentDidMount() {
-        console.log("profile")
-        console.log(Actions.getProfileState())
+    preMount() {
+        const state = Actions.getProfileState()
+        for (const [key] of Object.entries(inputFields)) {
+            const props = {...inputFields[key]._props, value: state[key]}
+            inputFields[key].setProps(props)
+        }
     }
 
     render() {

@@ -16,7 +16,7 @@ export default class Block {
     }
 
     public _props: TProps
-    private readonly _children
+    public readonly _children
     private readonly _id
     public _element!: HTMLElement
     private _meta
@@ -52,8 +52,15 @@ export default class Block {
         Object.keys(events).forEach(eventName => this._element.addEventListener(eventName, events[eventName]))
     }
 
+    public preMount() {
+
+    }
+
     private _render() {
+        this.preMount()
+
         const block = this.render()
+
         this.removeEvents()
         this._element.innerHTML = ""
         if (block !== undefined) {
@@ -61,6 +68,8 @@ export default class Block {
         }
         this.addEvents()
         this.addAttribute()
+
+        this.componentDidMount()
     }
 
     public render(): any {

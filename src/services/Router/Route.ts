@@ -33,11 +33,13 @@ export class Route {
     public render() {
         if (!this._block) {
             this._block = new this._blockClass(this._props)
+
             renderDOM(this._props.rootQuery, this._block)
+            this._block.componentDidMount()
+
             return
         }
 
-        this._block.componentDidMount()
-        this._block.show()
+        //this._block.show()
     }
 }

@@ -18,14 +18,10 @@ export interface IProfile {
     avatar?: string | null
 }
 
-const profile = Actions.getProfileState()
-
-
 const inputFields = {
     email: new Input({
         template: "profile",
         staticTmpl: true,
-        value: profile?.email ?? '',
         type: "email",
         name: "email",
         label: "Почта",
@@ -33,7 +29,6 @@ const inputFields = {
     login: new Input({
         template: "profile",
         staticTmpl: true,
-        value: profile?.login ?? '',
         type: "text",
         name: "login",
         label: "Логин"
@@ -41,7 +36,6 @@ const inputFields = {
     first_name: new Input({
         template: "profile",
         staticTmpl: true,
-        value: profile?.first_name ?? '',
         type: "text",
         name: "first_name",
         label: "Имя"
@@ -49,7 +43,6 @@ const inputFields = {
     second_name: new Input({
         template: "profile",
         staticTmpl: true,
-        value: profile?.second_name ?? '',
         type: "text",
         name: "second_name",
         label: "Фамилия"
@@ -57,7 +50,6 @@ const inputFields = {
     display_name: new Input({
         template: "profile",
         staticTmpl: true,
-        value: profile?.display_name ?? '',
         type: "text",
         name: "display_name",
         label: "Имя в чате"
@@ -65,7 +57,6 @@ const inputFields = {
     phone: new Input({
         template: "profile",
         staticTmpl: true,
-        value: profile?.phone ?? '',
         type: "text",
         name: "phone",
         label: "Телефон"
@@ -82,7 +73,7 @@ class UserProfile extends Block {
                     class: "profile"
                 },
                 userPhoto,
-                userName: profile?.first_name ?? '',
+                userName: "",
                 ...inputFields,
                 footer: [
                     new Link({
@@ -107,6 +98,14 @@ class UserProfile extends Block {
                 ],
             }
         )
+    }
+
+    preMount() {
+        const state = Actions.getProfileState()
+        for (const [key, value] of Object.entries(inputFields)) {
+            const props = {...inputFields[key]._props, value: state[key]}
+            inputFields[key].setProps(props)
+        }
     }
 
     render() {
