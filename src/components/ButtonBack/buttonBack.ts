@@ -2,8 +2,13 @@ import "./buttonBack.scss"
 import {router} from "../../index"
 import Block from "../../services/Block"
 
+type ButtonBackProps = {
+    link: string
+}
+
 export class ButtonBack extends Block {
-    constructor() {
+    constructor(props: ButtonBackProps) {
+        const {link} = props
         super("div",
             {
                 attr: {
@@ -12,7 +17,7 @@ export class ButtonBack extends Block {
                 events: {
                     click: (e: Event) => {
                         e.preventDefault()
-                        router.back()
+                        router.go(link)
                     }
                 }
             }

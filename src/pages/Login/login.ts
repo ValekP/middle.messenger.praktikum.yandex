@@ -23,7 +23,7 @@ const inputFields: TLogin = {
         type: "password",
         name: "password",
         label: "Пароль",
-        value: "qwerty123456"
+        value: "qwerty123456789"
     })
 }
 

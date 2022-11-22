@@ -7,7 +7,7 @@ import AuthController from "../../controllers/AuthController"
 import {router} from "../../index"
 import Actions from "../../services/Store/Actions"
 
-export interface IProfile {
+export type TProfile = {
     id?: number
     first_name: string
     second_name: string
@@ -18,7 +18,7 @@ export interface IProfile {
     avatar?: string | null
 }
 
-const inputFields = {
+const inputFields: Indexed = {
     email: new Input({
         template: "profile",
         staticTmpl: true,
@@ -57,7 +57,7 @@ const inputFields = {
     phone: new Input({
         template: "profile",
         staticTmpl: true,
-        type: "text",
+        type: "number",
         name: "phone",
         label: "Телефон"
     })
@@ -101,11 +101,12 @@ class UserProfile extends Block {
     }
 
     preMount() {
-        const state = Actions.getProfileState()
-        for (const [key, value] of Object.entries(inputFields)) {
+        const state = Actions.getProfileState() as Indexed
+        for (const [key] of Object.entries(inputFields)) {
             const props = {...inputFields[key]._props, value: state[key]}
             inputFields[key].setProps(props)
         }
+        this.setProps({...this._props, userName: state.first_name ?? ""})
     }
 
     render() {

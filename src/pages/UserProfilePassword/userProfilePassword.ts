@@ -3,34 +3,50 @@ import Input from "../../components/Input"
 import Button from "../../components/Button"
 import ProfilePhoto from "../../components/Profile/Photo"
 import {connectProfile} from "../../services/Store/ConnectComponents"
+import validateInputsList from "../../helpers/validateInputsList"
+import ProfileController from "../../controllers/ProfileController"
 
-const inputPasswordOld = new Input({
-    template: "profile",
-    type: "password",
-    name: "password_old",
-    label: "Старый Пароль"
-})
+export type TChangePassword = {
+    oldPassword: string
+    newPassword: string
+}
 
-const inputPassword = new Input({
-    template: "profile",
-    type: "password",
-    name: "password",
-    label: "Новый пароль"
-})
+const inputFields: Indexed = {
+    oldPassword: new Input({
+        template: "profile",
+        type: "password",
+        name: "password_old",
+        label: "Старый Пароль"
+    }),
+    newPassword: new Input({
+        template: "profile",
+        type: "password",
+        name: "password",
+        label: "Новый пароль"
+    })
+}
 
-const inputPasswordAgain = new Input({
-    template: "profile",
-    type: "password",
-    name: "password_again",
-    label: "Повторите новый пароль"
-})
+const inputFieldsExtend: Indexed = {
+    ...inputFields,
+    againPassword: new Input({
+        template: "profile",
+        type: "password",
+        name: "password_again",
+        label: "Повторите новый пароль"
+    })
+}
 
 const button = new Button({
     title: "Сохранить",
-    onClick: () => {
-        inputPasswordOld.inputValidate()
-        inputPassword.inputValidate()
-        inputPasswordAgain.inputValidate()
+    onClick: async (e: Event) => {
+        e.preventDefault()
+
+        const inputs = validateInputsList(inputFields)
+        const inputsExtend = validateInputsList(inputFieldsExtend)
+        if (inputs && inputsExtend) {
+            await ProfileController.updatePassword(inputs as TChangePassword)
+        }
+
     }
 })
 
@@ -44,10 +60,8 @@ class UserProfilePassword extends Block {
                     class: "profile"
                 },
                 userPhoto,
-                inputPasswordOld,
-                inputPassword,
-                inputPasswordAgain,
-                footer: button,
+                ...inputFieldsExtend,
+                footer: button
             }
         )
     }
@@ -56,9 +70,9 @@ class UserProfilePassword extends Block {
         return this.compile(`
             {{{ userPhoto }}}
             <div class="profile__fields-list">
-                {{{ inputPasswordOld }}}
-                {{{ inputPassword }}}
-                {{{ inputPasswordAgain }}}
+                {{{ oldPassword }}}
+                {{{ newPassword }}}
+                {{{ againPassword }}}
             </div>
             <div class="profile__footer">
                 {{{ footer }}}

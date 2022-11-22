@@ -1,14 +1,14 @@
 import Store from "./Store"
-import {IProfile} from "../../pages/UserProfile/userProfile"
+import {TProfile} from "../../pages/UserProfile/userProfile"
 
 class Actions {
-    public setProfile(profile: IProfile) {
+    public setProfile(profile: TProfile) {
         Store.set("profile", profile)
     }
 
     public getProfileState() {
         const state = Store.getState()
-        const profile: IProfile = state.profile ?? {}
+        const profile: TProfile = state.profile ?? {}
         return Object.assign(
             {
                 profile:

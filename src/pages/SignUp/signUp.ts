@@ -6,15 +6,15 @@ import validateInputsList from "../../helpers/validateInputsList"
 import AuthController from "../../controllers/AuthController"
 
 export type ISignUp = {
-    email: object | string
-    login: object | string
-    first_name: object | string
-    second_name: object | string
-    phone: object | string
-    password: object | string
+    email: string
+    login: string
+    first_name: string
+    second_name: string
+    phone: string
+    password: string
 }
 
-const inputFields: ISignUp = {
+const inputFields: Indexed = {
     email: new Input({
         template: "auth",
         type: "email",
@@ -45,7 +45,7 @@ const inputFields: ISignUp = {
     }),
     phone: new Input({
         template: "auth",
-        type: "text",
+        type: "number",
         name: "phone",
         label: "Телефон",
         value: "74563353363",

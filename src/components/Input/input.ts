@@ -4,7 +4,7 @@ import Block from "../../services/Block"
 
 type InputProps = {
     staticTmpl?: boolean
-    type?: "text" | "password" | "email"
+    type?: "text" | "password" | "email" | "number"
     value?: string
     name?: string
     label?: string
@@ -48,12 +48,13 @@ export class Input extends Block {
         if (!this._props.staticTmpl) {
             const {value, name} = this.getInput()
             const validate = validateInputs({name, value})
+            console.log(validate)
             if (validate) {
                 this.setError(validate as string)
                 return false
             } else {
                 this.clearError()
-                return value
+                return value.length === 0 ? null : value
             }
         }
     }

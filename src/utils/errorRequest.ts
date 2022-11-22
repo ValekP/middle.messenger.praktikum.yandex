@@ -16,6 +16,7 @@ export const errorRequest = (error: XMLHttpRequest | any) => {
             Store.removeState()
             throw ("Не авторизован")
         default:
+            alert(reason)
             throw new Error(reason)
     }
 }

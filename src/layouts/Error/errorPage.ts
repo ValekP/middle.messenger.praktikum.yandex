@@ -42,7 +42,7 @@ export class ErrorPage extends Block {
                 <div class="error__code">{{ statusCode }}</div>
                 <div class="error__text">{{ statusDescription }}</div>
                 <div class="error__link">
-                    <a href="">Назад к чатам</a>
+                    <a href="">Назад</a>
                 </div>
             </div>
         `)

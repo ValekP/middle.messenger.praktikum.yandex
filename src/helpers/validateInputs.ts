@@ -58,6 +58,24 @@ export default function validateInputs(props: ValidateAuthProps) {
                 default:
                     return false
             }
+        case "display_name":
+            switch (true) {
+                case props.value.length === 0:
+                    return "Введите имя"
+                case props.value.length > 0 && props.value.length < 3:
+                    return "Короткое имя (больше 3 символов)"
+                default:
+                    return false
+            }
+        case "phone":
+            switch (true) {
+                case props.value.length === 0:
+                    return "Введите телефон"
+                case props.value.length > 0 && props.value.length < 6:
+                    return "Неверный телефон (больше 6 цифр)"
+                default:
+                    return false
+            }
         default:
             return false
     }

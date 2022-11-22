@@ -4,7 +4,9 @@ import Page from "../../layouts/Page"
 import UserProfile from "./userProfile"
 import {checkNotAuth} from "../../controllers/AuthActions"
 
-const buttonBack = new ButtonBack()
+const buttonBack = new ButtonBack({
+    link: "/messenger"
+})
 
 const profile = new Profile({
     main: new UserProfile()

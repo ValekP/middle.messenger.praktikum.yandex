@@ -4,9 +4,10 @@ import Button from "../../components/Button"
 import ProfilePhoto from "../../components/Profile/Photo"
 import {connectProfile} from "../../services/Store/ConnectComponents"
 import validateInputsList from "../../helpers/validateInputsList"
-import Actions from "../../services/Store/Actions";
+import Actions from "../../services/Store/Actions"
+import ProfileController from "../../controllers/ProfileController"
 
-const inputFields = {
+const inputFields: Indexed = {
     email: new Input({
         template: "profile",
         staticTmpl: false,
@@ -45,7 +46,7 @@ const inputFields = {
     phone: new Input({
         template: "profile",
         staticTmpl: false,
-        type: "text",
+        type: "number",
         name: "phone",
         label: "Телефон"
     })
@@ -56,14 +57,16 @@ const button = new Button({
     onClick: async (e: Event) => {
         e.preventDefault()
         const inputs = validateInputsList(inputFields)
-        console.log(inputs)
         if (inputs) {
+            //await ProfileController.updateProfile(inputs as TProfile)
+            const formDataPhoto = userPhoto.getFormDataPhoto()
 
+            if (formDataPhoto) await ProfileController.updateAvatar(formDataPhoto)
         }
     }
 })
 
-const userPhoto = new ProfilePhoto()
+const userPhoto = new ProfilePhoto({edit: true})
 
 class UserProfileEdit extends Block {
     constructor() {
@@ -80,11 +83,16 @@ class UserProfileEdit extends Block {
     }
 
     preMount() {
-        const state = Actions.getProfileState()
+        const state = Actions.getProfileState() as Indexed
         for (const [key] of Object.entries(inputFields)) {
             const props = {...inputFields[key]._props, value: state[key]}
             inputFields[key].setProps(props)
         }
+        console.log(state)
+        userPhoto.setProps({
+            ...userPhoto._props,
+            photo: state.avatar ? `https://ya-praktikum.tech/api/v2/resources${state.avatar}` : null
+        })
     }
 
     render() {
