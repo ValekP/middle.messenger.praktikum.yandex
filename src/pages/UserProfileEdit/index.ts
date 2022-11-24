@@ -2,7 +2,8 @@ import ButtonBack from "../../components/ButtonBack"
 import Profile from "../../layouts/Profile"
 import Page from "../../layouts/Page"
 import UserProfileEdit from "./userProfileEdit"
-import {checkNotAuth} from "../../controllers/AuthActions"
+import AuthController from "../../controllers/AuthController";
+import {router} from "../../index";
 
 const buttonBack = new ButtonBack({
     link: "/profile"
@@ -18,7 +19,11 @@ const ProfileEditPage = {
     props: {
         sidebar: buttonBack,
         content: profile,
-        mountFn: checkNotAuth
+        mountFn: () => {
+            AuthController.checkAuth().catch(() => {
+                router.go("/login")
+            })
+        }
     }
 }
 

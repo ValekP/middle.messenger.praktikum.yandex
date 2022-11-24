@@ -4,8 +4,8 @@ import Button from "../../components/Button"
 import ProfilePhoto from "../../components/Profile/Photo"
 import {connectProfile} from "../../services/Store/ConnectComponents"
 import validateInputsList from "../../helpers/validateInputsList"
-import Actions from "../../services/Store/Actions"
 import ProfileController from "../../controllers/ProfileController"
+import {TProfile} from "../UserProfile/userProfile";
 
 const inputFields: Indexed = {
     email: new Input({
@@ -58,7 +58,7 @@ const button = new Button({
         e.preventDefault()
         const inputs = validateInputsList(inputFields)
         if (inputs) {
-            //await ProfileController.updateProfile(inputs as TProfile)
+            await ProfileController.updateProfile(inputs as TProfile)
             const formDataPhoto = userPhoto.getFormDataPhoto()
 
             if (formDataPhoto) await ProfileController.updateAvatar(formDataPhoto)
@@ -83,16 +83,7 @@ class UserProfileEdit extends Block {
     }
 
     preMount() {
-        const state = Actions.getProfileState() as Indexed
-        for (const [key] of Object.entries(inputFields)) {
-            const props = {...inputFields[key]._props, value: state[key]}
-            inputFields[key].setProps(props)
-        }
-        console.log(state)
-        userPhoto.setProps({
-            ...userPhoto._props,
-            photo: state.avatar ? `https://ya-praktikum.tech/api/v2/resources${state.avatar}` : null
-        })
+        ProfileController.updateProfileProps(inputFields, userPhoto)
     }
 
     render() {

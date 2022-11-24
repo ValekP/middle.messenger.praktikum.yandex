@@ -1,6 +1,7 @@
 import Login from "./login"
 import Auth from "../../layouts/Auth"
-import {checkAuth} from "../../controllers/AuthActions"
+import AuthController from "../../controllers/AuthController";
+import {router} from "../../index";
 
 const LoginPage = {
     pathname: "/login",
@@ -9,7 +10,9 @@ const LoginPage = {
     props: {
         title: "Вход",
         content: new Login(),
-        mountFn: checkAuth
+        mountFn: () => AuthController.checkAuth().then(() => {
+            router.go('/messenger')
+        })
     }
 }
 

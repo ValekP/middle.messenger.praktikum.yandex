@@ -44,6 +44,7 @@ class AuthController {
             errorRequest(error)
         }
     }
+
 }
 
 export default new AuthController()

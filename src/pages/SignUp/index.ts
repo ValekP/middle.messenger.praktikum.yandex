@@ -1,6 +1,7 @@
 import SignUp from "./signUp"
 import Auth from "../../layouts/Auth"
-import {checkAuth} from "../../controllers/AuthActions"
+import AuthController from "../../controllers/AuthController";
+import {router} from "../../index";
 
 const SignupPage = {
     pathname: "/signup",
@@ -8,7 +9,11 @@ const SignupPage = {
     props: {
         title: "Регистрация",
         content: new SignUp(),
-        mountFn: checkAuth
+        mountFn: () => {
+            AuthController.checkAuth().catch(() => {
+                router.go("/login")
+            })
+        }
     }
 }
 

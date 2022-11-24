@@ -47,7 +47,7 @@ export class ProfilePhoto extends Block {
                     input.onchange = () => {
                         if (input.files && input.files[0]) {
                             let reader = new FileReader()
-                            reader.onload = (e: Event) => photo.innerHTML = `<img src="${e.target?.result}" alt=""/>`
+                            reader.onload = (e: Event) => photo.innerHTML = `<img src="${(e.target as Indexed)?.result}" alt=""/>`
                             reader.readAsDataURL(input.files[0])
                         }
                     }

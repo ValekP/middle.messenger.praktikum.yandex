@@ -5,7 +5,7 @@ import Link from "../../components/Link"
 import {connectProfile} from "../../services/Store/ConnectComponents"
 import AuthController from "../../controllers/AuthController"
 import {router} from "../../index"
-import Actions from "../../services/Store/Actions"
+import ProfileController from "../../controllers/ProfileController";
 
 export type TProfile = {
     id?: number
@@ -101,12 +101,7 @@ class UserProfile extends Block {
     }
 
     preMount() {
-        const state = Actions.getProfileState() as Indexed
-        for (const [key] of Object.entries(inputFields)) {
-            const props = {...inputFields[key]._props, value: state[key]}
-            inputFields[key].setProps(props)
-        }
-        this.setProps({...this._props, userName: state.first_name ?? ""})
+        ProfileController.updateProfileProps(inputFields, userPhoto)
     }
 
     render() {
