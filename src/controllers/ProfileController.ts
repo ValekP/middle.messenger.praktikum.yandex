@@ -4,14 +4,15 @@ import {errorRequest} from "../utils/errorRequest"
 import {router} from "../index"
 import ProfileAPI from "../services/Api/ProfileAPI"
 import {TChangePassword} from "../pages/UserProfilePassword/userProfilePassword"
-import Actions from "../services/Store/Actions";
+import Actions from "../services/Store/Actions"
+import {webpath} from "../webpath";
 
 class ProfileController {
     public async updateProfile(data: TProfile) {
         try {
             await ProfileAPI.updateProfile(data)
             await AuthController.checkAuth()
-            router.go('/profile')
+            router.go(webpath.profile)
         } catch (error) {
             errorRequest(error)
         }
@@ -20,7 +21,7 @@ class ProfileController {
     public async updatePassword(data: TChangePassword) {
         try {
             await ProfileAPI.updatePassword(data)
-            router.go('/profile')
+            router.go(webpath.profile)
         } catch (error) {
             errorRequest(error)
         }
@@ -28,10 +29,10 @@ class ProfileController {
 
     public async updateAvatar(data: FormData) {
         try {
-            await ProfileAPI.updateAvatar(data);
-            await AuthController.checkAuth();
+            await ProfileAPI.updateAvatar(data)
+            await AuthController.checkAuth()
         } catch (error) {
-            errorRequest(error);
+            errorRequest(error)
         }
     }
 

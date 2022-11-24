@@ -6,9 +6,9 @@ import Conversation from "../../components/Conversation"
 import ConversationMessage from "../../components/Conversation/Message"
 import ConversationHeader from "../../components/Conversation/Header"
 import ConversationFooter from "../../components/Conversation/Footer"
-import AuthController from "../../controllers/AuthController";
-import {router} from "../../index";
-
+import AuthController from "../../controllers/AuthController"
+import {router} from "../../index"
+import {webpath} from "../../webpath";
 
 const chatsListHeader = new ChatsListHeader({})
 
@@ -70,7 +70,7 @@ const ChatsPage = {
         content: chat,
         mountFn: () => {
             AuthController.checkAuth().catch(() => {
-                router.go("/login")
+                router.go(webpath.login)
             })
         }
     }

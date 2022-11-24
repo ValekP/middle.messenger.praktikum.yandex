@@ -1,6 +1,7 @@
 import "./indexMenu.scss"
 import Block from "../../services/Block"
 import {router} from "../../index"
+import {webpath} from "../../webpath";
 
 export default class IndexMenu extends Block {
     constructor() {
@@ -11,28 +12,28 @@ export default class IndexMenu extends Block {
                 },
 
                 nav: {
-                    "/login": {
+                    [webpath.login]: {
                         title: "Login",
                     },
-                    "/signup": {
+                    [webpath.signup]: {
                         title: "Signup",
                     },
-                    "/messenger": {
+                    [webpath.chats]: {
                         title: "Chats",
                     },
-                    "/profile": {
+                    [webpath.profile]: {
                         title: "Profile",
                     },
-                    "/profile/edit": {
+                    [webpath.profileEdit]: {
                         title: "Profile Edit",
                     },
-                    "/profile/password": {
+                    [webpath.profilePassword]: {
                         title: "Profile Password",
                     },
-                    "/404": {
+                    [webpath.error404]: {
                         title: "404",
                     },
-                    "/500": {
+                    [webpath.error500]: {
                         title: "500",
                     }
                 }

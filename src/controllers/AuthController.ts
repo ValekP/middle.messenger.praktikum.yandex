@@ -5,13 +5,14 @@ import Actions from "../services/Store/Actions"
 import Store from "../services/Store/Store"
 import {ISignUp} from "../pages/SignUp/signUp"
 import {errorRequest} from "../utils/errorRequest"
+import {webpath} from "../webpath";
 
 class AuthController {
     public async login(user: TLogin) {
         try {
             await AuthAPI.login(user)
             await this.checkAuth()
-            router.go('/messenger')
+            router.go(webpath.chats)
         } catch (error) {
             errorRequest(error)
         }
@@ -30,7 +31,7 @@ class AuthController {
         try {
             await AuthAPI.signUp(user)
             await this.checkAuth()
-            router.go('/login')
+            router.go(webpath.login)
         } catch (error) {
             errorRequest(error)
         }

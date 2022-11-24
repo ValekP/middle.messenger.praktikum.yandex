@@ -2,11 +2,12 @@ import ButtonBack from "../../components/ButtonBack"
 import Profile from "../../layouts/Profile"
 import Page from "../../layouts/Page"
 import UserProfile from "./userProfile"
-import AuthController from "../../controllers/AuthController";
-import {router} from "../../index";
+import AuthController from "../../controllers/AuthController"
+import {router} from "../../index"
+import {webpath} from "../../webpath";
 
 const buttonBack = new ButtonBack({
-    link: "/messenger"
+    link: webpath.chats
 })
 
 const profile = new Profile({
@@ -21,7 +22,7 @@ const ProfilePage = {
         content: profile,
         mountFn: () => {
             AuthController.checkAuth().catch(() => {
-                router.go("/login")
+                router.go(webpath.login)
             })
         }
     }

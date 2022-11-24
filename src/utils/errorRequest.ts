@@ -1,6 +1,7 @@
 import {router} from "../index"
 import Store from "../services/Store/Store"
 import AuthController from "../controllers/AuthController"
+import {webpath} from "../webpath";
 
 export const errorRequest = (error: XMLHttpRequest | any) => {
     const {reason} = JSON.parse(error.response)
@@ -8,7 +9,7 @@ export const errorRequest = (error: XMLHttpRequest | any) => {
     switch (reason) {
         case "User already in system":
             AuthController.checkAuth().then(() => {
-                router.go('/messenger')
+                router.go(webpath.chats)
                 throw ("Авторизован")
             })
             break

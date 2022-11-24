@@ -1,7 +1,8 @@
 import SignUp from "./signUp"
 import Auth from "../../layouts/Auth"
-import AuthController from "../../controllers/AuthController";
-import {router} from "../../index";
+import AuthController from "../../controllers/AuthController"
+import {router} from "../../index"
+import {webpath} from "../../webpath";
 
 const SignupPage = {
     pathname: "/signup",
@@ -9,11 +10,9 @@ const SignupPage = {
     props: {
         title: "Регистрация",
         content: new SignUp(),
-        mountFn: () => {
-            AuthController.checkAuth().catch(() => {
-                router.go("/login")
-            })
-        }
+        mountFn: () => AuthController.checkAuth().then(() => {
+            router.go(webpath.chats)
+        })
     }
 }
 

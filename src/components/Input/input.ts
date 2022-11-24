@@ -37,7 +37,7 @@ export class Input extends Block {
 
     addEvents() {
         if (!this._props.staticTmpl) {
-            this._element?.querySelectorAll('input').forEach(input => {
+            this._element?.querySelectorAll("input").forEach(input => {
                 input.addEventListener("blur", this.inputValidate.bind(this))
                 input.addEventListener("focus", this.inputValidate.bind(this))
             })
@@ -64,7 +64,7 @@ export class Input extends Block {
     }
 
     clearError() {
-        this._inputError('', true)
+        this._inputError("", true)
     }
 
     inputTmpl() {
@@ -84,12 +84,12 @@ export class Input extends Block {
     }
 
     private getInput() {
-        return this._element?.querySelector('input') as HTMLInputElement
+        return this._element?.querySelector("input") as HTMLInputElement
     }
 
     private _inputError(text: string = "", clear: boolean = false) {
         let spanError
-        const checkSpan = this._element?.querySelector('.input-error')
+        const checkSpan = this._element?.querySelector(".input-error")
 
         if (checkSpan) {
             spanError = checkSpan

@@ -50,7 +50,7 @@ export default abstract class BaseAPI {
     }
 
     private response(res: XMLHttpRequest) {
-        if (res.response === 'OK') {
+        if (res.response === "OK") {
             return {ok: true}
         }
 

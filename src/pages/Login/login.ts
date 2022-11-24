@@ -4,6 +4,7 @@ import Button from "../../components/Button"
 import validateInputsList from "../../helpers/validateInputsList"
 import AuthController from "../../controllers/AuthController"
 import Link from "../../components/Link"
+import {webpath} from "../../webpath";
 
 export type TLogin = {
     login: object | string
@@ -38,7 +39,7 @@ const button = new Button({
     }
 })
 
-const link = new Link({title: "Нет аккаунта?", href: "/signup"})
+const link = new Link({title: "Нет аккаунта?", href: webpath.signup})
 
 export default class Login extends Block {
     constructor() {

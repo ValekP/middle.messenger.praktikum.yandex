@@ -14,12 +14,12 @@ class Actions {
                 profile:
                     {
                         id: null,
-                        first_name: '',
-                        second_name: '',
+                        first_name: "",
+                        second_name: "",
                         display_name: null,
-                        login: '',
-                        email: '',
-                        phone: '',
+                        login: "",
+                        email: "",
+                        phone: "",
                         avatar: null,
                     }
             },

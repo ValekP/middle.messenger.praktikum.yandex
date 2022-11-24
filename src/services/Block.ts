@@ -111,7 +111,7 @@ export default class Block {
             (propsAndStubs[key] as string) = `<div data-id="${child._id}"></div>`
         })
 
-        const fragment: HTMLElement = this.createDocumentElement('template')
+        const fragment: HTMLElement = this.createDocumentElement("template")
         fragment.innerHTML = Handlebars.compile(template)(propsAndStubs)
 
         Object.values(this._children).forEach((child) => {

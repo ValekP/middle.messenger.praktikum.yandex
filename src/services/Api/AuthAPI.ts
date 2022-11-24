@@ -4,11 +4,11 @@ import {ISignUp} from "../../pages/SignUp/signUp"
 
 class AuthAPI extends BaseAPI {
     constructor() {
-        super({path: '/auth'})
+        super({path: "/auth"})
     }
 
     public login(data: TLogin) {
-        return this.post('/signin',
+        return this.post("/signin",
             {
                 data: data,
                 withCredentials: true
@@ -17,13 +17,13 @@ class AuthAPI extends BaseAPI {
     }
 
     public checkAuth() {
-        return this.get('/user', {
+        return this.get("/user", {
             withCredentials: true
         })
     }
 
     public signUp(data: ISignUp) {
-        return this.post('/signup',
+        return this.post("/signup",
             {
                 data: data,
                 withCredentials: true
@@ -32,7 +32,7 @@ class AuthAPI extends BaseAPI {
     }
 
     public signOut() {
-        return this.post('/logout', {
+        return this.post("/logout", {
             withCredentials: true
         })
     }

@@ -1,6 +1,7 @@
 import {Route} from "./Route"
 import {BlockConstruct} from "../Block"
 import {router} from "../../index"
+import {webpath} from "../../webpath";
 
 interface RouterProps {
     pathname: TPathname
@@ -40,7 +41,7 @@ export default class Router {
         const route = this.getRoute(pathname)
 
         if (!route) {
-            router.go("/404")
+            router.go(webpath.error404)
             return
         }
 

@@ -5,7 +5,7 @@ import ProfilePhoto from "../../components/Profile/Photo"
 import {connectProfile} from "../../services/Store/ConnectComponents"
 import validateInputsList from "../../helpers/validateInputsList"
 import ProfileController from "../../controllers/ProfileController"
-import {TProfile} from "../UserProfile/userProfile";
+import {TProfile} from "../UserProfile/userProfile"
 
 const inputFields: Indexed = {
     email: new Input({

@@ -1,6 +1,7 @@
 import "./header.scss"
 import Block from "../../../services/Block"
 import Link from "../../Link"
+import {webpath} from "../../../webpath";
 
 type ChatsHeaderProps = {}
 
@@ -12,7 +13,7 @@ const linkProfile = new Link({
             <path d="M1 9L5 5L1 1"/>
         </svg>
     `,
-    href: "/profile"
+    href: webpath.profile
 })
 
 export class ChatsHeader extends Block {

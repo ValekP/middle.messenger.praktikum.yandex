@@ -4,29 +4,29 @@ import {TChangePassword} from "../../pages/UserProfilePassword/userProfilePasswo
 
 class UserProfileAPI extends BaseAPI {
     constructor() {
-        super({path: '/user'})
+        super({path: "/user"})
     }
 
     public updateProfile(data: TProfile) {
-        return this.put('/profile', {
+        return this.put("/profile", {
             data: data,
             withCredentials: true
         })
     }
 
     public updatePassword(data: TChangePassword) {
-        return this.put('/password', {
+        return this.put("/password", {
             data: data,
             withCredentials: true
         })
     }
 
     public updateAvatar(data: FormData) {
-        return this.put('/profile/avatar', {
+        return this.put("/profile/avatar", {
             headers: {},
             withCredentials: true,
             data,
-        });
+        })
     }
 }
 

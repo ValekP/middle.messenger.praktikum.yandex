@@ -5,7 +5,8 @@ import Link from "../../components/Link"
 import {connectProfile} from "../../services/Store/ConnectComponents"
 import AuthController from "../../controllers/AuthController"
 import {router} from "../../index"
-import ProfileController from "../../controllers/ProfileController";
+import ProfileController from "../../controllers/ProfileController"
+import {webpath} from "../../webpath";
 
 export type TProfile = {
     id?: number
@@ -78,11 +79,11 @@ class UserProfile extends Block {
                 footer: [
                     new Link({
                         title: "Изменить данные",
-                        href: "/profile/edit"
+                        href: webpath.profileEdit
                     }),
                     new Link({
                         title: "Изменить пароль",
-                        href: "/profile/password"
+                        href: webpath.profilePassword
                     }),
                     new Link({
                         title: "Выйти",
@@ -90,7 +91,7 @@ class UserProfile extends Block {
                         onClick: async (e) => {
                             e.preventDefault()
                             await AuthController.signOut().then(() => {
-                                router.go('/login')
+                                router.go("")
                             })
                         },
                         classes: "link--red"
