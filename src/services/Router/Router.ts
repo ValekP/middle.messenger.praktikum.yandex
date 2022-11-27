@@ -1,7 +1,7 @@
 import {Route} from "./Route"
 import {BlockConstruct} from "../Block"
 import {router} from "../../index"
-import {webpath} from "../../webpath";
+import {webpath} from "../../webpath"
 
 interface RouterProps {
     pathname: TPathname

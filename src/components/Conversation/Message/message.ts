@@ -7,6 +7,24 @@ type ConversationMessageProps = {
     myMessage?: boolean
 }
 
+export type TChatMessages = {
+    className?: string
+    chat_id: number
+    time: string
+    type: string
+    user_id: string
+    content: string
+    file?: {
+        id: number
+        user_id: number
+        path: string
+        filename: string
+        content_type: string
+        content_size: number
+        upload_date: string
+    }
+}
+
 export class ConversationMessage extends Block {
     constructor(props: ConversationMessageProps) {
         const {myMessage = false, ...rest} = props

@@ -3,6 +3,7 @@ import Block from "../../services/Block"
 import {router} from "../../index"
 
 type LinkProps = {
+    tag?: string
     title: string
     href: string
     classes?: string
@@ -11,8 +12,8 @@ type LinkProps = {
 
 export class Link extends Block {
     constructor(props: LinkProps) {
-        const {onClick, ...rest} = props
-        super("div",
+        const {onClick, tag = "div", ...rest} = props
+        super(tag,
             {
                 attr: {
                     class: "link-wrap"

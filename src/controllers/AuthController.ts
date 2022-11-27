@@ -5,7 +5,7 @@ import Actions from "../services/Store/Actions"
 import Store from "../services/Store/Store"
 import {ISignUp} from "../pages/SignUp/signUp"
 import {errorRequest} from "../utils/errorRequest"
-import {webpath} from "../webpath";
+import {webpath} from "../webpath"
 
 class AuthController {
     public async login(user: TLogin) {

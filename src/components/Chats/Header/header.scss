@@ -6,6 +6,21 @@
     margin: 0 10px;
     border-bottom: 1px solid $color-style-5;
 
+    &_menu {
+      display: flex;
+      justify-content: flex-end;
+
+      .menu {
+        display: flex;
+        list-style: none;
+        height: 100%;
+
+        &-item {
+          @include flex-j-a-center
+        }
+      }
+    }
+
     &-link {
       display: flex;
       justify-content: end;

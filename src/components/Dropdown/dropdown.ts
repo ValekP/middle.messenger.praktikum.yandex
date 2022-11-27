@@ -3,20 +3,26 @@ import Block from "../../services/Block"
 
 type DropdownProps = {
     title: string
+    nav: object[]
 }
 
 export class Dropdown extends Block {
     constructor(props: DropdownProps) {
+        const {title, nav, ...rest} = props
         super("div",
             {
                 attr: {
                     class: "dropdown"
                 },
-                ...props,
+                ...rest,
+                title,
+                nav,
+                navList: 3,
                 events: {
                     click: (e: Event) => {
                         e.preventDefault()
                         console.log("ok dropdown")
+                        this._element?.classList.toggle("active")
                     }
                 }
             }
@@ -29,7 +35,7 @@ export class Dropdown extends Block {
                 {{{ title }}}
             </div>
             <nav class="dropdown-menu">
-                test
+                <ul>{{{nav}}}</ul>
             </nav>
         `)
     }

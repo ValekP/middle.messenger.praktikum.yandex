@@ -10,6 +10,11 @@
     flex: 1;
     overflow-y: auto;
   }
+
+  &-preview {
+    @include flex-j-a-center;
+    height: 100%;
+  }
 }
 
 .messages {

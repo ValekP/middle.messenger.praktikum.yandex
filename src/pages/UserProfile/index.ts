@@ -4,7 +4,7 @@ import Page from "../../layouts/Page"
 import UserProfile from "./userProfile"
 import AuthController from "../../controllers/AuthController"
 import {router} from "../../index"
-import {webpath} from "../../webpath";
+import {webpath} from "../../webpath"
 
 const buttonBack = new ButtonBack({
     link: webpath.chats

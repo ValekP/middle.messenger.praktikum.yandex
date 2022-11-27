@@ -1,6 +1,19 @@
 import "./chats.scss"
 import Block from "../../services/Block"
 
+export type TChatList = {
+    id: number
+    title: string
+    avatar: null | string
+    created_by: number
+    unread_count: number
+    last_message: {
+        id: number
+        content: string
+        time: Date | string
+    }
+}
+
 type ChatsProps = {
     chatsListHeader: object
     chatsList: object[]

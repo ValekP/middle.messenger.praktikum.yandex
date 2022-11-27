@@ -6,7 +6,7 @@ import {connectProfile} from "../../services/Store/ConnectComponents"
 import AuthController from "../../controllers/AuthController"
 import {router} from "../../index"
 import ProfileController from "../../controllers/ProfileController"
-import {webpath} from "../../webpath";
+import {webpath} from "../../webpath"
 
 export type TProfile = {
     id?: number
@@ -91,7 +91,7 @@ class UserProfile extends Block {
                         onClick: async (e) => {
                             e.preventDefault()
                             await AuthController.signOut().then(() => {
-                                router.go("")
+                                router.go(webpath.login)
                             })
                         },
                         classes: "link--red"
@@ -101,8 +101,9 @@ class UserProfile extends Block {
         )
     }
 
-    preMount() {
-        ProfileController.updateProfileProps(inputFields, userPhoto)
+    componentDidMount() {
+        ProfileController.updateProfileProps(inputFields)
+        ProfileController.updateProfilePhoto(userPhoto)
     }
 
     render() {

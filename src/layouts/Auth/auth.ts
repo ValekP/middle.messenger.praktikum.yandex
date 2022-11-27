@@ -19,7 +19,7 @@ export class Auth extends Block {
         )
     }
 
-    preMount() {
+    componentDidMount() {
         if (this._props.mountFn) {
             this._props.mountFn()
         }

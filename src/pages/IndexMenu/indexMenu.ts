@@ -1,7 +1,7 @@
 import "./indexMenu.scss"
 import Block from "../../services/Block"
 import {router} from "../../index"
-import {webpath} from "../../webpath";
+import {webpath} from "../../webpath"
 
 export default class IndexMenu extends Block {
     constructor() {

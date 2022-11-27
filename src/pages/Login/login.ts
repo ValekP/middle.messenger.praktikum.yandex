@@ -4,7 +4,7 @@ import Button from "../../components/Button"
 import validateInputsList from "../../helpers/validateInputsList"
 import AuthController from "../../controllers/AuthController"
 import Link from "../../components/Link"
-import {webpath} from "../../webpath";
+import {webpath} from "../../webpath"
 
 export type TLogin = {
     login: object | string
@@ -17,7 +17,7 @@ const inputFields: TLogin = {
         type: "text",
         name: "login",
         label: "Логин",
-        value: "Magnus36"
+        value: "Magnus361"
     }),
     password: new Input({
         template: "auth",

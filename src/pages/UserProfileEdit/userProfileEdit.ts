@@ -60,7 +60,6 @@ const button = new Button({
         if (inputs) {
             await ProfileController.updateProfile(inputs as TProfile)
             const formDataPhoto = userPhoto.getFormDataPhoto()
-
             if (formDataPhoto) await ProfileController.updateAvatar(formDataPhoto)
         }
     }
@@ -82,8 +81,9 @@ class UserProfileEdit extends Block {
         )
     }
 
-    preMount() {
-        ProfileController.updateProfileProps(inputFields, userPhoto)
+    componentDidMount() {
+        ProfileController.updateProfileProps(inputFields)
+        ProfileController.updateProfilePhoto(userPhoto)
     }
 
     render() {

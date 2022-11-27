@@ -4,7 +4,7 @@ import Button from "../../components/Button"
 import Link from "../../components/Link"
 import validateInputsList from "../../helpers/validateInputsList"
 import AuthController from "../../controllers/AuthController"
-import {webpath} from "../../webpath";
+import {webpath} from "../../webpath"
 
 export type ISignUp = {
     email: string

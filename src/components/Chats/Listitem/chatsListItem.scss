@@ -2,7 +2,7 @@
 
 .chats {
   &-item {
-    &#{&}-active {
+    &.active {
       background: $color-style-4;
     }
 
@@ -19,6 +19,9 @@
 
     &__img {
       @include user-img(47);
+      @include flex-j-a-center;
+      position: relative;
+      overflow: hidden;
     }
 
     &__body {

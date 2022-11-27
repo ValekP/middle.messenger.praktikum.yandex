@@ -13,6 +13,8 @@
 
       &_img {
         @include user-img(34);
+        @include flex-j-a-center;
+        overflow: hidden;
       }
 
       &_name {
