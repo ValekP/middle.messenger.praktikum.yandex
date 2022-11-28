@@ -1,6 +1,7 @@
 import ChatController from "./ChatController"
 import Actions from "../services/Store/Actions"
 import {TChatMessages} from "../components/Conversation/Message/message"
+import formatDate from "../helpers/formatDate";
 
 
 export type TMessageWebSocketConnect = {
@@ -81,7 +82,8 @@ class MessageController {
         if (Array.isArray(data)) {
 
             data.forEach(msg => {
-                msg.time = msg.time
+                msg.time = formatDate(new Date(Date.parse(msg.time)))
+                msg.myMessage = this._userId === parseInt(msg.user_id)
                 return msg
             })
 

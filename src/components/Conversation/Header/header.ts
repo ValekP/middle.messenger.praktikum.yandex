@@ -18,12 +18,12 @@ const dropdown = new Dropdown({
     nav: [
         new Link({
             tag: "li",
-            title: "меню 1",
+            title: "Добавить пользователя",
             href: webpath.profile
         }),
         new Link({
             tag: "li",
-            title: "меню 2",
+            title: "Удалить пользователя",
             href: webpath.profile
         })
     ]

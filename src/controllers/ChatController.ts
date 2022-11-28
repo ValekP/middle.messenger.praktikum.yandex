@@ -49,7 +49,7 @@ class ChatController {
             const chatList = Actions.getChatListState() as TChatList[]
             const newChatList = chatList.filter(chat => chat.id !== id)
             //обновим store, чтобы удалить лишний чат
-            //MessageController.leave()
+            MessageController.leave()
             Actions.removeActiveChat()
             Actions.setChatList(newChatList)
         } catch (error) {

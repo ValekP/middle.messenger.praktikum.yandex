@@ -29,6 +29,7 @@ export class ProfilePhoto extends Block {
 
     getFormDataPhoto() {
         const input = this.getInputPhoto()
+        console.log(input.files)
         if (input && input.files && input.files[0]) {
             const formData = new FormData()
             formData.append("avatar", input.files[0])

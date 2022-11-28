@@ -1,5 +1,6 @@
 import "./chatsListItem.scss"
 import Block from "../../../services/Block"
+import formatDate from "../../../helpers/formatDate";
 
 export type TChatProps = {
     id: number
@@ -28,6 +29,7 @@ export class ChatsListItem extends Block {
                 avatar: () => {
                     return avatar ? `https://ya-praktikum.tech/api/v2/resources${avatar}` : null
                 },
+                lastMsgTime: () => rest.last_message ? formatDate(new Date(Date.parse(rest.last_message.time))) : "",
                 events: {
                     click: onClick
                 }
@@ -61,7 +63,7 @@ export class ChatsListItem extends Block {
                         <div class="chats-item__header_name">{{ title }}</div>
                         <div class="chats-item__header_time">
                             {{# if last_message.time }}
-                                {{ last_message.time }}
+                                {{ lastMsgTime }}
                             {{/if }}
                         </div>
                     </div>

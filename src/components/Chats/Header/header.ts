@@ -18,12 +18,7 @@ const dropdown = new Dropdown({
     nav: [
         new Link({
             tag: "li",
-            title: "Профиль1",
-            href: webpath.profile
-        }),
-        new Link({
-            tag: "li",
-            title: "Профиль2",
+            title: "Создать чат",
             href: webpath.profile
         })
     ]

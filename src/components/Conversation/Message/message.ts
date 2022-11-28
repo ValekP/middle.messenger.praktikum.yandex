@@ -14,6 +14,7 @@ export type TChatMessages = {
     type: string
     user_id: string
     content: string
+    myMessage: boolean
     file?: {
         id: number
         user_id: number

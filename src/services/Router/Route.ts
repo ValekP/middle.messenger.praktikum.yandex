@@ -34,11 +34,9 @@ export class Route {
         if (!this._block) {
             this._block = new this._blockClass(this._props)
             renderDOM(this._props.rootQuery, this._block)
-            this._block.componentDidMount()
-
+            this._block?.dispatchComponentDidMount()
             return
         }
-
         //this._block.show()
     }
 }

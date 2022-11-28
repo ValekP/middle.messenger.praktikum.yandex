@@ -45,7 +45,6 @@ class Actions {
     }
 
     public getActiveChatState() {
-
         const state = Store.getState()
         const activeChat = state.activeChat ?? {}
 
@@ -118,27 +117,32 @@ class Actions {
         const state = Store.getState()
         const msg: string = state.msg ?? {}
 
-        return Object.assign(
-            [
-                {
-                    chat_id: 0,
-                    time: '',
-                    type: '',
-                    user_id: '',
-                    content: '',
-                    file: {
-                        id: 0,
-                        user_id: 0,
-                        path: '',
-                        filename: '',
-                        content_type: '',
-                        content_size: 0,
-                        upload_date: '',
+        if (state.msg.length) {
+            return Object.assign(
+                [
+                    {
+                        chat_id: 0,
+                        time: '',
+                        type: '',
+                        user_id: '',
+                        content: '',
+                        myMessage: false,
+                        file: {
+                            id: 0,
+                            user_id: 0,
+                            path: '',
+                            filename: '',
+                            content_type: '',
+                            content_size: 0,
+                            upload_date: '',
+                        }
                     }
-                }
-            ],
-            msg
-        )
+                ],
+                msg
+            )
+        } else {
+            return []
+        }
     }
 
     public setChatMessages(msg: TChatMessages[]) {

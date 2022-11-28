@@ -69,7 +69,7 @@ export default class Block {
         this.addEvents()
         this.addAttribute()
 
-        this.componentDidMount()
+        //this.componentDidMount()
     }
 
     public render(): any {
@@ -167,10 +167,11 @@ export default class Block {
         if (Object.keys(this._children).length) {
             this._eventBus.emit(Block.EVENTS.FLOW_RENDER)
         }
+        this.componentDidMount()
     }
 
     private _componentDidMount() {
-        this.componentDidMount()
+
         Object.values(this._children).forEach((child) => {
             if (Array.isArray(child)) {
                 child.forEach(item => item.dispatchComponentDidMount())
@@ -178,6 +179,7 @@ export default class Block {
                 child.dispatchComponentDidMount()
             }
         })
+
     }
 
     public componentDidMount() {
