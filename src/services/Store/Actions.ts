@@ -1,8 +1,8 @@
 import Store from "./Store"
 import {TProfile} from "../../pages/UserProfile/userProfile"
-import {TChatMessages} from "../../components/Conversation/Message/message"
 import {TChatList} from "../../components/Chats/chats"
 import {TActiveConversationUsers} from "../../components/Conversation/conversation"
+import {TChatMessages} from "../../components/Conversation/Message/message"
 
 class Actions {
     public setProfile(profile: TProfile) {
@@ -30,6 +30,10 @@ class Actions {
         )
     }
 
+    public setChatList(newChatList: TChatList[]) {
+        Store.set('chatList', newChatList)
+    }
+
     public getChatListState() {
         const state = Store.getState()
         const chatList: TChatList[] = state.chatList ?? {}
@@ -40,11 +44,11 @@ class Actions {
         )
     }
 
-    public setChatList(newChatList: TChatList[]) {
-        Store.set('chatList', newChatList)
+    public setActiveChat(activeChat: TActiveConversationUsers) {
+        Store.set('activeChat', activeChat)
     }
 
-    public getActiveChatState() {
+    public getActiveChat() {
         const state = Store.getState()
         const activeChat = state.activeChat ?? {}
 
@@ -71,12 +75,7 @@ class Actions {
         )
     }
 
-    public setActiveChat(activeChat: TActiveConversationUsers) {
-        Store.set('activeChat', activeChat)
-    }
-
     public removeActiveChat() {
-
         const intialState: TActiveConversationUsers = {
             id: null,
             title: '',
@@ -95,8 +94,43 @@ class Actions {
                 }
             ]
         }
-
         Store.set('activeChat', intialState)
+    }
+
+    public setChatMessages(msg: TChatMessages[]) {
+        Store.set('msg', msg)
+    }
+
+    public combineChatMessages(msg: TChatMessages[]) {
+        Store.set('msg', [...this.getChatMessages(), msg])
+    }
+
+    public getChatMessages() {
+        const state = Store.getState()
+        const msg: string = state.msg ?? {}
+
+        return Object.assign(
+            [
+                {
+                    chat_id: 0,
+                    time: '',
+                    type: '',
+                    user_id: '',
+                    content: '',
+                    myMessage: false,
+                    file: {
+                        id: 0,
+                        user_id: 0,
+                        path: '',
+                        filename: '',
+                        content_type: '',
+                        content_size: 0,
+                        upload_date: '',
+                    }
+                }
+            ],
+            msg
+        )
     }
 
     public getTokenToMessagesServer() {
@@ -111,42 +145,6 @@ class Actions {
 
     public setTokenToMessagesServer(token: string) {
         Store.set('token', token)
-    }
-
-    public getChatMessages() {
-        const state = Store.getState()
-        const msg: string = state.msg ?? {}
-
-        if (state.msg.length) {
-            return Object.assign(
-                [
-                    {
-                        chat_id: 0,
-                        time: '',
-                        type: '',
-                        user_id: '',
-                        content: '',
-                        myMessage: false,
-                        file: {
-                            id: 0,
-                            user_id: 0,
-                            path: '',
-                            filename: '',
-                            content_type: '',
-                            content_size: 0,
-                            upload_date: '',
-                        }
-                    }
-                ],
-                msg
-            )
-        } else {
-            return []
-        }
-    }
-
-    public setChatMessages(msg: TChatMessages[]) {
-        Store.set('msg', msg)
     }
 
 }

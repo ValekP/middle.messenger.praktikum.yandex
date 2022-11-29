@@ -5,6 +5,7 @@ import ConversationMessage from "./Message"
 import ConversationFooter from "./Footer"
 import Actions from "../../services/Store/Actions"
 
+
 type ConversationProps = {
     id?: number
     header?: object
@@ -56,27 +57,46 @@ export class Conversation extends Block {
         })
     }
 
-    getMessages() {
-        console.log(Actions.getChatMessages())
-        return Actions.getChatMessages().map(msg => new ConversationMessage({
+    async getMessages() {
+        // return Actions.getChatMessages().map(msg => new ConversationMessage({
+        //     text: msg.content,
+        //     time: msg.time,
+        //     myMessage: msg.myMessage
+        // }))
+
+        let msgs = Actions.getChatMessages().map(msg => new ConversationMessage({
             text: msg.content,
             time: msg.time,
             myMessage: msg.myMessage
         }))
+
+        console.log(msgs)
+
+        // this._props.messages = msgs
     }
 
     setFooter() {
         return new ConversationFooter({})
     }
 
-    view() {
-        console.log(Actions.getActiveChatState())
-        const state = Actions.getActiveChatState()
-        console.log(state)
+    async view() {
+        const state = await Actions.getActiveChat()
+        await console.log(state)
+        // const messages = await Actions.getChatMessages()
+        // await console.log(messages)
+        setInterval(() => this.getMessages(), 3000)
+
+        // await ChatController.requestChatUsers(chat)
+        // const state = await Actions.getActiveChatState()
+        // //await console.log(state)
+        // const messages = await Actions.getChatMessages()
+
+
+        //await console.log(messages)
         this.setProps({
             ...this._props,
+            id: state.id,
             header: this.setHeader(state.title, state.avatar),
-            messages: this.getMessages(),
             footer: this.setFooter(),
         })
     }

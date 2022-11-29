@@ -9,6 +9,7 @@ type ConversationMessageProps = {
 
 export type TChatMessages = {
     className?: string
+    id?: number
     chat_id: number
     time: string
     type: string

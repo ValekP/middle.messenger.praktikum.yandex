@@ -1,7 +1,7 @@
 import ChatController from "./ChatController"
 import Actions from "../services/Store/Actions"
 import {TChatMessages} from "../components/Conversation/Message/message"
-import formatDate from "../helpers/formatDate";
+import formatDate from "../helpers/formatDate"
 
 
 export type TMessageWebSocketConnect = {
@@ -43,9 +43,11 @@ class MessageController {
     }
 
     public leave() {
-        clearInterval(this._ping)
-        this._ws.close()
-        this._removeEvents()
+        if (this._ping && this._ws) {
+            clearInterval(this._ping)
+            this._ws.close()
+            this._removeEvents()
+        }
     }
 
     public sendMessage(message: string) {
@@ -70,26 +72,35 @@ class MessageController {
 
     private _handleOpen() {
         this.getMessages({offset: 0})
-        ChatController.request()
+        ChatController.getChats()
         this._ping = setInterval(() => {
-            this._ws.send('')
-        }, 1000)
+            this._ws.send(JSON.stringify({
+                type: 'ping',
+            }))
+        }, 2000)
     }
 
     private _handleMassage(e: MessageEvent) {
         const data = JSON.parse(e.data) as TChatMessages[]
 
-        if (Array.isArray(data)) {
-
-            data.forEach(msg => {
-                msg.time = formatDate(new Date(Date.parse(msg.time)))
-                msg.myMessage = this._userId === parseInt(msg.user_id)
-                return msg
-            })
-
-            Actions.setChatMessages(data)
-            ChatController.request()
+        const format = (msg: Indexed) => {
+            msg.time = formatDate(new Date(Date.parse(msg.time)))
+            msg.myMessage = this._userId === parseInt(msg.user_id)
+            return msg
         }
+
+        if (Array.isArray(data)) {
+            data.forEach(msg => format(msg))
+            console.log(data)
+            Actions.setChatMessages(data)
+            ChatController.getChats()
+        } else if ("id" in data) {
+            console.log(data)
+            Actions.combineChatMessages(format(data) as TChatMessages[])
+            // ChatController.getChats()
+        }
+
+
     }
 
     private _handleClose(e: CloseEventInit) {

@@ -13,7 +13,7 @@ export const conversation = new Conversation({})
 
 const chatsList: never[] = []
 
-const chatsSidebar = new Chats({
+export const chatsSidebar = new Chats({
     chatsListHeader,
     chatsList
 })

@@ -1,6 +1,10 @@
 import "./chatsListItem.scss"
 import Block from "../../../services/Block"
-import formatDate from "../../../helpers/formatDate";
+import formatDate from "../../../helpers/formatDate"
+import Actions from "../../../services/Store/Actions"
+import ChatController from "../../../controllers/ChatController"
+import {chatsSidebar, conversation} from "../../../pages/Chats"
+import MessageController from "../../../controllers/MessageController";
 
 export type TChatProps = {
     id: number
@@ -13,12 +17,11 @@ export type TChatProps = {
         content: string
         time: string
     }
-    onClick?: EventListener
 }
 
 export class ChatsListItem extends Block {
     constructor(props: TChatProps) {
-        const {avatar, onClick, ...rest} = props
+        const {avatar, ...rest} = props
 
         super("div",
             {
@@ -31,14 +34,27 @@ export class ChatsListItem extends Block {
                 },
                 lastMsgTime: () => rest.last_message ? formatDate(new Date(Date.parse(rest.last_message.time))) : "",
                 events: {
-                    click: onClick
+                    click: async () => {
+                        if (rest.id !== Actions.getActiveChat().id) {
+
+                            await MessageController.leave()
+
+                            await Actions.removeActiveChat()
+                            await ChatController.setActiveChat({...rest, avatar})
+                            await chatsSidebar.updateChatList()
+                            await conversation.view()
+                        }
+                    }
                 }
             }
         )
+
+        if (rest.id === Actions.getActiveChat().id) {
+            this.setActive()
+        }
     }
 
     setActive() {
-        console.log("sdfsdfsdfsdf")
         this._element.classList.add("active")
     }
 

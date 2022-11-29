@@ -1,10 +1,9 @@
 import "./chats.scss"
 import Block from "../../services/Block"
-import Actions from "../../services/Store/Actions";
-import {TChatProps} from "./Listitem/chatsListItem";
-import ChatController from "../../controllers/ChatController";
-import ChatsListItem, {clickChatItem} from "./Listitem";
-import {conversation} from "../../pages/Chats";
+import Actions from "../../services/Store/Actions"
+import ChatController from "../../controllers/ChatController"
+import ChatsListItem from "./Listitem"
+import {TChatProps} from "./Listitem/chatsListItem"
 
 export type TChatList = {
     id: number
@@ -37,31 +36,15 @@ export class Chats extends Block {
     }
 
     async updateChatList() {
-        await ChatController.request()
-        const chatsList = Actions.getChatListState().map((chat: TChatProps) => {
-            chat = {
-                ...chat,
-                onClick: async () => {
-                    const {id1} = Actions.getActiveChatState();
-                    console.log(id1)
-
-                    await ChatController.requestChatUsers(chat)
-                    await clickChatItem(chatsList as [], chat)
-
-                    // await conversation.setProps({
-                    //     id: chat.id
-                    // })
-                    await conversation.view()
-                }
-            }
-            return new ChatsListItem(chat)
-        })
-        console.log("chats", chatsList)
+        await ChatController.getChats()
+        console.log(Actions.getChatListState())
+        const chatsList = Actions.getChatListState().map((chat: TChatProps) => new ChatsListItem(chat))
         this.setProps({...this._props, chatsList})
     }
 
-    componentDidMount() {
-        this.updateChatList()
+    async componentDidMount() {
+        Actions.removeActiveChat()
+        await this.updateChatList()
     }
 
     render() {
