@@ -29,9 +29,7 @@ class Store extends EventBus {
     }
 
     removeState() {
-        console.log(this._state)
         this._state = {}
-        console.log(this._state)
         this.emit(`${StoreEvents.UPDATED}`)
     }
 
