@@ -5,7 +5,7 @@ import {router} from "../../index"
 import {webpath} from "../../webpath"
 
 const LoginPage = {
-    pathname: "/login",
+    pathname: webpath.login,
     view: Auth,
     props: {
         title: "Вход",

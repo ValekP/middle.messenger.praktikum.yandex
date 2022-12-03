@@ -5,7 +5,7 @@ import {router} from "../../index"
 import {webpath} from "../../webpath"
 
 const SignupPage = {
-    pathname: "/signup",
+    pathname: webpath.signup,
     view: Auth,
     props: {
         title: "Регистрация",

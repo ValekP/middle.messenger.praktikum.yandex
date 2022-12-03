@@ -19,7 +19,7 @@ export const chatsSidebar = new Chats({
 })
 
 const ChatsPage = {
-    pathname: "/messenger",
+    pathname: webpath.chats,
     view: Page,
     props: {
         sidebar: chatsSidebar,

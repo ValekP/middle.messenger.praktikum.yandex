@@ -15,7 +15,7 @@ const profile = new Profile({
 })
 
 const ProfilePasswordPage = {
-    pathname: "/profile/password",
+    pathname: webpath.profilePassword,
     view: Page,
     props: {
         sidebar: buttonBack,

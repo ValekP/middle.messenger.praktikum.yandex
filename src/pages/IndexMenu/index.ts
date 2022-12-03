@@ -1,7 +1,8 @@
 import IndexMenu from "./indexMenu"
+import {webpath} from "../../webpath";
 
 const IndexMenuPage = {
-    pathname: "/",
+    pathname: webpath.menu,
     view: IndexMenu
 }
 

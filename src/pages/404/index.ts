@@ -1,7 +1,8 @@
 import ErrorPage from "../../layouts/Error"
+import {webpath} from "../../webpath";
 
 const Error404Page = {
-    pathname: "/404",
+    pathname: webpath.error404,
     view: ErrorPage,
     props: {
         statusCode: 404,

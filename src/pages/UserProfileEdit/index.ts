@@ -15,7 +15,7 @@ const profile = new Profile({
 })
 
 const ProfileEditPage = {
-    pathname: "/profile/edit",
+    pathname: webpath.profileEdit,
     view: Page,
     props: {
         sidebar: buttonBack,

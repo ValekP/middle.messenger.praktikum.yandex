@@ -40,7 +40,7 @@ class AuthController {
     public async signOut() {
         try {
             await AuthAPI.signOut()
-            Store.removeState()
+            await Store.removeState()
         } catch (error) {
             errorRequest(error)
         }

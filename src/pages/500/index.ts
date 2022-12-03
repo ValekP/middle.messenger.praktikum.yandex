@@ -1,7 +1,8 @@
 import ErrorPage from "../../layouts/Error"
+import {webpath} from "../../webpath";
 
 const Error500Page = {
-    pathname: "/500",
+    pathname: webpath.error500,
     view: ErrorPage,
     props: {
         statusCode: 500,

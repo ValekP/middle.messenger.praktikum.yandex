@@ -1,5 +1,5 @@
 export const webpath = {
-    "login": "/login",
+    "login": "/",
     "signup": "/signup",
     "chats": "/messenger",
     "profile": "/profile",
@@ -7,5 +7,5 @@ export const webpath = {
     "profilePassword": "/profile/password",
     "error404": "/404",
     "error500": "/500",
-    "menu": "/",
+    "menu": "/menu",
 }
