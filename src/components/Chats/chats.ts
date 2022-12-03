@@ -30,7 +30,8 @@ export class Chats extends Block {
                 attr: {
                     class: "chats"
                 },
-                ...props
+                ...props,
+                intervalUpdate: null
             }
         )
     }
@@ -39,6 +40,23 @@ export class Chats extends Block {
         await ChatController.getChats()
         const chatsList = Actions.getChatListState().map((chat: TChatProps) => new ChatsListItem(chat))
         this._children.chatsList = [...chatsList]
+        this.intervalUpdate()
+    }
+
+    intervalUpdate() {
+        const {id} = Actions.getActiveChat()
+        if (!id) {
+            if (!this._props.intervalUpdate) {
+                this._props.intervalUpdate = setInterval(async () => {
+                    console.log("update")
+                    await this.updateChatList()
+                }, 2000)
+            }
+        } else if (this._props.intervalUpdate) {
+            console.log("remove update")
+            clearInterval(this._props.intervalUpdate)
+            this._props.intervalUpdate = null
+        }
     }
 
     async componentDidMount() {
