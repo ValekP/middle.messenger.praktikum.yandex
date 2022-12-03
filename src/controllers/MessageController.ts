@@ -39,7 +39,7 @@ class MessageController {
     public getMessages(options: TMessageWebSocketGet) {
         this._ws.send(JSON.stringify({
             content: options.offset.toString(),
-            type: 'get old',
+            type: "get old",
         }))
     }
 
@@ -54,21 +54,21 @@ class MessageController {
     public sendMsg(message: string) {
         this._ws.send(JSON.stringify({
             content: message,
-            type: 'message',
+            type: "message",
         }))
         this._handleOpen()
     }
 
     private _addEvents() {
-        this._ws.addEventListener('open', this._handleOpen)
-        this._ws.addEventListener('message', this._handleMassage)
-        this._ws.addEventListener('close', this._handleClose)
+        this._ws.addEventListener("open", this._handleOpen)
+        this._ws.addEventListener("message", this._handleMassage)
+        this._ws.addEventListener("close", this._handleClose)
     }
 
     private _removeEvents() {
-        this._ws.removeEventListener('open', this._handleOpen)
-        this._ws.removeEventListener('message', this._handleMassage)
-        this._ws.removeEventListener('close', this._handleClose)
+        this._ws.removeEventListener("open", this._handleOpen)
+        this._ws.removeEventListener("message", this._handleMassage)
+        this._ws.removeEventListener("close", this._handleClose)
     }
 
     private _handleOpen() {
@@ -76,7 +76,7 @@ class MessageController {
         ChatController.getChats()
         this._ping = setInterval(() => {
             this._ws.send(JSON.stringify({
-                type: 'ping',
+                type: "ping",
             }))
         }, 2000)
     }
@@ -104,7 +104,7 @@ class MessageController {
 
     private _handleClose(e: CloseEventInit) {
         if (e.wasClean) {
-            alert('Соединение закрыто')
+            alert("Соединение закрыто")
         } else if (e.code === 1006) {
             this._reconnection()
         }

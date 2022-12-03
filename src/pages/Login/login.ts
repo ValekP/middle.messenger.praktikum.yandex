@@ -17,14 +17,12 @@ const inputFields: TLogin = {
         type: "text",
         name: "login",
         label: "Логин",
-        value: "Magnus361"
     }),
     password: new Input({
         template: "auth",
         type: "password",
         name: "password",
         label: "Пароль",
-        value: "qwerty123456789"
     })
 }
 

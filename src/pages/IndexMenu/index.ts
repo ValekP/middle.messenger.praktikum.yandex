@@ -1,5 +1,5 @@
 import IndexMenu from "./indexMenu"
-import {webpath} from "../../webpath";
+import {webpath} from "../../webpath"
 
 const IndexMenuPage = {
     pathname: webpath.menu,

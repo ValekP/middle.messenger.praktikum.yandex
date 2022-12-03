@@ -31,7 +31,7 @@ class UserProfileAPI extends BaseAPI {
     }
 
     public findUser(data: TFindUser) {
-        return this.post('/search', {
+        return this.post("/search", {
             withCredentials: true,
             data,
         })

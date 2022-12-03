@@ -15,38 +15,38 @@ export type TFindUser = {
 
 class ChatApi extends BaseAPI {
     constructor() {
-        super({path: '/chats'})
+        super({path: "/chats"})
     }
 
     public createChat(data: TChatApiCreate) {
-        return this.post('/', {
+        return this.post("/", {
             withCredentials: true,
             data: data,
         })
     }
 
     public getChat() {
-        return this.get('/', {
+        return this.get("/", {
             withCredentials: true,
         })
     }
 
     public removeChat(chatId: number) {
-        return this.delete('/', {
+        return this.delete("/", {
             withCredentials: true,
             data: {chatId: chatId},
         })
     }
 
     public addUserChat(data: TChatApiAddUser) {
-        return this.put('/users', {
+        return this.put("/users", {
             withCredentials: true,
             data: data,
         })
     }
 
     public deleteUserChat(data: TChatApiAddUser) {
-        return this.delete('/users', {
+        return this.delete("/users", {
             withCredentials: true,
             data: data,
         })
@@ -65,7 +65,7 @@ class ChatApi extends BaseAPI {
     }
 
     public updateAvatar(data: FormData) {
-        return this.put('/avatar', {
+        return this.put("/avatar", {
             headers: {},
             withCredentials: true,
             data,

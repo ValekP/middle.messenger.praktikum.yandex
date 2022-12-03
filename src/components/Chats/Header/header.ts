@@ -23,7 +23,7 @@ const dropdown = new Dropdown({
             title: "Создать чат",
             href: "/add/chat",
             onClick: async () => {
-                const nameChat = prompt('Название чата')
+                const nameChat = prompt("Название чата")
                 await ChatController.createChat({
                     title: nameChat as string
                 })

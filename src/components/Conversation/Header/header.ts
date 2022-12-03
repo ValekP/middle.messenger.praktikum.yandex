@@ -27,9 +27,9 @@ const dropdown = new Dropdown({
             title: "Добавить пользователя",
             href: webpath.profile,
             onClick: async () => {
-                const userChat = prompt('Введите логин пользователя')
+                const userLogin = prompt("Введите логин пользователя")
                 const data: TFindUser = {
-                    login: userChat as string,
+                    login: userLogin as string,
                 }
                 await ProfileController.findUser(data)
             }
@@ -39,9 +39,9 @@ const dropdown = new Dropdown({
             title: "Удалить пользователя",
             href: webpath.profile,
             onClick: async () => {
-                const userChat = prompt('Введите логин пользователя')
+                const userLogin = prompt("Введите логин пользователя")
                 const chat = Actions.getActiveChat()
-                const findUser = chat.users.find((item: TConversationUsers) => item.login === userChat)
+                const findUser = chat.users.find((item: TConversationUsers) => item.login === userLogin)
                 if (findUser) {
                     await ChatController.deleteUserChat({
                         users: [findUser.id],

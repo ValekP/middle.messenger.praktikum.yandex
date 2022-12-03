@@ -60,7 +60,7 @@ class ProfileController {
             const chatId = Actions.getActiveChat().id
             if (Array.isArray(userProfile) && chatId) {
                 if (userProfile.length < 1) {
-                    alert('Пользователь не найден')
+                    alert("Пользователь не найден")
                 }
                 const userId = userProfile[0].id
                 const data: TChatApiAddUser = {

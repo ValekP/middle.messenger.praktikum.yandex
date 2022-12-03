@@ -1,5 +1,5 @@
 import ErrorPage from "../../layouts/Error"
-import {webpath} from "../../webpath";
+import {webpath} from "../../webpath"
 
 const Error404Page = {
     pathname: webpath.error404,

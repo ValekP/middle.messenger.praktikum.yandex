@@ -31,7 +31,7 @@ class Actions {
     }
 
     public setChatList(newChatList: TChatList[]) {
-        Store.set('chatList', newChatList)
+        Store.set("chatList", newChatList)
     }
 
     public getChatListState() {
@@ -45,7 +45,7 @@ class Actions {
     }
 
     public setActiveChat(activeChat: TActiveConversationUsers) {
-        Store.set('activeChat', activeChat)
+        Store.set("activeChat", activeChat)
     }
 
     public getActiveChat() {
@@ -55,19 +55,19 @@ class Actions {
         return Object.assign(
             {
                 id: null,
-                title: '',
-                avatar: '',
+                title: "",
+                avatar: "",
                 users: [
                     {
                         id: 0,
-                        first_name: '',
-                        second_name: '',
-                        display_name: '',
-                        login: '',
-                        email: '',
-                        phone: '',
-                        avatar: '',
-                        role: ''
+                        first_name: "",
+                        second_name: "",
+                        display_name: "",
+                        login: "",
+                        email: "",
+                        phone: "",
+                        avatar: "",
+                        role: ""
                     }
                 ]
             },
@@ -78,31 +78,31 @@ class Actions {
     public removeActiveChat() {
         const intialState: TActiveConversationUsers = {
             id: null,
-            title: '',
-            avatar: '',
+            title: "",
+            avatar: "",
             users: [
                 {
                     id: 0,
-                    first_name: '',
-                    second_name: '',
-                    display_name: '',
-                    login: '',
-                    email: '',
-                    phone: '',
-                    avatar: '',
-                    role: ''
+                    first_name: "",
+                    second_name: "",
+                    display_name: "",
+                    login: "",
+                    email: "",
+                    phone: "",
+                    avatar: "",
+                    role: ""
                 }
             ]
         }
-        Store.set('activeChat', intialState)
+        Store.set("activeChat", intialState)
     }
 
     public setChatMessages(msg: TChatMessages[]) {
-        Store.set('msg', msg)
+        Store.set("msg", msg)
     }
 
     public combineChatMessages(msg: TChatMessages[]) {
-        Store.set('msg', [...this.getChatMessages(), msg])
+        Store.set("msg", [...this.getChatMessages(), msg])
     }
 
     public getChatMessages() {
@@ -113,19 +113,19 @@ class Actions {
             [
                 {
                     chat_id: 0,
-                    time: '',
-                    type: '',
-                    user_id: '',
-                    content: '',
+                    time: "",
+                    type: "",
+                    user_id: "",
+                    content: "",
                     myMessage: false,
                     file: {
                         id: 0,
                         user_id: 0,
-                        path: '',
-                        filename: '',
-                        content_type: '',
+                        path: "",
+                        filename: "",
+                        content_type: "",
                         content_size: 0,
-                        upload_date: '',
+                        upload_date: "",
                     }
                 }
             ],
@@ -138,13 +138,13 @@ class Actions {
         const token: string = state.token ?? {}
 
         return Object.assign(
-            '',
+            "",
             token
         )
     }
 
     public setTokenToMessagesServer(token: string) {
-        Store.set('token', token)
+        Store.set("token", token)
     }
 
 }

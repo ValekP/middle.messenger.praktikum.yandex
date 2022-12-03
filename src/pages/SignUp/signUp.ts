@@ -21,42 +21,36 @@ const inputFields: Indexed = {
         type: "email",
         name: "email",
         label: "Почта",
-        value: "test@sdf.rr",
     }),
     login: new Input({
         template: "auth",
         type: "text",
         name: "login",
         label: "Логин",
-        value: "hgfgh45",
     }),
     first_name: new Input({
         template: "auth",
         type: "text",
         name: "first_name",
         label: "Имя",
-        value: "Вика",
     }),
     second_name: new Input({
         template: "auth",
         type: "text",
         name: "second_name",
         label: "Фамилия",
-        value: "Викина",
     }),
     phone: new Input({
         template: "auth",
         type: "number",
         name: "phone",
         label: "Телефон",
-        value: "74563353363",
     }),
     password: new Input({
         template: "auth",
         type: "password",
         name: "password",
         label: "Пароль",
-        value: "11111111Q",
     })
 }
 
