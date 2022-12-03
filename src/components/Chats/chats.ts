@@ -37,9 +37,8 @@ export class Chats extends Block {
 
     async updateChatList() {
         await ChatController.getChats()
-        console.log(Actions.getChatListState())
         const chatsList = Actions.getChatListState().map((chat: TChatProps) => new ChatsListItem(chat))
-        this.setProps({...this._props, chatsList})
+        this._children.chatsList = [...chatsList]
     }
 
     async componentDidMount() {

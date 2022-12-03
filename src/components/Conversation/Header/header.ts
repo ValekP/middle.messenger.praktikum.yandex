@@ -3,6 +3,12 @@ import Block from "../../../services/Block"
 import Dropdown from "../../Dropdown"
 import Link from "../../Link"
 import {webpath} from "../../../webpath"
+import ChatController from "../../../controllers/ChatController"
+import {chatsSidebar, conversation} from "../../../pages/Chats"
+import {TFindUser} from "../../../services/Api/ChatApi"
+import ProfileController from "../../../controllers/ProfileController"
+import Actions from "../../../services/Store/Actions"
+import {TConversationUsers} from "../conversation"
 
 type ConversationHeaderProps = {
     avatar?: string
@@ -19,12 +25,45 @@ const dropdown = new Dropdown({
         new Link({
             tag: "li",
             title: "Добавить пользователя",
-            href: webpath.profile
+            href: webpath.profile,
+            onClick: async () => {
+                const userChat = prompt('Введите логин пользователя')
+                const data: TFindUser = {
+                    login: userChat as string,
+                }
+                await ProfileController.findUser(data)
+            }
         }),
         new Link({
             tag: "li",
             title: "Удалить пользователя",
-            href: webpath.profile
+            href: webpath.profile,
+            onClick: async () => {
+                const userChat = prompt('Введите логин пользователя')
+                const chat = Actions.getActiveChat()
+                const findUser = chat.users.find((item: TConversationUsers) => item.login === userChat)
+                if (findUser) {
+                    await ChatController.deleteUserChat({
+                        users: [findUser.id],
+                        chatId: chat.id
+                    })
+                } else {
+                    alert("Пользователь не найден")
+                }
+            }
+        }),
+        new Link({
+            tag: "li",
+            title: "Удалить чат",
+            href: webpath.profile,
+            onClick: async () => {
+                let isDel = confirm("Вы уверены что хотите удалить чат?")
+                if (isDel) {
+                    await ChatController.removeChat()
+                    await conversation.setProps({id: null})
+                    await chatsSidebar.updateChatList()
+                }
+            }
         })
     ]
 })

@@ -66,6 +66,11 @@ class UserProfilePassword extends Block {
         )
     }
 
+    componentDidMount() {
+        ProfileController.updateProfileProps(inputFields)
+        ProfileController.updateProfilePhoto(userPhoto)
+    }
+
     render() {
         return this.compile(`
             {{{ userPhoto }}}

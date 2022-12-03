@@ -1,6 +1,7 @@
 import BaseAPI from "./BaseApi"
 import {TProfile} from "../../pages/UserProfile/userProfile"
 import {TChangePassword} from "../../pages/UserProfilePassword/userProfilePassword"
+import {TFindUser} from "./ChatApi"
 
 class UserProfileAPI extends BaseAPI {
     constructor() {
@@ -24,6 +25,13 @@ class UserProfileAPI extends BaseAPI {
     public updateAvatar(data: FormData) {
         return this.put("/profile/avatar", {
             headers: {},
+            withCredentials: true,
+            data,
+        })
+    }
+
+    public findUser(data: TFindUser) {
+        return this.post('/search', {
             withCredentials: true,
             data,
         })

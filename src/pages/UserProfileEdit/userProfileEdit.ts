@@ -6,6 +6,8 @@ import {connectProfile} from "../../services/Store/ConnectComponents"
 import validateInputsList from "../../helpers/validateInputsList"
 import ProfileController from "../../controllers/ProfileController"
 import {TProfile} from "../UserProfile/userProfile"
+import {router} from "../../index"
+import {webpath} from "../../webpath"
 
 const inputFields: Indexed = {
     email: new Input({
@@ -61,6 +63,7 @@ const button = new Button({
             await ProfileController.updateProfile(inputs as TProfile)
             const formDataPhoto = userPhoto.getFormDataPhoto()
             if (formDataPhoto) await ProfileController.updateAvatar(formDataPhoto)
+            await router.go(webpath.profile)
         }
     }
 })

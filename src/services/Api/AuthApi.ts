@@ -2,7 +2,7 @@ import BaseAPI from "./BaseApi"
 import {TLogin} from "../../pages/Login/login"
 import {ISignUp} from "../../pages/SignUp/signUp"
 
-class AuthAPI extends BaseAPI {
+class AuthApi extends BaseAPI {
     constructor() {
         super({path: "/auth"})
     }
@@ -38,4 +38,4 @@ class AuthAPI extends BaseAPI {
     }
 }
 
-export default new AuthAPI()
+export default new AuthApi()

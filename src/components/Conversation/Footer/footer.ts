@@ -1,18 +1,37 @@
 import "./footer.scss"
 import Block from "../../../services/Block"
-
-type ConversationFooterProps = {}
+import MessageController from "../../../controllers/MessageController"
 
 export class ConversationFooter extends Block {
-    constructor(props: ConversationFooterProps) {
+    constructor() {
         super("div",
             {
                 attr: {
                     class: "conversation__footer"
-                },
-                ...props
+                }
             }
         )
+    }
+
+    getTextMsg() {
+        const input = this._element.querySelector(".conversation-input input") as HTMLInputElement
+        if (input) {
+            const msg = input.value
+            input.value = ""
+            return msg
+        } else {
+            return null
+        }
+    }
+
+    addEvents() {
+        const btnSend = this._element?.querySelector(".conversation-send button") as HTMLButtonElement
+        btnSend.onclick = () => {
+            const msg = this.getTextMsg()
+            if (msg) {
+                MessageController.sendMsg(msg)
+            }
+        }
     }
 
     render() {

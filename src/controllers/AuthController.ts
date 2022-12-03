@@ -1,4 +1,4 @@
-import AuthAPI from "../services/Api/AuthAPI"
+import AuthAPI from "../services/Api/AuthApi"
 import {router} from "../index"
 import {TLogin} from "../pages/Login/login"
 import Actions from "../services/Store/Actions"

@@ -1,12 +1,6 @@
 import "./message.scss"
 import Block from "../../../services/Block"
 
-type ConversationMessageProps = {
-    text: string
-    time: string
-    myMessage?: boolean
-}
-
 export type TChatMessages = {
     className?: string
     id?: number
@@ -28,7 +22,7 @@ export type TChatMessages = {
 }
 
 export class ConversationMessage extends Block {
-    constructor(props: ConversationMessageProps) {
+    constructor(props: TChatMessages) {
         const {myMessage = false, ...rest} = props
 
         super("div",
@@ -47,7 +41,7 @@ export class ConversationMessage extends Block {
             <div class="message-inner">
                 <div class="message__media"></div>
                 <div class="message__text">
-                    {{ text }}
+                    {{ content }}
                 </div>
                 <div class="message__info">
                     <div class="message__info_time">{{ time }}</div>

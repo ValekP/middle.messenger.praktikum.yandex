@@ -21,7 +21,6 @@ export class Dropdown extends Block {
                 events: {
                     click: (e: Event) => {
                         e.preventDefault()
-                        console.log("ok dropdown")
                         this._element?.classList.toggle("active")
                     }
                 }

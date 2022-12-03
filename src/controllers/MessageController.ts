@@ -2,6 +2,7 @@ import ChatController from "./ChatController"
 import Actions from "../services/Store/Actions"
 import {TChatMessages} from "../components/Conversation/Message/message"
 import formatDate from "../helpers/formatDate"
+import {chatsSidebar, conversation} from "../pages/Chats"
 
 
 export type TMessageWebSocketConnect = {
@@ -50,7 +51,7 @@ class MessageController {
         }
     }
 
-    public sendMessage(message: string) {
+    public sendMsg(message: string) {
         this._ws.send(JSON.stringify({
             content: message,
             type: 'message',
@@ -91,15 +92,13 @@ class MessageController {
 
         if (Array.isArray(data)) {
             data.forEach(msg => format(msg))
-            console.log(data)
             Actions.setChatMessages(data)
-            ChatController.getChats()
+
         } else if ("id" in data) {
-            console.log(data)
-            Actions.combineChatMessages(format(data) as TChatMessages[])
-            // ChatController.getChats()
+            conversation.setNewMessages(format(data) as TChatMessages)
         }
 
+        chatsSidebar.updateChatList()
 
     }
 

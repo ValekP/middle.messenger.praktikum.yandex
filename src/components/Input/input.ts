@@ -48,7 +48,6 @@ export class Input extends Block {
         if (!this._props.staticTmpl) {
             const {value, name} = this.getInput()
             const validate = validateInputs({name, value})
-            console.log(validate)
             if (validate) {
                 this.setError(validate as string)
                 return false

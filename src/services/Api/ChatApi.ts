@@ -1,12 +1,16 @@
 import BaseAPI from "./BaseApi"
 
-type TChatApiCreate = {
+export type TChatApiCreate = {
     title: string
 }
 
-type TChatApiAddUser = {
+export type TChatApiAddUser = {
     users: number[]
     chatId: number
+}
+
+export type TFindUser = {
+    login: string
 }
 
 class ChatApi extends BaseAPI {

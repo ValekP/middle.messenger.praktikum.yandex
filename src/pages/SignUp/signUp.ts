@@ -56,7 +56,7 @@ const inputFields: Indexed = {
         type: "password",
         name: "password",
         label: "Пароль",
-        value: "11111111q",
+        value: "11111111Q",
     })
 }
 

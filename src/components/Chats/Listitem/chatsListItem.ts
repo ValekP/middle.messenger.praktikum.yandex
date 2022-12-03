@@ -4,7 +4,7 @@ import formatDate from "../../../helpers/formatDate"
 import Actions from "../../../services/Store/Actions"
 import ChatController from "../../../controllers/ChatController"
 import {chatsSidebar, conversation} from "../../../pages/Chats"
-import MessageController from "../../../controllers/MessageController";
+import MessageController from "../../../controllers/MessageController"
 
 export type TChatProps = {
     id: number

@@ -1,10 +1,9 @@
-import ChatApi from "../services/Api/ChatApi"
+import ChatApi, {TChatApiAddUser, TChatApiCreate} from "../services/Api/ChatApi"
 import Actions from "../services/Store/Actions"
 import {errorRequest} from "../utils/errorRequest"
 import {TChatList} from "../components/Chats/chats"
 import {TActiveConversationUsers, TConversationUsers} from "../components/Conversation/conversation"
 import MessageController, {TMessageWebSocketConnect} from "./MessageController"
-
 
 class ChatController {
     public async getChats() {
@@ -60,6 +59,47 @@ class ChatController {
         }
     }
 
+    public async createChat(data: TChatApiCreate) {
+        try {
+            await ChatApi.createChat(data)
+            Actions.removeActiveChat()
+            await this.getChats()
+        } catch (error) {
+            errorRequest(error)
+        }
+    }
+
+    public async removeChat() {
+        try {
+            const {id} = Actions.getActiveChat()
+            await ChatApi.removeChat(id)
+            const chatList = Actions.getChatListState() as TChatList[]
+            const newChatList = chatList.filter(chat => chat.id !== id)
+            MessageController.leave()
+            Actions.removeActiveChat()
+            Actions.setChatList(newChatList)
+        } catch (error) {
+            errorRequest(error)
+        }
+    }
+
+    public async addUserChat(data: TChatApiAddUser) {
+        try {
+            await ChatApi.addUserChat(data)
+            await this.setActiveChat(Actions.getActiveChat())
+        } catch (error) {
+            errorRequest(error)
+        }
+    }
+
+    public async deleteUserChat(data: TChatApiAddUser) {
+        try {
+            await ChatApi.deleteUserChat(data)
+            await this.setActiveChat(Actions.getActiveChat())
+        } catch (error) {
+            errorRequest(error)
+        }
+    }
 
 }
 

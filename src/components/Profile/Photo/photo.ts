@@ -6,7 +6,6 @@ type ProfilePhotoProps = {
     photo?: string | null
 }
 
-
 export class ProfilePhoto extends Block {
     constructor(props: ProfilePhotoProps = {}) {
         const {edit = false, photo, ...rest} = props
@@ -29,7 +28,6 @@ export class ProfilePhoto extends Block {
 
     getFormDataPhoto() {
         const input = this.getInputPhoto()
-        console.log(input.files)
         if (input && input.files && input.files[0]) {
             const formData = new FormData()
             formData.append("avatar", input.files[0])
@@ -45,11 +43,9 @@ export class ProfilePhoto extends Block {
             if (input) {
                 this._element.onclick = () => input.click()
                 input.onchange = () => {
-                    console.log("change")
                     if (input.files && input.files[0]) {
                         let reader = new FileReader()
                         reader.onload = (e: Event) => {
-                            console.log(e.target, photo)
                             photo.innerHTML = `<img src="${(e.target as Indexed)?.result}" alt=""/>`
                         }
                         reader.readAsDataURL(input.files[0])

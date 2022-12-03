@@ -69,7 +69,6 @@ export default class Block {
         this.addEvents()
         this.addAttribute()
 
-        //this.componentDidMount()
     }
 
     public render(): any {

@@ -4,7 +4,7 @@ import ConversationHeader from "./Header"
 import ConversationMessage from "./Message"
 import ConversationFooter from "./Footer"
 import Actions from "../../services/Store/Actions"
-
+import {TChatMessages} from "./Message/message"
 
 type ConversationProps = {
     id?: number
@@ -57,48 +57,38 @@ export class Conversation extends Block {
         })
     }
 
-    async getMessages() {
-        // return Actions.getChatMessages().map(msg => new ConversationMessage({
-        //     text: msg.content,
-        //     time: msg.time,
-        //     myMessage: msg.myMessage
-        // }))
+    getMessages() {
+        return Actions.getChatMessages().map(msg => new ConversationMessage(msg)).reverse()
+    }
 
-        let msgs = Actions.getChatMessages().map(msg => new ConversationMessage({
-            text: msg.content,
-            time: msg.time,
-            myMessage: msg.myMessage
-        }))
+    scrollMsg() {
+        const scrollMsg = this._element.querySelector(".conversation__content")
+        if (scrollMsg) {
+            scrollMsg.scrollTop = scrollMsg.scrollHeight
+        }
+    }
 
-        console.log(msgs)
-
-        // this._props.messages = msgs
+    setNewMessages(msg: TChatMessages) {
+        const mst = [new ConversationMessage(msg)]
+        this._children.messages = [...this._children.messages, ...mst]
+        this.scrollMsg()
     }
 
     setFooter() {
-        return new ConversationFooter({})
+        return new ConversationFooter()
     }
 
     async view() {
         const state = await Actions.getActiveChat()
-        await console.log(state)
-        // const messages = await Actions.getChatMessages()
-        // await console.log(messages)
-        setInterval(() => this.getMessages(), 3000)
 
-        // await ChatController.requestChatUsers(chat)
-        // const state = await Actions.getActiveChatState()
-        // //await console.log(state)
-        // const messages = await Actions.getChatMessages()
-
-
-        //await console.log(messages)
         this.setProps({
             ...this._props,
             id: state.id,
             header: this.setHeader(state.title, state.avatar),
+            messages: this.getMessages(),
             footer: this.setFooter(),
         })
+        this.scrollMsg()
     }
 
     render() {

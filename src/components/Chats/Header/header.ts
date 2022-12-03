@@ -4,6 +4,8 @@ import Link from "../../Link"
 import {webpath} from "../../../webpath"
 import ProfilePhoto from "../../Profile/Photo"
 import Dropdown from "../../Dropdown"
+import ChatController from "../../../controllers/ChatController"
+import {chatsSidebar} from "../../../pages/Chats"
 
 type ChatsHeaderProps = {}
 
@@ -19,7 +21,14 @@ const dropdown = new Dropdown({
         new Link({
             tag: "li",
             title: "Создать чат",
-            href: webpath.profile
+            href: "/add/chat",
+            onClick: async () => {
+                const nameChat = prompt('Название чата')
+                await ChatController.createChat({
+                    title: nameChat as string
+                })
+                await chatsSidebar.updateChatList()
+            }
         })
     ]
 })
