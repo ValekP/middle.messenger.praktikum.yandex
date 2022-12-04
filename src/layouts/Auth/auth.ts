@@ -9,7 +9,7 @@ type AuthProps = {
 
 export class Auth extends Block {
     constructor(props: AuthProps) {
-        super("div",
+        super("form",
             {
                 attr: {
                     class: "auth"

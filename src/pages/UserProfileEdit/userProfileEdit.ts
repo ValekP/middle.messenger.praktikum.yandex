@@ -56,23 +56,14 @@ const inputFields: Indexed = {
 
 const button = new Button({
     title: "Сохранить",
-    onClick: async (e: Event) => {
-        e.preventDefault()
-        const inputs = validateInputsList(inputFields)
-        if (inputs) {
-            await ProfileController.updateProfile(inputs as TProfile)
-            const formDataPhoto = userPhoto.getFormDataPhoto()
-            if (formDataPhoto) await ProfileController.updateAvatar(formDataPhoto)
-            await router.go(webpath.profile)
-        }
-    }
+    type: "submit",
 })
 
 const userPhoto = new ProfilePhoto({edit: true})
 
 class UserProfileEdit extends Block {
     constructor() {
-        super("div",
+        super("form",
             {
                 attr: {
                     class: "profile"
@@ -84,7 +75,22 @@ class UserProfileEdit extends Block {
         )
     }
 
+    formSubmit() {
+        const form = this._element?.closest("form") as HTMLFormElement
+        form.onsubmit = async (e: Event) => {
+            e.preventDefault()
+            const inputs = validateInputsList(inputFields)
+            if (inputs) {
+                await ProfileController.updateProfile(inputs as TProfile)
+                const formDataPhoto = userPhoto.getFormDataPhoto()
+                if (formDataPhoto) await ProfileController.updateAvatar(formDataPhoto)
+                await router.go(webpath.profile)
+            }
+        }
+    }
+
     componentDidMount() {
+        this.formSubmit()
         ProfileController.updateProfileProps(inputFields)
         ProfileController.updateProfilePhoto(userPhoto)
     }

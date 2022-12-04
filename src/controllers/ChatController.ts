@@ -75,7 +75,7 @@ class ChatController {
             await ChatApi.removeChat(id)
             const chatList = Actions.getChatListState() as TChatList[]
             const newChatList = chatList.filter(chat => chat.id !== id)
-            MessageController.leave()
+            //MessageController.leave()
             Actions.removeActiveChat()
             Actions.setChatList(newChatList)
         } catch (error) {

@@ -38,23 +38,14 @@ const inputFieldsExtend: Indexed = {
 
 const button = new Button({
     title: "Сохранить",
-    onClick: async (e: Event) => {
-        e.preventDefault()
-
-        const inputs = validateInputsList(inputFields)
-        const inputsExtend = validateInputsList(inputFieldsExtend)
-        if (inputs && inputsExtend) {
-            await ProfileController.updatePassword(inputs as TChangePassword)
-        }
-
-    }
+    type: "submit",
 })
 
 const userPhoto = new ProfilePhoto()
 
 class UserProfilePassword extends Block {
     constructor() {
-        super("div",
+        super("form",
             {
                 attr: {
                     class: "profile"
@@ -66,7 +57,20 @@ class UserProfilePassword extends Block {
         )
     }
 
+    formSubmit() {
+        const form = this._element?.closest("form") as HTMLFormElement
+        form.onsubmit = async (e: Event) => {
+            e.preventDefault()
+            const inputs = validateInputsList(inputFields)
+            const inputsExtend = validateInputsList(inputFieldsExtend)
+            if (inputs && inputsExtend) {
+                await ProfileController.updatePassword(inputs as TChangePassword)
+            }
+        }
+    }
+
     componentDidMount() {
+        this.formSubmit()
         ProfileController.updateProfileProps(inputFields)
         ProfileController.updateProfilePhoto(userPhoto)
     }

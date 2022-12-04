@@ -4,6 +4,7 @@ import Actions from "../../services/Store/Actions"
 import ChatController from "../../controllers/ChatController"
 import ChatsListItem from "./Listitem"
 import {TChatProps} from "./Listitem/chatsListItem"
+import isEqual from "../../helpers/isEqual";
 
 export type TChatList = {
     id: number
@@ -31,37 +32,25 @@ export class Chats extends Block {
                     class: "chats"
                 },
                 ...props,
-                intervalUpdate: null
+                intervalUpdate: true
             }
         )
     }
 
     async updateChatList() {
+        const itemChatList = [...Actions.getChatListState()]
         await ChatController.getChats()
-        const chatsList = Actions.getChatListState().map((chat: TChatProps) => new ChatsListItem(chat))
-        this._children.chatsList = [...chatsList]
-        this.intervalUpdate()
-    }
-
-    intervalUpdate() {
-        const {id} = Actions.getActiveChat()
-        if (!id) {
-            if (!this._props.intervalUpdate) {
-                this._props.intervalUpdate = setInterval(async () => {
-                    console.log("update")
-                    await this.updateChatList()
-                }, 2000)
-            }
-        } else if (this._props.intervalUpdate) {
-            console.log("remove update")
-            clearInterval(this._props.intervalUpdate)
-            this._props.intervalUpdate = null
+        if (this._props.intervalUpdate || !isEqual(Actions.getChatListState(), itemChatList)) {
+            const chatsList = Actions.getChatListState().map((chat: TChatProps) => new ChatsListItem(chat))
+            this._children.chatsList = [...chatsList]
+            this._props.intervalUpdate = false
         }
     }
 
     async componentDidMount() {
         Actions.removeActiveChat()
         await this.updateChatList()
+        await ChatController.getTokenToMessagesServer(0)
     }
 
     render() {

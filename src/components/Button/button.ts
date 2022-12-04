@@ -3,12 +3,13 @@ import Block from "../../services/Block"
 
 type ButtonProps = {
     title: string
+    type?: string
     onClick?: EventListener
 }
 
 export class Button extends Block {
     constructor(props: ButtonProps) {
-        const {onClick, ...rest} = props
+        const {onClick, type = "button", ...rest} = props
         super("div",
             {
                 attr: {
@@ -24,7 +25,7 @@ export class Button extends Block {
 
     render() {
         return this.compile(`
-            <button class="btn">{{ title }}</button>
+            <button class="btn" type="{{ type }}">{{ title }}</button>
         `)
     }
 }

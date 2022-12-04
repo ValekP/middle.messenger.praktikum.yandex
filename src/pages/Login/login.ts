@@ -28,13 +28,7 @@ const inputFields: TLogin = {
 
 const button = new Button({
     title: "Войти",
-    onClick: async (e: Event) => {
-        e.preventDefault()
-        const inputs = validateInputsList(inputFields)
-        if (inputs) {
-            await AuthController.login(inputs as TLogin)
-        }
-    }
+    type: "submit",
 })
 
 const link = new Link({title: "Нет аккаунта?", href: webpath.signup})
@@ -51,6 +45,21 @@ export default class Login extends Block {
                 link
             }
         )
+    }
+
+    formSubmit() {
+        const form = this._element?.closest("form") as HTMLFormElement
+        form.onsubmit = async (e: Event) => {
+            e.preventDefault()
+            const inputs = validateInputsList(inputFields)
+            if (inputs) {
+                await AuthController.login(inputs as TLogin)
+            }
+        }
+    }
+
+    componentDidMount() {
+        this.formSubmit()
     }
 
     render() {

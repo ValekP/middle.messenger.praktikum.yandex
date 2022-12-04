@@ -67,14 +67,7 @@ const inputFieldsExtend = {
 
 const button = new Button({
     title: "Зарегистрироваться",
-    onClick: async (e: Event) => {
-        e.preventDefault()
-        const inputs = validateInputsList(inputFields)
-        const inputsExtend = validateInputsList(inputFieldsExtend)
-        if (inputs && inputsExtend) {
-            await AuthController.signUp(inputs as ISignUp)
-        }
-    }
+    type: "submit",
 })
 
 const link = new Link({title: "Войти", href: webpath.login})
@@ -91,6 +84,22 @@ export default class SignUp extends Block {
                 link
             }
         )
+    }
+
+    formSubmit() {
+        const form = this._element?.closest("form") as HTMLFormElement
+        form.onsubmit = async (e: Event) => {
+            e.preventDefault()
+            const inputs = validateInputsList(inputFields)
+            const inputsExtend = validateInputsList(inputFieldsExtend)
+            if (inputs && inputsExtend) {
+                await AuthController.signUp(inputs as ISignUp)
+            }
+        }
+    }
+
+    componentDidMount() {
+        this.formSubmit()
     }
 
     render() {

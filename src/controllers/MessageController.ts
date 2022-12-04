@@ -4,7 +4,6 @@ import {TChatMessages} from "../components/Conversation/Message/message"
 import formatDate from "../helpers/formatDate"
 import {chatsSidebar, conversation} from "../pages/Chats"
 
-
 export type TMessageWebSocketConnect = {
     userId: number
     chatId: number
@@ -29,9 +28,11 @@ class MessageController {
     }
 
     public connect(options: TMessageWebSocketConnect) {
+        this.leave()
         this._userId = options.userId
         this._chatId = options.chatId
         this._token = options.token
+
         this._ws = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${options.userId}/${options.chatId}/${options.token}`)
         this._addEvents()
     }
@@ -44,11 +45,15 @@ class MessageController {
     }
 
     public leave() {
-        if (this._ping && this._ws) {
-            clearInterval(this._ping)
+        this.clearIntervalWs()
+        if (this._ws) {
             this._ws.close()
             this._removeEvents()
         }
+    }
+
+    private clearIntervalWs() {
+        if (this._ping) clearInterval(this._ping)
     }
 
     public sendMsg(message: string) {
@@ -74,32 +79,38 @@ class MessageController {
     private _handleOpen() {
         this.getMessages({offset: 0})
         ChatController.getChats()
+        this.clearIntervalWs()
         this._ping = setInterval(() => {
-            this._ws.send(JSON.stringify({
-                type: "ping",
-            }))
+            const {id} = Actions.getProfileState()
+            if (id) {
+                this._ws.send(JSON.stringify({
+                    type: "ping",
+                }))
+            } else {
+                this.leave()
+            }
         }, 2000)
+
     }
 
     private _handleMassage(e: MessageEvent) {
-        const data = JSON.parse(e.data) as TChatMessages[]
-
-        const format = (msg: Indexed) => {
-            msg.time = formatDate(new Date(Date.parse(msg.time)))
-            msg.myMessage = this._userId === parseInt(msg.user_id)
-            return msg
+        try {
+            const data = JSON.parse(e.data) as TChatMessages[]
+            const format = (msg: Indexed) => {
+                msg.time = formatDate(new Date(Date.parse(msg.time)))
+                msg.myMessage = this._userId === parseInt(msg.user_id)
+                return msg
+            }
+            if (Array.isArray(data)) {
+                data.forEach(msg => format(msg))
+                Actions.setChatMessages(data)
+            } else if ("id" in data) {
+                conversation.setNewMessages(format(data) as TChatMessages)
+            }
+            chatsSidebar.updateChatList()
+        } catch (e) {
+            console.log(e)
         }
-
-        if (Array.isArray(data)) {
-            data.forEach(msg => format(msg))
-            Actions.setChatMessages(data)
-
-        } else if ("id" in data) {
-            conversation.setNewMessages(format(data) as TChatMessages)
-        }
-
-        chatsSidebar.updateChatList()
-
     }
 
     private _handleClose(e: CloseEventInit) {

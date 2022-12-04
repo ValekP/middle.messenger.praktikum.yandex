@@ -80,8 +80,7 @@ export class Conversation extends Block {
 
     async view() {
         const state = await Actions.getActiveChat()
-
-        this.setProps({
+        await this.setProps({
             ...this._props,
             id: state.id,
             header: this.setHeader(state.title, state.avatar),
