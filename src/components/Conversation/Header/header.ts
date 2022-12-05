@@ -60,8 +60,8 @@ const dropdown = new Dropdown({
                 let isDel = confirm("Вы уверены что хотите удалить чат?")
                 if (isDel) {
                     await ChatController.removeChat()
-                    await conversation.setProps({id: null})
-                    await chatsSidebar.updateChatList()
+                    await conversation.hide()
+                    await chatsSidebar.updateChat()
                 }
             }
         })

@@ -12,7 +12,7 @@ class AuthController {
         try {
             await AuthAPI.login(user)
             await this.checkAuth()
-            router.go(webpath.chats)
+            await router.go(webpath.chats)
         } catch (error) {
             errorRequest(error)
         }

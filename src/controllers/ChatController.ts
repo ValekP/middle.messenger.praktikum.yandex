@@ -28,7 +28,7 @@ class ChatController {
                     users: getChatUsersResponse as TConversationUsers[]
                 }
 
-            Actions.setActiveChat(activeChat)
+            await Actions.setActiveChat(activeChat)
             await this.getTokenToMessagesServer(id)
         } catch (error) {
             errorRequest(error)
@@ -41,8 +41,8 @@ class ChatController {
             if (!data.token) {
                 return
             }
-            Actions.setTokenToMessagesServer(data.token)
-            const {id} = Actions.getProfileState()
+            await Actions.setTokenToMessagesServer(data.token)
+            const {id} = await Actions.getProfileState()
             if (!id) {
                 return
             }
@@ -53,7 +53,7 @@ class ChatController {
                     chatId: chatId,
                     token: data.token
                 }
-            MessageController.connect(socketOptios)
+            await MessageController.connect(socketOptios)
         } catch (error) {
             errorRequest(error)
         }
@@ -75,7 +75,7 @@ class ChatController {
             await ChatApi.removeChat(id)
             const chatList = Actions.getChatListState() as TChatList[]
             const newChatList = chatList.filter(chat => chat.id !== id)
-            //MessageController.leave()
+
             Actions.removeActiveChat()
             Actions.setChatList(newChatList)
         } catch (error) {

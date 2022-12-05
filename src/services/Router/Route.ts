@@ -37,6 +37,5 @@ export class Route {
             this._block?.dispatchComponentDidMount()
             return
         }
-        //this._block.show()
     }
 }

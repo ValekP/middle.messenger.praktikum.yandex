@@ -4,7 +4,6 @@ import formatDate from "../../../helpers/formatDate"
 import Actions from "../../../services/Store/Actions"
 import ChatController from "../../../controllers/ChatController"
 import {chatsSidebar, conversation} from "../../../pages/Chats"
-import MessageController from "../../../controllers/MessageController"
 
 export type TChatProps = {
     id: number
@@ -36,13 +35,10 @@ export class ChatsListItem extends Block {
                 events: {
                     click: async () => {
                         if (rest.id !== Actions.getActiveChat().id) {
-
-                            await MessageController.leave()
-
                             await Actions.removeActiveChat()
                             await ChatController.setActiveChat({...rest, avatar})
-                            await chatsSidebar.updateChatList()
-                            await conversation.view()
+                            await chatsSidebar.updateChatListView()
+                            conversation.view()
                         }
                     }
                 }

@@ -61,6 +61,15 @@ export class Conversation extends Block {
         return Actions.getChatMessages().map(msg => new ConversationMessage(msg)).reverse()
     }
 
+    updateMessages() {
+        this._children.messages = this.getMessages()
+    }
+
+    setMessages(msgs: any[] = []) {
+        this._children.messages = [...this._children.messages, ...msgs]
+        this.scrollMsg()
+    }
+
     scrollMsg() {
         const scrollMsg = this._element.querySelector(".conversation__content")
         if (scrollMsg) {
@@ -70,8 +79,17 @@ export class Conversation extends Block {
 
     setNewMessages(msg: TChatMessages) {
         const mst = [new ConversationMessage(msg)]
-        this._children.messages = [...this._children.messages, ...mst]
-        this.scrollMsg()
+        this.setMessages(mst)
+    }
+
+    hide() {
+        this.setProps({
+            ...this._props,
+            id: null,
+            header: null,
+            messages: null,
+            footer: null,
+        })
     }
 
     setFooter() {
@@ -80,7 +98,7 @@ export class Conversation extends Block {
 
     async view() {
         const state = await Actions.getActiveChat()
-        await this.setProps({
+        this.setProps({
             ...this._props,
             id: state.id,
             header: this.setHeader(state.title, state.avatar),

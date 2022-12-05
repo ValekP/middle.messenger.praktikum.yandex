@@ -40,7 +40,7 @@ export class HTTPTransport {
             method = Methods.GET,
             headers = {},
             data,
-            timeout = 5000,
+            timeout = 10000,
             withCredentials = false,
         } = options
 

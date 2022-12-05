@@ -1,4 +1,3 @@
-import ChatController from "./ChatController"
 import Actions from "../services/Store/Actions"
 import {TChatMessages} from "../components/Conversation/Message/message"
 import formatDate from "../helpers/formatDate"
@@ -61,7 +60,6 @@ class MessageController {
             content: message,
             type: "message",
         }))
-        this._handleOpen()
     }
 
     private _addEvents() {
@@ -78,7 +76,6 @@ class MessageController {
 
     private _handleOpen() {
         this.getMessages({offset: 0})
-        ChatController.getChats()
         this.clearIntervalWs()
         this._ping = setInterval(() => {
             const {id} = Actions.getProfileState()
@@ -89,11 +86,12 @@ class MessageController {
             } else {
                 this.leave()
             }
-        }, 2000)
+            chatsSidebar.updateChat()
+        }, 3000)
 
     }
 
-    private _handleMassage(e: MessageEvent) {
+    private async _handleMassage(e: MessageEvent) {
         try {
             const data = JSON.parse(e.data) as TChatMessages[]
             const format = (msg: Indexed) => {
@@ -104,10 +102,11 @@ class MessageController {
             if (Array.isArray(data)) {
                 data.forEach(msg => format(msg))
                 Actions.setChatMessages(data)
+                await conversation.updateMessages()
             } else if ("id" in data) {
-                conversation.setNewMessages(format(data) as TChatMessages)
+                await conversation.setNewMessages(format(data) as TChatMessages)
+
             }
-            chatsSidebar.updateChatList()
         } catch (e) {
             console.log(e)
         }

@@ -27,7 +27,7 @@ const dropdown = new Dropdown({
                 await ChatController.createChat({
                     title: nameChat as string
                 })
-                await chatsSidebar.updateChatList()
+                await chatsSidebar.updateChat()
             }
         })
     ]

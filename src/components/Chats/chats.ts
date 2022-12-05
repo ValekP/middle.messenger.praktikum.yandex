@@ -4,7 +4,6 @@ import Actions from "../../services/Store/Actions"
 import ChatController from "../../controllers/ChatController"
 import ChatsListItem from "./Listitem"
 import {TChatProps} from "./Listitem/chatsListItem"
-import isEqual from "../../helpers/isEqual";
 
 export type TChatList = {
     id: number
@@ -31,25 +30,25 @@ export class Chats extends Block {
                 attr: {
                     class: "chats"
                 },
-                ...props,
-                intervalUpdate: true
+                ...props
             }
         )
     }
 
-    async updateChatList() {
-        const itemChatList = [...Actions.getChatListState()]
+    async updateChat() {
         await ChatController.getChats()
-        if (this._props.intervalUpdate || !isEqual(Actions.getChatListState(), itemChatList)) {
-            const chatsList = Actions.getChatListState().map((chat: TChatProps) => new ChatsListItem(chat))
-            this._children.chatsList = [...chatsList]
-            this._props.intervalUpdate = false
-        }
+        await this.updateChatListView()
+    }
+
+    async updateChatListView() {
+        const chatsList = Actions.getChatListState().map((chat: TChatProps) => new ChatsListItem(chat))
+        this._children.chatsList = [...chatsList]
+        this._props.firstUpdate = true
     }
 
     async componentDidMount() {
         Actions.removeActiveChat()
-        await this.updateChatList()
+        await this.updateChat()
         await ChatController.getTokenToMessagesServer(0)
     }
 
