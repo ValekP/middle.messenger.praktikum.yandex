@@ -1,41 +1,64 @@
-import Block from "../../utils/Block";
-import renderDOM from "../../utils/renderDOM";
-import './indexMenu.scss'
+import "./indexMenu.scss"
+import Block from "../../services/Block"
+import {router} from "../../index"
+import {webpath} from "../../webpath"
 
-
-type IndexMenuProps = {
-    nav: object;
-};
-
-export class IndexMenu extends Block<IndexMenuProps> {
-    constructor(props: IndexMenuProps) {
-        super('div',
+export default class IndexMenu extends Block {
+    constructor() {
+        super("div",
             {
                 attr: {
                     class: "index-menu"
                 },
-                ...props,
-                events: {
-                    click: (e: Event) => {
-                        // @ts-ignore
-                        if ('page' in e.target.dataset) {
-                            e.preventDefault();
-                            // @ts-ignore
-                            history.pushState(null, null, e.target.dataset.page);
-                            // @ts-ignore
-                            renderDOM("#root", props.nav[e.target.dataset.page].page)
-                        }
+
+                nav: {
+                    [webpath.login]: {
+                        title: "Login",
+                    },
+                    [webpath.signup]: {
+                        title: "Signup",
+                    },
+                    [webpath.chats]: {
+                        title: "Chats",
+                    },
+                    [webpath.profile]: {
+                        title: "Profile",
+                    },
+                    [webpath.profileEdit]: {
+                        title: "Profile Edit",
+                    },
+                    [webpath.profilePassword]: {
+                        title: "Profile Password",
+                    },
+                    [webpath.error404]: {
+                        title: "404",
+                    },
+                    [webpath.error500]: {
+                        title: "500",
                     }
                 }
             }
         )
     }
 
+    addEvents() {
+        this._element?.querySelectorAll(".index-menu__item_link").forEach(item => {
+            item.addEventListener("click", (e) => {
+                // @ts-ignore
+                const attrHref = e.target.attributes.href.value
+                if (attrHref) {
+                    e.preventDefault()
+                    router.go(attrHref)
+                }
+            })
+        })
+    }
+
     render() {
         return this.compile(`
             <ul class="index-menu-list">
                 {{#each nav}}
-                    <li class="index-menu__item"><a href="#" class="index-menu__item_link" data-page="{{ @key }}">{{ title }}</a></li>
+                    <li class="index-menu__item"><a href="{{ @key }}" class="index-menu__item_link">{{ title }}</a></li>
                 {{/each}}
             </ul>
         `)

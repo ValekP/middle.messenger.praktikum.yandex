@@ -1,1 +1,1 @@
-export {Page as default} from './page';
+export {Page as default} from "./page"

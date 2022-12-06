@@ -1,10 +1,9 @@
-@import "src/styles/_mixins";
-@import "src/styles/_colors";
+@import "src/styles/utils";
 
 .input-wrap {
-
   &-profile {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid $color-style-5;
@@ -22,10 +21,12 @@
       border: none;
 
       &-label {
+        grid-row: span 2;
         font-size: 13px;
       }
 
       &-error {
+        text-align: end;
         font-size: 10px;
         color: $color-red;
         margin-left: 10px;

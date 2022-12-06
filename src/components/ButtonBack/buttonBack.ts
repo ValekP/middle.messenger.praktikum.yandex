@@ -1,16 +1,23 @@
-import Block from "../../utils/Block";
-import './buttonBack.scss'
+import "./buttonBack.scss"
+import {router} from "../../index"
+import Block from "../../services/Block"
 
-export class ButtonBack extends Block<{}> {
-    constructor() {
-        super('div',
+type ButtonBackProps = {
+    link: string
+}
+
+export class ButtonBack extends Block {
+    constructor(props: ButtonBackProps) {
+        const {link} = props
+        super("div",
             {
                 attr: {
                     class: "back-sidebar"
                 },
                 events: {
-                    click: (e: any) => {
-                        console.log(e)
+                    click: (e: Event) => {
+                        e.preventDefault()
+                        router.go(link)
                     }
                 }
             }

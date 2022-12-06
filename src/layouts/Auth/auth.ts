@@ -1,14 +1,15 @@
-import Block from "../../utils/Block";
-import './auth.scss'
+import "./auth.scss"
+import Block from "../../services/Block"
 
 type AuthProps = {
-    title: string;
-    content: object | string;
-};
+    title: string
+    content: object | string
+    mountFn?: Function
+}
 
-export class Auth extends Block<AuthProps> {
+export class Auth extends Block {
     constructor(props: AuthProps) {
-        super('div',
+        super("form",
             {
                 attr: {
                     class: "auth"
@@ -18,14 +19,20 @@ export class Auth extends Block<AuthProps> {
         )
     }
 
+    componentDidMount() {
+        if (this._props.mountFn) {
+            this._props.mountFn()
+        }
+    }
+
     render() {
         return this.compile(`
-            <section class="auth-form">
+            <div class="auth-form">
                 <div class="auth-form-header">
                     <h1>{{ title }}</h1>
                 </div>
                 {{{ content }}}
-            </section>
+            </div>
         `)
     }
 }

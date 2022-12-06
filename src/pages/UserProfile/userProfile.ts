@@ -1,41 +1,122 @@
-import Block from "../../utils/Block";
+import Block from "../../services/Block"
+import Input from "../../components/Input"
+import ProfilePhoto from "../../components/Profile/Photo"
+import Link from "../../components/Link"
+import {connectProfile} from "../../services/Store/ConnectComponents"
+import AuthController from "../../controllers/AuthController"
+import {router} from "../../index"
+import ProfileController from "../../controllers/ProfileController"
+import {webpath} from "../../webpath"
 
-type LoginProps = {
-    inputEmail: object | string;
-    inputLogin: object | string;
-    inputFirstName: object | string;
-    inputSecondName: object | string;
-    inputDisplayName: object | string;
-    inputPhone: object | string;
-    footer: object | string;
-};
+export type TProfile = {
+    id?: number
+    first_name: string
+    second_name: string
+    display_name: string | null
+    login: string
+    email: string
+    phone: string
+    avatar?: string | null
+}
 
-export default class UserProfile extends Block<LoginProps> {
-    constructor(props: LoginProps) {
-        super('div',
+const inputFields: Indexed = {
+    email: new Input({
+        template: "profile",
+        staticTmpl: true,
+        type: "email",
+        name: "email",
+        label: "Почта",
+    }),
+    login: new Input({
+        template: "profile",
+        staticTmpl: true,
+        type: "text",
+        name: "login",
+        label: "Логин"
+    }),
+    first_name: new Input({
+        template: "profile",
+        staticTmpl: true,
+        type: "text",
+        name: "first_name",
+        label: "Имя"
+    }),
+    second_name: new Input({
+        template: "profile",
+        staticTmpl: true,
+        type: "text",
+        name: "second_name",
+        label: "Фамилия"
+    }),
+    display_name: new Input({
+        template: "profile",
+        staticTmpl: true,
+        type: "text",
+        name: "display_name",
+        label: "Имя в чате"
+    }),
+    phone: new Input({
+        template: "profile",
+        staticTmpl: true,
+        type: "number",
+        name: "phone",
+        label: "Телефон"
+    })
+}
+
+const userPhoto = new ProfilePhoto()
+
+class UserProfile extends Block {
+    constructor() {
+        super("div",
             {
                 attr: {
                     class: "profile"
                 },
-                ...props
+                userPhoto,
+                userName: "",
+                ...inputFields,
+                footer: [
+                    new Link({
+                        title: "Изменить данные",
+                        href: webpath.profileEdit
+                    }),
+                    new Link({
+                        title: "Изменить пароль",
+                        href: webpath.profilePassword
+                    }),
+                    new Link({
+                        title: "Выйти",
+                        href: "/logout",
+                        onClick: async (e) => {
+                            e.preventDefault()
+                            await AuthController.signOut().then(() => {
+                                router.go(webpath.login)
+                            })
+                        },
+                        classes: "link--red"
+                    }),
+                ],
             }
         )
     }
 
+    componentDidMount() {
+        ProfileController.updateProfileProps(inputFields)
+        ProfileController.updateProfilePhoto(userPhoto)
+    }
+
     render() {
         return this.compile(`
-            <div class="profile__img">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M36 2H4C2.89543 2 2 2.89543 2 4V25.2667L14.6547 22.3139C15.5486 22.1053 16.4635 22 17.3814 22H22.6186C23.5365 22 24.4514 22.1053 25.3453 22.3139L38 25.2667V4C38 2.89543 37.1046 2 36 2ZM4 0C1.79086 0 0 1.79086 0 4V36C0 38.2091 1.79086 40 4 40H36C38.2091 40 40 38.2091 40 36V4C40 1.79086 38.2091 0 36 0H4ZM10.9091 14.5455C12.9174 14.5455 14.5455 12.9174 14.5455 10.9091C14.5455 8.90079 12.9174 7.27273 10.9091 7.27273C8.90082 7.27273 7.27276 8.90079 7.27276 10.9091C7.27276 12.9174 8.90082 14.5455 10.9091 14.5455Z" fill="#CDCDCD"/>
-                </svg>
-            </div>
-            <div class="profile__data-list">
-                {{{ inputEmail }}}
-                {{{ inputLogin }}}
-                {{{ inputFirstName }}}
-                {{{ inputSecondName }}}
-                {{{ inputDisplayName }}}
-                {{{ inputPhone }}}
+            {{{ userPhoto }}}
+            <div class="profile__name">{{ userName }}</div>
+            <div class="profile__fields-list">
+                {{{ email }}}
+                {{{ login }}}
+                {{{ first_name }}}
+                {{{ second_name }}}
+                {{{ display_name }}}
+                {{{ phone }}}
             </div>
             <div class="profile__footer">
                 {{{ footer }}}
@@ -43,3 +124,5 @@ export default class UserProfile extends Block<LoginProps> {
         `)
     }
 }
+
+export default connectProfile(UserProfile)

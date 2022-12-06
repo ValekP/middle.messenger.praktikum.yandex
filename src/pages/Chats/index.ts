@@ -1,40 +1,35 @@
-import Page from "../../layouts/Page";
-import ChatsList from "../../components/ChatsList";
-import {Chat} from "../../components/Chat/chat";
+import Page from "../../layouts/Page"
+import Chats from "../../components/Chats"
+import ChatsListHeader from "../../components/Chats/Header"
+import Conversation from "../../components/Conversation"
+import AuthController from "../../controllers/AuthController"
+import {router} from "../../index"
+import {webpath} from "../../webpath"
 
-const chatList = new ChatsList({
-    chats: [
-        {
-            name: "Design Destroyer",
-            date: "12 Окт 2022",
-            text: "В 2008 году художник Jon Rafman начал собирать...",
-            action: 4
-        },
-        {
-            name: "Вадим",
-            date: "10:49",
-            text: "Изображение",
-            active: true
-        },
-        {
-            name: "Киноклуб",
-            date: "12:00",
-            text: "Вы: стикер"
-        },
-        {
-            name: "тет-а-теты",
-            date: "Ср",
-            text: "И Human Interface Guidelines и Material Design рекомендуют...",
-            action: 17
+
+const chatsListHeader = new ChatsListHeader({})
+
+export const conversation = new Conversation({})
+
+const chatsList: never[] = []
+
+export const chatsSidebar = new Chats({
+    chatsListHeader,
+    chatsList
+})
+
+const ChatsPage = {
+    pathname: webpath.chats,
+    view: Page,
+    props: {
+        sidebar: chatsSidebar,
+        content: conversation,
+        mountFn: () => {
+            AuthController.checkAuth().catch(() => {
+                router.go(webpath.login)
+            })
         }
-    ]
-})
-
-const chat = new Chat()
-
-const ChatsPage = new Page({
-    sidebar: chatList,
-    content: chat
-})
+    }
+}
 
 export default ChatsPage

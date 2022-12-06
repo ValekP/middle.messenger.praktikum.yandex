@@ -1,14 +1,15 @@
-import Block from "../../utils/Block";
-import './page.scss'
+import "./page.scss"
+import Block from "../../services/Block"
 
 type PageProps = {
-    sidebar: object | string;
-    content: object | string;
-};
+    sidebar: object | string
+    content: object | string
+    mountFn?: Function
+}
 
-export class Page extends Block<PageProps> {
+export class Page extends Block {
     constructor(props: PageProps) {
-        super('div',
+        super("div",
             {
                 attr: {
                     class: "layout"
@@ -16,6 +17,12 @@ export class Page extends Block<PageProps> {
                 ...props
             }
         )
+    }
+
+    componentDidMount() {
+        if (this._props.mountFn) {
+            this._props.mountFn()
+        }
     }
 
     render() {

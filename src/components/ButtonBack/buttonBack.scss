@@ -1,5 +1,4 @@
-@import "src/styles/_mixins";
-@import "src/styles/_colors";
+@import "src/styles/utils";
 
 .back-sidebar {
   @include flex-j-a-center;

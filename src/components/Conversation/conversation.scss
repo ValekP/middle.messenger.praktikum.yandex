@@ -1,0 +1,30 @@
+@import "../../styles/utils";
+
+.conversation {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0 20px;
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  &-preview {
+    @include flex-j-a-center;
+    height: 100%;
+  }
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 30px;
+  width: 100%;
+}

@@ -1,15 +1,16 @@
-import Block from "../../utils/Block";
-import './button.scss'
+import "./button.scss"
+import Block from "../../services/Block"
 
 type ButtonProps = {
-    title: string;
-    onClick?: EventListener;
-};
+    title: string
+    type?: string
+    onClick?: EventListener
+}
 
-export class Button extends Block<ButtonProps> {
+export class Button extends Block {
     constructor(props: ButtonProps) {
-        const {onClick, ...rest} = props;
-        super('div',
+        const {onClick, type = "button", ...rest} = props
+        super("div",
             {
                 attr: {
                     class: "btn-wrap"
@@ -21,9 +22,10 @@ export class Button extends Block<ButtonProps> {
             }
         )
     }
+
     render() {
         return this.compile(`
-            <button class="btn">{{ title }}</button>
+            <button class="btn" type="{{ type }}">{{ title }}</button>
         `)
     }
 }

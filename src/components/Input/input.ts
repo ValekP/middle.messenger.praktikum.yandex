@@ -1,29 +1,31 @@
-import Block from "../../utils/Block";
-import './input.scss'
-import validateInputs from "../../helpers/validateInputs";
+import "./input.scss"
+import validateInputs from "../../helpers/validateInputs"
+import Block from "../../services/Block"
 
 type InputProps = {
-    type?: 'text' | 'password' | 'email';
-    value?: string;
-    name?: string;
-    label?: string;
-    textError?: string;
-    onBlur?: EventListener;
-    onFocus?: EventListener;
-    onChange?: EventListener;
-    template: 'auth' | 'profile'
-};
+    staticTmpl?: boolean
+    type?: "text" | "password" | "email" | "number"
+    value?: string
+    name?: string
+    label?: string
+    textError?: string
+    onBlur?: EventListener
+    onFocus?: EventListener
+    onChange?: EventListener
+    template: "auth" | "profile"
+}
 
-export class Input extends Block<InputProps> {
+export class Input extends Block {
     constructor(props: InputProps) {
-        const {onBlur, onFocus, onChange, template, ...rest} = props;
-        super('div',
+        const {onBlur, onFocus, onChange, template, staticTmpl = false, ...rest} = props
+        super("div",
             {
                 attr: {
                     class: `input-wrap-${template}`
                 },
                 ...rest,
                 template,
+                staticTmpl,
                 events: {
                     blur: onBlur,
                     focus: onFocus,
@@ -34,21 +36,25 @@ export class Input extends Block<InputProps> {
     }
 
     addEvents() {
-        this._element?.querySelectorAll('input').forEach(input => {
-            input.addEventListener('blur', (e) => this.inputValidate());
-        });
-    };
-
-    inputValidate(focus: boolean = false): void {
-        const {value, name} = this.getInput()
-        const validate = validateInputs({name, value})
-        if (validate) {
-            this.setError(validate as string)
-        } else {
-            this.clearError()
+        if (!this._props.staticTmpl) {
+            this._element?.querySelectorAll("input").forEach(input => {
+                input.addEventListener("blur", this.inputValidate.bind(this))
+                input.addEventListener("focus", this.inputValidate.bind(this))
+            })
         }
-        if (focus) {
-            this.getInput().focus()
+    }
+
+    inputValidate() {
+        if (!this._props.staticTmpl) {
+            const {value, name} = this.getInput()
+            const validate = validateInputs({name, value})
+            if (validate) {
+                this.setError(validate as string)
+                return false
+            } else {
+                this.clearError()
+                return value.length === 0 ? null : value
+            }
         }
     }
 
@@ -57,42 +63,58 @@ export class Input extends Block<InputProps> {
     }
 
     clearError() {
-        this._inputError('', true)
+        this._inputError("", true)
     }
 
-    render() {
-        const input = `<input class="input" type="{{ type }}" name="{{ name }}" value="{{ value}}" placeholder="{{ label }}">`
-        const label = `<label for="{{ name }}" class="input-label">{{ label }}</label>`
-        const inputTemplate = this._props.template === 'auth' ? `${input}${label}` : `${label}${input}`
+    inputTmpl() {
+        if (this._props.staticTmpl) {
+            return `<div class="input">{{ value }}</div>`
+        } else {
+            return `<input class="input" type="{{ type }}" name="{{ name }}" value="{{ value }}" placeholder="{{ label }}">`
+        }
+    }
 
-        return this.compile(`
-            ${inputTemplate}
-      
-            {{# if textError}}
-                <span class="input-error">{{ textError }}</span>
-            {{/if }}
-        `)
+    labelTmpl() {
+        if (this._props.staticTmpl) {
+            return `<div class="input-label">{{ label }}</div>`
+        } else {
+            return `<label for="{{ name }}" class="input-label">{{ label }}</label>`
+        }
     }
 
     private getInput() {
-        return this._element?.querySelector('input') as HTMLInputElement
+        return this._element?.querySelector("input") as HTMLInputElement
     }
 
     private _inputError(text: string = "", clear: boolean = false) {
-        const {value} = this.getInput()
-        this.setProps({
-            textError: clear ? '' : text
-        })
-        console.log(this)
+        let spanError
+        const checkSpan = this._element?.querySelector(".input-error")
 
-        if (this._props.template === 'auth') {
-            if (clear) {
-                this._element.classList.remove('input-v-error')
-            } else {
-                this._element.classList.add('input-v-error')
-            }
+        if (checkSpan) {
+            spanError = checkSpan
+        } else {
+            spanError = document.createElement("span")
+            spanError.classList.add("input-error")
         }
 
-        this.getInput().value = value
+        spanError.textContent = text
+        this._element.appendChild(spanError)
+
+        if (this._props.template === "auth") {
+            if (clear) {
+                this._element.classList.remove("input-v-error")
+            } else {
+                this._element.classList.add("input-v-error")
+            }
+        }
+    }
+
+    render() {
+        const inputTemplate = this._props.template === "auth" ? `${this.inputTmpl()}${this.labelTmpl()}` : `${this.labelTmpl()}${this.inputTmpl()}`
+
+        return this.compile(`
+            ${inputTemplate}
+            <span class="input-error">{{ textError }}</span>
+        `)
     }
 }

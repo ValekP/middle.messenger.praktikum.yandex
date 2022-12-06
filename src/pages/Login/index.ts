@@ -1,39 +1,19 @@
-import Auth from "../../layouts/Auth";
-import Login from "./login";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
+import Login from "./login"
+import Auth from "../../layouts/Auth"
+import AuthController from "../../controllers/AuthController"
+import {router} from "../../index"
+import {webpath} from "../../webpath"
 
-const inputLogin = new Input({
-    template: "auth",
-    type: "text",
-    name: "login",
-    label: "Логин"
-})
-
-const inputPassword = new Input({
-    template: "auth",
-    type: "password",
-    name: "password",
-    label: "Пароль"
-})
-
-const button = new Button({
-    title: "Войти",
-    onClick: (e) => {
-        inputLogin.inputValidate()
-        inputPassword.inputValidate()
+const LoginPage = {
+    pathname: webpath.login,
+    view: Auth,
+    props: {
+        title: "Вход",
+        content: new Login(),
+        mountFn: () => AuthController.checkAuth().then(() => {
+            router.go(webpath.chats)
+        })
     }
-})
+}
 
-const loginContent = new Login({
-    inputLogin,
-    inputPassword,
-    button
-})
-
-const LoginAuth = new Auth({
-    title: "Вход",
-    content: loginContent,
-})
-
-export default LoginAuth
+export default LoginPage

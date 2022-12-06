@@ -1,0 +1,42 @@
+@import "../../../styles/utils";
+
+.message {
+  display: flex;
+  margin: 5px 0;
+
+  &#{&}-my {
+    justify-content: flex-end;
+  }
+
+  &-inner {
+    position: relative;
+    background: $color-style-2;
+    border-radius: 12px;
+    max-width: 50%;
+    min-width: 115px;
+  }
+
+  &-my &-inner {
+    background: $color-style-4;
+    border-bottom-right-radius: 0;
+  }
+
+  &__text {
+    padding: 12px 12px 18px 12px;
+    font-size: 12px;
+  }
+
+  &__info {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+
+    &_time {
+      font-size: 9px;
+    }
+  }
+
+  &-my &__info_time {
+    color: $color-primary;
+  }
+}
