@@ -1,7 +1,7 @@
 ## Messenger
 - Дизайн проект
   в [Figma](https://www.figma.com/file/ee8telL3yL4WUwx9QgsRhh/middle.messenger.praktikum.yandex?node-id=0%3A1)
-- Демо проект в [Netlify](https://delightful-pixie-6284f1.netlify.app)
+- Демо проект в [Netlify](https://chimerical-pothos-6a8c62.netlify.app/)
 
 ## Установка
 
