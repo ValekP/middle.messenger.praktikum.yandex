@@ -11,28 +11,13 @@
     align-items: center;
     display: flex;
 
-    &:hover {
-      color: $color-primary;
-      cursor: pointer;
-
-      & svg {
-        fill: $color-primary;
-      }
-    }
-
     svg {
       fill: #000;
     }
-  }
 
-  &.active {
-    & .dropdown-menu {
-      display: block;
-    }
-
-    & .dropdown-btn {
-      background: $color-style-6;
+    &:hover {
       color: $color-primary;
+      cursor: pointer;
 
       & svg {
         fill: $color-primary;
@@ -66,6 +51,21 @@
           width: 100%;
           white-space: nowrap;
         }
+      }
+    }
+  }
+
+  &.active {
+    & .dropdown-menu {
+      display: block;
+    }
+
+    & .dropdown-btn {
+      background: $color-style-6;
+      color: $color-primary;
+
+      & svg {
+        fill: $color-primary;
       }
     }
   }
