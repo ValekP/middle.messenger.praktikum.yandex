@@ -10,7 +10,7 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "npm run build && node server.js",
     "lint:scss": "stylelint \"**/*.scss\"",
-    "lint:ts": "eslint .",
+    "lint:ts": "eslint \"**/*.ts\"",
     "test": "mocha"
   },
   "husky": {
@@ -33,7 +33,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.2",
     "eslint": "8.26.0",
-    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-standard": "^17.0.0",
     "handlebars": "4.7.7",
     "html-webpack-plugin": "^5.5.0",
     "husky": "8.0.2",

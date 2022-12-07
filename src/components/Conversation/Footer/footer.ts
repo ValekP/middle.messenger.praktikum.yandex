@@ -1,30 +1,30 @@
-import "./footer.scss"
-import Block from "../../../services/Block"
-import MessageController from "../../../controllers/MessageController"
+import './footer.scss'
+import Block from '../../../services/Block'
+import MessageController from '../../../controllers/MessageController'
 
 export class ConversationFooter extends Block {
-    constructor() {
-        super("form",
+    constructor () {
+        super('form',
             {
                 attr: {
-                    class: "conversation__footer"
+                    class: 'conversation__footer'
                 }
             }
         )
     }
 
-    getTextMsg() {
-        const input = this._element.querySelector(".conversation-input input") as HTMLInputElement
+    getTextMsg () {
+        const input = this._element.querySelector('.conversation-input input') as HTMLInputElement
         if (input) {
             const msg = input.value
-            input.value = ""
+            input.value = ''
             return msg
         } else {
             return null
         }
     }
 
-    addEvents() {
+    addEvents () {
         const form = this._element as HTMLFormElement
         form.onsubmit = async (e: Event) => {
             e.preventDefault()
@@ -35,7 +35,7 @@ export class ConversationFooter extends Block {
         }
     }
 
-    render() {
+    render () {
         return this.compile(`
             <div class="conversation-attach">
                 <button class="conversation-attach__btn" type="submit">

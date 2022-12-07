@@ -1,6 +1,6 @@
-import isArrayOrObject from "./isArrayOrObject"
+import isArrayOrObject from './isArrayOrObject'
 
-export default function isEqual(lhs: Indexed, rhs: Indexed) {
+export default function isEqual (lhs: Indexed, rhs: Indexed) {
     if (Object.keys(lhs).length !== Object.keys(rhs).length) {
         return false
     }

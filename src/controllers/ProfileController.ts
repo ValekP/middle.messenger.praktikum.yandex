@@ -1,17 +1,17 @@
-import {TProfile} from "../pages/UserProfile/userProfile"
-import AuthController from "./AuthController"
-import {errorRequest} from "../utils/errorRequest"
-import {router} from "../index"
-import ProfileAPI from "../services/Api/ProfileApi"
-import ProfileApi from "../services/Api/ProfileApi"
-import {TChangePassword} from "../pages/UserProfilePassword/userProfilePassword"
-import Actions from "../services/Store/Actions"
-import {webpath} from "../webpath"
-import ChatController from "./ChatController"
-import {TChatApiAddUser, TFindUser} from "../services/Api/ChatApi"
+import { TProfile } from '../pages/UserProfile/userProfile'
+import AuthController from './AuthController'
+import { errorRequest } from '../utils/errorRequest'
+import { router } from '../index'
+import ProfileAPI from '../services/Api/ProfileApi'
+import ProfileApi from '../services/Api/ProfileApi'
+import { TChangePassword } from '../pages/UserProfilePassword/userProfilePassword'
+import Actions from '../services/Store/Actions'
+import { webpath } from '../webpath'
+import ChatController from './ChatController'
+import { TChatApiAddUser, TFindUser } from '../services/Api/ChatApi'
 
 class ProfileController {
-    public async updateProfile(data: TProfile) {
+    public async updateProfile (data: TProfile) {
         try {
             await ProfileAPI.updateProfile(data)
             await AuthController.checkAuth()
@@ -20,7 +20,7 @@ class ProfileController {
         }
     }
 
-    public async updatePassword(data: TChangePassword) {
+    public async updatePassword (data: TChangePassword) {
         try {
             await ProfileAPI.updatePassword(data)
             router.go(webpath.profile)
@@ -29,7 +29,7 @@ class ProfileController {
         }
     }
 
-    public async updateAvatar(data: FormData) {
+    public async updateAvatar (data: FormData) {
         try {
             await ProfileAPI.updateAvatar(data)
             await AuthController.checkAuth()
@@ -38,15 +38,18 @@ class ProfileController {
         }
     }
 
-    public updateProfileProps(inputFields: Indexed) {
+    public updateProfileProps (inputFields: Indexed) {
         const state = Actions.getProfileState() as Indexed
         for (const [key] of Object.entries(inputFields)) {
-            const props = {...inputFields[key]._props, value: state[key]}
+            const props = {
+                ...inputFields[key]._props,
+                value: state[key]
+            }
             inputFields[key].setProps(props)
         }
     }
 
-    public updateProfilePhoto(userPhoto: Indexed) {
+    public updateProfilePhoto (userPhoto: Indexed) {
         const state = Actions.getProfileState() as Indexed
         userPhoto.setProps({
             ...userPhoto._props,
@@ -54,20 +57,20 @@ class ProfileController {
         })
     }
 
-    public async findUser(data: TFindUser) {
+    public async findUser (data: TFindUser) {
         try {
             const userProfile = await ProfileApi.findUser(data)
             const chatId = Actions.getActiveChat().id
             if (Array.isArray(userProfile) && chatId) {
                 if (userProfile.length < 1) {
-                    alert("Пользователь не найден")
+                    alert('Пользователь не найден')
                 }
                 const userId = userProfile[0].id
                 const data: TChatApiAddUser = {
-                    "users": [
+                    users: [
                         userId
                     ],
-                    "chatId": chatId
+                    chatId
                 }
                 await ChatController.addUserChat(data)
             }

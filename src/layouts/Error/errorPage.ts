@@ -1,6 +1,6 @@
-import "./error.scss"
-import Block from "../../services/Block"
-import {router} from "../../index"
+import './error.scss'
+import Block from '../../services/Block'
+import { router } from '../../index'
 
 type ErrorProps = {
     statusCode: number
@@ -9,19 +9,19 @@ type ErrorProps = {
 }
 
 export class ErrorPage extends Block {
-    constructor(props: ErrorProps) {
-        super("div",
+    constructor (props: ErrorProps) {
+        super('div',
             {
                 attr: {
-                    class: "error"
+                    class: 'error'
                 },
                 ...props
             }
         )
     }
 
-    addEvents() {
-        const linkBack = this._element?.querySelector("a")
+    addEvents () {
+        const linkBack = this._element?.querySelector('a')
         if (linkBack) {
             linkBack.onclick = (e: Event) => {
                 e.preventDefault()
@@ -30,13 +30,13 @@ export class ErrorPage extends Block {
         }
     }
 
-    componentDidMount() {
+    componentDidMount () {
         if (this._props.mountFn) {
             this._props.mountFn()
         }
     }
 
-    render() {
+    render () {
         return this.compile(`
             <div class="error-content">
                 <div class="error__code">{{ statusCode }}</div>

@@ -1,14 +1,14 @@
-import AuthAPI from "../services/Api/AuthApi"
-import {router} from "../index"
-import {TLogin} from "../pages/Login/login"
-import Actions from "../services/Store/Actions"
-import Store from "../services/Store/Store"
-import {ISignUp} from "../pages/SignUp/signUp"
-import {errorRequest} from "../utils/errorRequest"
-import {webpath} from "../webpath"
+import AuthAPI from '../services/Api/AuthApi'
+import { router } from '../index'
+import { TLogin } from '../pages/Login/login'
+import Actions from '../services/Store/Actions'
+import Store from '../services/Store/Store'
+import { ISignUp } from '../pages/SignUp/signUp'
+import { errorRequest } from '../utils/errorRequest'
+import { webpath } from '../webpath'
 
 class AuthController {
-    public async login(user: TLogin) {
+    public async login (user: TLogin) {
         try {
             await AuthAPI.login(user)
             await this.checkAuth()
@@ -18,7 +18,7 @@ class AuthController {
         }
     }
 
-    public async checkAuth() {
+    public async checkAuth () {
         try {
             const profile = await AuthAPI.checkAuth()
             await Actions.setProfile(profile)
@@ -27,7 +27,7 @@ class AuthController {
         }
     }
 
-    public async signUp(user: ISignUp) {
+    public async signUp (user: ISignUp) {
         try {
             await AuthAPI.signUp(user)
             await this.checkAuth()
@@ -37,7 +37,7 @@ class AuthController {
         }
     }
 
-    public async signOut() {
+    public async signOut () {
         try {
             await AuthAPI.signOut()
             await Store.removeState()
@@ -45,7 +45,6 @@ class AuthController {
             errorRequest(error)
         }
     }
-
 }
 
 export default new AuthController()

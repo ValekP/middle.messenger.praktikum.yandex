@@ -1,1 +1,1 @@
-export {ConversationHeader as default} from "./header"
+export { ConversationHeader as default } from './header'

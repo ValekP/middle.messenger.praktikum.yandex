@@ -1,10 +1,10 @@
-import {HTTPTransport} from "./HTTPTransport"
+import { HTTPTransport } from './HTTPTransport'
 
-describe("HTTPTransport", () => {
+describe('HTTPTransport', () => {
     const http = new HTTPTransport()
-    it("Тестовый запрос получение ip", (done) => {
+    it('Тестовый запрос получение ip', (done) => {
         http
-            .get("http://ip-api.com/json/")
+            .get('http://ip-api.com/json/')
             .then((r) => {
                 done()
                 console.log(r.response)

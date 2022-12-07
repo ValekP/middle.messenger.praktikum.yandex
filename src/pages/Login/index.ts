@@ -1,14 +1,14 @@
-import Login from "./login"
-import Auth from "../../layouts/Auth"
-import AuthController from "../../controllers/AuthController"
-import {router} from "../../index"
-import {webpath} from "../../webpath"
+import Login from './login'
+import Auth from '../../layouts/Auth'
+import AuthController from '../../controllers/AuthController'
+import { router } from '../../index'
+import { webpath } from '../../webpath'
 
 const LoginPage = {
     pathname: webpath.login,
     view: Auth,
     props: {
-        title: "Вход",
+        title: 'Вход',
         content: new Login(),
         mountFn: () => AuthController.checkAuth().then(() => {
             router.go(webpath.chats)

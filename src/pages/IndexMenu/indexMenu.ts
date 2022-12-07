@@ -1,49 +1,49 @@
-import "./indexMenu.scss"
-import Block from "../../services/Block"
-import {router} from "../../index"
-import {webpath} from "../../webpath"
+import './indexMenu.scss'
+import Block from '../../services/Block'
+import { router } from '../../index'
+import { webpath } from '../../webpath'
 
 export default class IndexMenu extends Block {
-    constructor() {
-        super("div",
+    constructor () {
+        super('div',
             {
                 attr: {
-                    class: "index-menu"
+                    class: 'index-menu'
                 },
 
                 nav: {
                     [webpath.login]: {
-                        title: "Login",
+                        title: 'Login'
                     },
                     [webpath.signup]: {
-                        title: "Signup",
+                        title: 'Signup'
                     },
                     [webpath.chats]: {
-                        title: "Chats",
+                        title: 'Chats'
                     },
                     [webpath.profile]: {
-                        title: "Profile",
+                        title: 'Profile'
                     },
                     [webpath.profileEdit]: {
-                        title: "Profile Edit",
+                        title: 'Profile Edit'
                     },
                     [webpath.profilePassword]: {
-                        title: "Profile Password",
+                        title: 'Profile Password'
                     },
                     [webpath.error404]: {
-                        title: "404",
+                        title: '404'
                     },
                     [webpath.error500]: {
-                        title: "500",
+                        title: '500'
                     }
                 }
             }
         )
     }
 
-    addEvents() {
-        this._element?.querySelectorAll(".index-menu__item_link").forEach(item => {
-            item.addEventListener("click", (e) => {
+    addEvents () {
+        this._element?.querySelectorAll('.index-menu__item_link').forEach(item => {
+            item.addEventListener('click', (e) => {
                 // @ts-ignore
                 const attrHref = e.target.attributes.href.value
                 if (attrHref) {
@@ -54,7 +54,7 @@ export default class IndexMenu extends Block {
         })
     }
 
-    render() {
+    render () {
         return this.compile(`
             <ul class="index-menu-list">
                 {{#each nav}}

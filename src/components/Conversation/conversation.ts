@@ -1,10 +1,10 @@
-import "./conversation.scss"
-import Block from "../../services/Block"
-import ConversationHeader from "./Header"
-import ConversationMessage from "./Message"
-import ConversationFooter from "./Footer"
-import Actions from "../../services/Store/Actions"
-import {TChatMessages} from "./Message/message"
+import './conversation.scss'
+import Block from '../../services/Block'
+import ConversationHeader from './Header'
+import ConversationMessage from './Message'
+import ConversationFooter from './Footer'
+import Actions from '../../services/Store/Actions'
+import { TChatMessages } from './Message/message'
 
 type ConversationProps = {
     id?: number
@@ -33,82 +33,85 @@ export type TActiveConversationUsers = {
 }
 
 export class Conversation extends Block {
-    constructor(props: ConversationProps) {
-        const {id, ...rest} = props
+    constructor (props: ConversationProps) {
+        const {
+            id,
+            ...rest
+        } = props
 
-        super("div",
+        super('div',
             {
                 attr: {
-                    class: "conversation"
+                    class: 'conversation'
                 },
                 ...rest,
                 id,
                 header: null,
                 messages: null,
-                footer: null,
+                footer: null
             }
         )
     }
 
-    setHeader(title: string, avatar: string) {
+    setHeader (title: string, avatar: string) {
         return new ConversationHeader({
             title,
             avatar
         })
     }
 
-    getMessages() {
+    getMessages () {
         return Actions.getChatMessages().map(msg => new ConversationMessage(msg)).reverse()
     }
 
-    updateMessages() {
+    updateMessages () {
         this._children.messages = this.getMessages()
     }
 
-    setMessages(msgs: any[] = []) {
+    setMessages (msgs: any[] = []) {
         this._children.messages = [...this._children.messages, ...msgs]
         this.scrollMsg()
     }
 
-    scrollMsg() {
-        const scrollMsg = this._element.querySelector(".conversation__content")
+    scrollMsg () {
+        const scrollMsg = this._element.querySelector('.conversation__content')
         if (scrollMsg) {
             scrollMsg.scrollTop = scrollMsg.scrollHeight
         }
     }
 
-    setNewMessages(msg: TChatMessages) {
+    setNewMessages (msg: TChatMessages) {
         const mst = [new ConversationMessage(msg)]
         this.setMessages(mst)
     }
 
-    hide() {
+    hide () {
         this.setProps({
             ...this._props,
             id: null,
             header: null,
             messages: null,
-            footer: null,
+            footer: null
         })
     }
 
-    setFooter() {
+    setFooter () {
         return new ConversationFooter()
     }
 
-    async view() {
+    async view () {
         const state = await Actions.getActiveChat()
         this.setProps({
             ...this._props,
             id: state.id,
             header: this.setHeader(state.title, state.avatar),
             messages: this.getMessages(),
-            footer: this.setFooter(),
+            footer: this.setFooter()
         })
         this.scrollMsg()
     }
 
-    render() {
+    render () {
         return this.compile(`
             {{# if id }}
                 {{{ header }}}

@@ -1,5 +1,5 @@
-import "./message.scss"
-import Block from "../../../services/Block"
+import './message.scss'
+import Block from '../../../services/Block'
 
 export type TChatMessages = {
     className?: string
@@ -22,13 +22,16 @@ export type TChatMessages = {
 }
 
 export class ConversationMessage extends Block {
-    constructor(props: TChatMessages) {
-        const {myMessage = false, ...rest} = props
+    constructor (props: TChatMessages) {
+        const {
+            myMessage = false,
+            ...rest
+        } = props
 
-        super("div",
+        super('div',
             {
                 attr: {
-                    class: `message ${myMessage ? "message-my" : ""}`
+                    class: `message ${myMessage ? 'message-my' : ''}`
                 },
                 ...rest,
                 myMessage
@@ -36,7 +39,7 @@ export class ConversationMessage extends Block {
         )
     }
 
-    render() {
+    render () {
         return this.compile(`
             <div class="message-inner">
                 <div class="message__media"></div>

@@ -1,1 +1,1 @@
-export {Conversation as default} from "./conversation"
+export { Conversation as default } from './conversation'

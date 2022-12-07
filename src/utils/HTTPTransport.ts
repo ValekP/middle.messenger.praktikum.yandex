@@ -1,10 +1,10 @@
-import queryStringify from "../helpers/queryStringify"
+import queryStringify from '../helpers/queryStringify'
 
 enum Methods {
-    GET = "GET",
-    PUT = "PUT",
-    POST = "POST",
-    DELETE = "DELETE"
+    GET = 'GET',
+    PUT = 'PUT',
+    POST = 'POST',
+    DELETE = 'DELETE'
 }
 
 type HttpOptions = {
@@ -19,20 +19,32 @@ type HttpMethods = (url: string, options?: HttpOptions) => Promise<any>
 
 export class HTTPTransport {
     get: HttpMethods = (url, options = {}) => {
-        url = options.data ? url + "?" + queryStringify(options.data) : url
-        return this.request(url, {...options, method: Methods.GET})
+        url = options.data ? url + '?' + queryStringify(options.data) : url
+        return this.request(url, {
+            ...options,
+            method: Methods.GET
+        })
     }
 
     post: HttpMethods = (url, options = {}) => {
-        return this.request(url, {...options, method: Methods.POST})
+        return this.request(url, {
+            ...options,
+            method: Methods.POST
+        })
     }
 
     put: HttpMethods = (url, options = {}) => {
-        return this.request(url, {...options, method: Methods.PUT})
+        return this.request(url, {
+            ...options,
+            method: Methods.PUT
+        })
     }
 
     delete: HttpMethods = (url, options = {}) => {
-        return this.request(url, {...options, method: Methods.DELETE})
+        return this.request(url, {
+            ...options,
+            method: Methods.DELETE
+        })
     }
 
     request = (url: string, options: HttpOptions) => {
@@ -41,7 +53,7 @@ export class HTTPTransport {
             headers = {},
             data,
             timeout = 10000,
-            withCredentials = false,
+            withCredentials = false
         } = options
 
         return new Promise((resolve, reject) => {

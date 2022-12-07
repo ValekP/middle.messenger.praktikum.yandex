@@ -1,1 +1,1 @@
-export {ProfilePhoto as default} from "./photo"
+export { ProfilePhoto as default } from './photo'

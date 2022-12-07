@@ -1,9 +1,9 @@
-import "./chatsListItem.scss"
-import Block from "../../../services/Block"
-import formatDate from "../../../helpers/formatDate"
-import Actions from "../../../services/Store/Actions"
-import ChatController from "../../../controllers/ChatController"
-import {chatsSidebar, conversation} from "../../../pages/Chats"
+import './chatsListItem.scss'
+import Block from '../../../services/Block'
+import formatDate from '../../../helpers/formatDate'
+import Actions from '../../../services/Store/Actions'
+import ChatController from '../../../controllers/ChatController'
+import { chatsSidebar, conversation } from '../../../pages/Chats'
 
 export type TChatProps = {
     id: number
@@ -19,24 +19,30 @@ export type TChatProps = {
 }
 
 export class ChatsListItem extends Block {
-    constructor(props: TChatProps) {
-        const {avatar, ...rest} = props
+    constructor (props: TChatProps) {
+        const {
+            avatar,
+            ...rest
+        } = props
 
-        super("div",
+        super('div',
             {
                 attr: {
-                    class: "chats-item"
+                    class: 'chats-item'
                 },
                 ...rest,
                 avatar: () => {
                     return avatar ? `https://ya-praktikum.tech/api/v2/resources${avatar}` : null
                 },
-                lastMsgTime: () => rest.last_message ? formatDate(new Date(Date.parse(rest.last_message.time))) : "",
+                lastMsgTime: () => rest.last_message ? formatDate(new Date(Date.parse(rest.last_message.time))) : '',
                 events: {
                     click: async () => {
                         if (rest.id !== Actions.getActiveChat().id) {
                             await Actions.removeActiveChat()
-                            await ChatController.setActiveChat({...rest, avatar})
+                            await ChatController.setActiveChat({
+                                ...rest,
+                                avatar
+                            })
                             await chatsSidebar.updateChatListView()
                             conversation.view()
                         }
@@ -50,15 +56,15 @@ export class ChatsListItem extends Block {
         }
     }
 
-    setActive() {
-        this._element.classList.add("active")
+    setActive () {
+        this._element.classList.add('active')
     }
 
-    removeActive() {
-        this._element.classList.remove("active")
+    removeActive () {
+        this._element.classList.remove('active')
     }
 
-    render() {
+    render () {
         return this.compile(`
             <div class="chats-item-inner">
                 <div class="chats-item__img">

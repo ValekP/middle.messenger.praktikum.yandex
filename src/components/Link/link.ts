@@ -1,6 +1,6 @@
-import "./link.scss"
-import Block from "../../services/Block"
-import {router} from "../../index"
+import './link.scss'
+import Block from '../../services/Block'
+import { router } from '../../index'
 
 type LinkProps = {
     tag?: string
@@ -11,25 +11,29 @@ type LinkProps = {
 }
 
 export class Link extends Block {
-    constructor(props: LinkProps) {
-        const {onClick, tag = "div", ...rest} = props
+    constructor (props: LinkProps) {
+        const {
+            onClick,
+            tag = 'div',
+            ...rest
+        } = props
         super(tag,
             {
                 attr: {
-                    class: "link-wrap"
+                    class: 'link-wrap'
                 },
                 ...rest,
                 events: {
-                    click: onClick ? onClick : (e: Event) => {
+                    click: onClick || ((e: Event) => {
                         e.preventDefault()
                         router.go(this._props.href)
-                    }
+                    })
                 }
             }
         )
     }
 
-    render() {
+    render () {
         return this.compile(`
             <a href="{{ href }}" class="link {{ classes }}">{{{ title }}}</a>
         `)

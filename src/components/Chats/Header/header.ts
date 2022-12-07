@@ -1,11 +1,11 @@
-import "./header.scss"
-import Block from "../../../services/Block"
-import Link from "../../Link"
-import {webpath} from "../../../webpath"
-import ProfilePhoto from "../../Profile/Photo"
-import Dropdown from "../../Dropdown"
-import ChatController from "../../../controllers/ChatController"
-import {chatsSidebar} from "../../../pages/Chats"
+import './header.scss'
+import Block from '../../../services/Block'
+import Link from '../../Link'
+import { webpath } from '../../../webpath'
+import ProfilePhoto from '../../Profile/Photo'
+import Dropdown from '../../Dropdown'
+import ChatController from '../../../controllers/ChatController'
+import { chatsSidebar } from '../../../pages/Chats'
 
 type ChatsHeaderProps = {}
 
@@ -19,11 +19,11 @@ const dropdown = new Dropdown({
     `,
     nav: [
         new Link({
-            tag: "li",
-            title: "Создать чат",
-            href: "/add/chat",
+            tag: 'li',
+            title: 'Создать чат',
+            href: '/add/chat',
             onClick: async () => {
-                const nameChat = prompt("Название чата")
+                const nameChat = prompt('Название чата')
                 await ChatController.createChat({
                     title: nameChat as string
                 })
@@ -44,11 +44,11 @@ const linkProfile = new Link({
 })
 
 export class ChatsHeader extends Block {
-    constructor(props: ChatsHeaderProps) {
-        super("div",
+    constructor (props: ChatsHeaderProps) {
+        super('div',
             {
                 attr: {
-                    class: "chats__header"
+                    class: 'chats__header'
                 },
                 ...props,
                 userPhoto,
@@ -58,7 +58,7 @@ export class ChatsHeader extends Block {
         )
     }
 
-    render() {
+    render () {
         return this.compile(`
             <nav class="chats__header_menu">
                 <ul class="menu">
