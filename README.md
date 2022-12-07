@@ -10,3 +10,9 @@
 - `npm run build` — сборка статических файлов,
 - `npm run start` — сборка и запуск веб-сервера,
 - `npm run test` — запуск тестов.
+
+## Docker
+
+`
+docker build -t messenger . && docker run -p 3000:3000 -d messenger
+`
