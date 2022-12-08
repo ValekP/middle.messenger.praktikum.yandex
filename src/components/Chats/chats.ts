@@ -1,9 +1,9 @@
-import "./chats.scss"
-import Block from "../../services/Block"
-import Actions from "../../services/Store/Actions"
-import ChatController from "../../controllers/ChatController"
-import ChatsListItem from "./Listitem"
-import {TChatProps} from "./Listitem/chatsListItem"
+import './chats.scss'
+import Block from '../../services/Block'
+import Actions from '../../services/Store/Actions'
+import ChatController from '../../controllers/ChatController'
+import ChatsListItem from './Listitem'
+import { TChatProps } from './Listitem/chatsListItem'
 
 export type TChatList = {
     id: number
@@ -24,35 +24,35 @@ type ChatsProps = {
 }
 
 export class Chats extends Block {
-    constructor(props: ChatsProps) {
-        super("div",
+    constructor (props: ChatsProps) {
+        super('div',
             {
                 attr: {
-                    class: "chats"
+                    class: 'chats'
                 },
                 ...props
             }
         )
     }
 
-    async updateChat() {
+    async updateChat () {
         await ChatController.getChats()
         await this.updateChatListView()
     }
 
-    async updateChatListView() {
+    async updateChatListView () {
         const chatsList = Actions.getChatListState().map((chat: TChatProps) => new ChatsListItem(chat))
         this._children.chatsList = [...chatsList]
         this._props.firstUpdate = true
     }
 
-    async componentDidMount() {
+    async componentDidMount () {
         Actions.removeActiveChat()
         await this.updateChat()
         await ChatController.getTokenToMessagesServer(0)
     }
 
-    render() {
+    render () {
         return this.compile(`
             {{{ chatsListHeader }}}
             <div class="chats__list">

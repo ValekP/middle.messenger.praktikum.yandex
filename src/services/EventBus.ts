@@ -3,11 +3,11 @@ type Listener = (...args: any) => void
 export default class EventBus {
     protected listeners: Record<string, Listener[]>
 
-    constructor() {
+    constructor () {
         this.listeners = {}
     }
 
-    on(event: string, callback: Listener) {
+    on (event: string, callback: Listener) {
         if (!this.listeners[event]) {
             this.listeners[event] = []
         }
@@ -15,17 +15,17 @@ export default class EventBus {
         this.listeners[event].push(callback)
     }
 
-    off(event: string, callback: Listener) {
+    off (event: string, callback: Listener) {
         if (!this.listeners[event]) {
             throw new Error(`Нет события: ${event}`)
         }
 
         this.listeners[event] = this.listeners[event].filter(
-            (listener) => listener !== callback,
+            (listener) => listener !== callback
         )
     }
 
-    emit(event: string, ...args: any) {
+    emit (event: string, ...args: any) {
         if (!this.listeners[event]) {
             throw new Error(`Нет события: ${event}`)
         }

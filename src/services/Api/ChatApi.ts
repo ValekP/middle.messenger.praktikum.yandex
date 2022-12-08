@@ -1,4 +1,4 @@
-import BaseAPI from "./BaseApi"
+import BaseAPI from './BaseApi'
 
 export type TChatApiCreate = {
     title: string
@@ -14,61 +14,61 @@ export type TFindUser = {
 }
 
 class ChatApi extends BaseAPI {
-    constructor() {
-        super({path: "/chats"})
+    constructor () {
+        super({ path: '/chats' })
     }
 
-    public createChat(data: TChatApiCreate) {
-        return this.post("/", {
+    public createChat (data: TChatApiCreate) {
+        return this.post('/', {
             withCredentials: true,
-            data: data,
+            data
         })
     }
 
-    public getChat() {
-        return this.get("/", {
-            withCredentials: true,
+    public getChat () {
+        return this.get('/', {
+            withCredentials: true
         })
     }
 
-    public removeChat(chatId: number) {
-        return this.delete("/", {
+    public removeChat (chatId: number) {
+        return this.delete('/', {
             withCredentials: true,
-            data: {chatId: chatId},
+            data: { chatId }
         })
     }
 
-    public addUserChat(data: TChatApiAddUser) {
-        return this.put("/users", {
+    public addUserChat (data: TChatApiAddUser) {
+        return this.put('/users', {
             withCredentials: true,
-            data: data,
+            data
         })
     }
 
-    public deleteUserChat(data: TChatApiAddUser) {
-        return this.delete("/users", {
+    public deleteUserChat (data: TChatApiAddUser) {
+        return this.delete('/users', {
             withCredentials: true,
-            data: data,
+            data
         })
     }
 
-    public getTokenToMessagesServer(chatId: number) {
+    public getTokenToMessagesServer (chatId: number) {
         return this.post(`/token/${chatId}`, {
-            withCredentials: true,
+            withCredentials: true
         })
     }
 
-    public getChatUsers(chatId: number | string) {
+    public getChatUsers (chatId: number | string) {
         return this.get(`/${chatId}/users`, {
-            withCredentials: true,
+            withCredentials: true
         })
     }
 
-    public updateAvatar(data: FormData) {
-        return this.put("/avatar", {
+    public updateAvatar (data: FormData) {
+        return this.put('/avatar', {
             headers: {},
             withCredentials: true,
-            data,
+            data
         })
     }
 }

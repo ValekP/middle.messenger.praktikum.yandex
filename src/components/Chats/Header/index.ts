@@ -1,1 +1,1 @@
-export {ChatsHeader as default} from "./header"
+export { ChatsHeader as default } from './header'

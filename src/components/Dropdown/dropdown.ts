@@ -1,5 +1,5 @@
-import "./dropdown.scss"
-import Block from "../../services/Block"
+import './dropdown.scss'
+import Block from '../../services/Block'
 
 type DropdownProps = {
     title: string
@@ -7,12 +7,16 @@ type DropdownProps = {
 }
 
 export class Dropdown extends Block {
-    constructor(props: DropdownProps) {
-        const {title, nav, ...rest} = props
-        super("div",
+    constructor (props: DropdownProps) {
+        const {
+            title,
+            nav,
+            ...rest
+        } = props
+        super('div',
             {
                 attr: {
-                    class: "dropdown"
+                    class: 'dropdown'
                 },
                 ...rest,
                 title,
@@ -21,14 +25,14 @@ export class Dropdown extends Block {
                 events: {
                     click: (e: Event) => {
                         e.preventDefault()
-                        this._element?.classList.toggle("active")
+                        this._element?.classList.toggle('active')
                     }
                 }
             }
         )
     }
 
-    render() {
+    render () {
         return this.compile(`
             <div class="dropdown-btn">
                 {{{ title }}}

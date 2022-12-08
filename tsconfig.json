@@ -16,5 +16,8 @@
     ".parcel-cache",
     ".github",
     "src/server.js"
-  ]
+  ],
+  "ts-node": {
+    "transpileOnly": true
+  }
 }

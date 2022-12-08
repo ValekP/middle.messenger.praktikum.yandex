@@ -1,1 +1,1 @@
-export {ConversationFooter as default} from "./footer"
+export { ConversationFooter as default } from './footer'

@@ -1,1 +1,1 @@
-export {ConversationMessage as default} from "./message"
+export { ConversationMessage as default } from './message'

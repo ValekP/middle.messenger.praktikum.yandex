@@ -1,10 +1,10 @@
-import Block from "../../services/Block"
-import Input from "../../components/Input"
-import Button from "../../components/Button"
-import ProfilePhoto from "../../components/Profile/Photo"
-import {connectProfile} from "../../services/Store/ConnectComponents"
-import validateInputsList from "../../helpers/validateInputsList"
-import ProfileController from "../../controllers/ProfileController"
+import Block from '../../services/Block'
+import Input from '../../components/Input'
+import Button from '../../components/Button'
+import ProfilePhoto from '../../components/Profile/Photo'
+import { connectProfile } from '../../services/Store/ConnectComponents'
+import validateInputsList from '../../helpers/validateInputsList'
+import ProfileController from '../../controllers/ProfileController'
 
 export type TChangePassword = {
     oldPassword: string
@@ -13,42 +13,42 @@ export type TChangePassword = {
 
 const inputFields: Indexed = {
     oldPassword: new Input({
-        template: "profile",
-        type: "password",
-        name: "password_old",
-        label: "Старый Пароль"
+        template: 'profile',
+        type: 'password',
+        name: 'password_old',
+        label: 'Старый Пароль'
     }),
     newPassword: new Input({
-        template: "profile",
-        type: "password",
-        name: "password",
-        label: "Новый пароль"
+        template: 'profile',
+        type: 'password',
+        name: 'password',
+        label: 'Новый пароль'
     })
 }
 
 const inputFieldsExtend: Indexed = {
     ...inputFields,
     againPassword: new Input({
-        template: "profile",
-        type: "password",
-        name: "password_again",
-        label: "Повторите новый пароль"
+        template: 'profile',
+        type: 'password',
+        name: 'password_again',
+        label: 'Повторите новый пароль'
     })
 }
 
 const button = new Button({
-    title: "Сохранить",
-    type: "submit",
+    title: 'Сохранить',
+    type: 'submit'
 })
 
 const userPhoto = new ProfilePhoto()
 
 class UserProfilePassword extends Block {
-    constructor() {
-        super("form",
+    constructor () {
+        super('form',
             {
                 attr: {
-                    class: "profile"
+                    class: 'profile'
                 },
                 userPhoto,
                 ...inputFieldsExtend,
@@ -57,8 +57,8 @@ class UserProfilePassword extends Block {
         )
     }
 
-    formSubmit() {
-        const form = this._element?.closest("form") as HTMLFormElement
+    formSubmit () {
+        const form = this._element?.closest('form') as HTMLFormElement
         form.onsubmit = async (e: Event) => {
             e.preventDefault()
             const inputs = validateInputsList(inputFields)
@@ -69,13 +69,13 @@ class UserProfilePassword extends Block {
         }
     }
 
-    componentDidMount() {
+    componentDidMount () {
         this.formSubmit()
         ProfileController.updateProfileProps(inputFields)
         ProfileController.updateProfilePhoto(userPhoto)
     }
 
-    render() {
+    render () {
         return this.compile(`
             {{{ userPhoto }}}
             <div class="profile__fields-list">

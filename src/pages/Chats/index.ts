@@ -1,11 +1,10 @@
-import Page from "../../layouts/Page"
-import Chats from "../../components/Chats"
-import ChatsListHeader from "../../components/Chats/Header"
-import Conversation from "../../components/Conversation"
-import AuthController from "../../controllers/AuthController"
-import {router} from "../../index"
-import {webpath} from "../../webpath"
-
+import Page from '../../layouts/Page'
+import Chats from '../../components/Chats'
+import ChatsListHeader from '../../components/Chats/Header'
+import Conversation from '../../components/Conversation'
+import AuthController from '../../controllers/AuthController'
+import { router } from '../../index'
+import { webpath } from '../../webpath'
 
 const chatsListHeader = new ChatsListHeader({})
 

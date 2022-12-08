@@ -1,14 +1,14 @@
-import "./header.scss"
-import Block from "../../../services/Block"
-import Dropdown from "../../Dropdown"
-import Link from "../../Link"
-import {webpath} from "../../../webpath"
-import ChatController from "../../../controllers/ChatController"
-import {chatsSidebar, conversation} from "../../../pages/Chats"
-import {TFindUser} from "../../../services/Api/ChatApi"
-import ProfileController from "../../../controllers/ProfileController"
-import Actions from "../../../services/Store/Actions"
-import {TConversationUsers} from "../conversation"
+import './header.scss'
+import Block from '../../../services/Block'
+import Dropdown from '../../Dropdown'
+import Link from '../../Link'
+import { webpath } from '../../../webpath'
+import ChatController from '../../../controllers/ChatController'
+import { chatsSidebar, conversation } from '../../../pages/Chats'
+import { TFindUser } from '../../../services/Api/ChatApi'
+import ProfileController from '../../../controllers/ProfileController'
+import Actions from '../../../services/Store/Actions'
+import { TConversationUsers } from '../conversation'
 
 type ConversationHeaderProps = {
     avatar?: string
@@ -23,23 +23,23 @@ const dropdown = new Dropdown({
     `,
     nav: [
         new Link({
-            tag: "li",
-            title: "Добавить пользователя",
+            tag: 'li',
+            title: 'Добавить пользователя',
             href: webpath.profile,
             onClick: async () => {
-                const userLogin = prompt("Введите логин пользователя")
+                const userLogin = prompt('Введите логин пользователя')
                 const data: TFindUser = {
-                    login: userLogin as string,
+                    login: userLogin as string
                 }
                 await ProfileController.findUser(data)
             }
         }),
         new Link({
-            tag: "li",
-            title: "Удалить пользователя",
+            tag: 'li',
+            title: 'Удалить пользователя',
             href: webpath.profile,
             onClick: async () => {
-                const userLogin = prompt("Введите логин пользователя")
+                const userLogin = prompt('Введите логин пользователя')
                 const chat = Actions.getActiveChat()
                 const findUser = chat.users.find((item: TConversationUsers) => item.login === userLogin)
                 if (findUser) {
@@ -48,16 +48,16 @@ const dropdown = new Dropdown({
                         chatId: chat.id
                     })
                 } else {
-                    alert("Пользователь не найден")
+                    alert('Пользователь не найден')
                 }
             }
         }),
         new Link({
-            tag: "li",
-            title: "Удалить чат",
+            tag: 'li',
+            title: 'Удалить чат',
             href: webpath.profile,
             onClick: async () => {
-                let isDel = confirm("Вы уверены что хотите удалить чат?")
+                const isDel = confirm('Вы уверены что хотите удалить чат?')
                 if (isDel) {
                     await ChatController.removeChat()
                     await conversation.hide()
@@ -69,24 +69,27 @@ const dropdown = new Dropdown({
 })
 
 export class ConversationHeader extends Block {
-    constructor(props: ConversationHeaderProps) {
-        const {avatar, ...rest} = props
+    constructor (props: ConversationHeaderProps) {
+        const {
+            avatar,
+            ...rest
+        } = props
 
-        super("div",
+        super('div',
             {
                 attr: {
-                    class: "conversation__header"
+                    class: 'conversation__header'
                 },
                 ...rest,
                 dropdown,
                 avatar: () => {
                     return avatar ? `https://ya-praktikum.tech/api/v2/resources${avatar}` : null
-                },
+                }
             }
         )
     }
 
-    render() {
+    render () {
         return this.compile(`
             <div class="conversation__header-info">
                 <div class="conversation__header-info_img">

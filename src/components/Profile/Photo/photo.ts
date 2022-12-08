@@ -1,5 +1,5 @@
-import "./photo.scss"
-import Block from "../../../services/Block"
+import './photo.scss'
+import Block from '../../../services/Block'
 
 type ProfilePhotoProps = {
     edit?: boolean
@@ -7,13 +7,17 @@ type ProfilePhotoProps = {
 }
 
 export class ProfilePhoto extends Block {
-    constructor(props: ProfilePhotoProps = {}) {
-        const {edit = false, photo, ...rest} = props
+    constructor (props: ProfilePhotoProps = {}) {
+        const {
+            edit = false,
+            photo,
+            ...rest
+        } = props
 
-        super("div",
+        super('div',
             {
                 attr: {
-                    class: `profile-photo${edit ? " photo-edit" : ""}`
+                    class: `profile-photo${edit ? ' photo-edit' : ''}`
                 },
                 ...rest,
                 edit,
@@ -22,29 +26,29 @@ export class ProfilePhoto extends Block {
         )
     }
 
-    getInputPhoto(): HTMLInputElement {
-        return this._element?.querySelector(".profile-photo-input") as HTMLInputElement
+    getInputPhoto (): HTMLInputElement {
+        return this._element?.querySelector('.profile-photo-input') as HTMLInputElement
     }
 
-    getFormDataPhoto() {
+    getFormDataPhoto () {
         const input = this.getInputPhoto()
         if (input && input.files && input.files[0]) {
             const formData = new FormData()
-            formData.append("avatar", input.files[0])
+            formData.append('avatar', input.files[0])
             return formData
         }
         return false
     }
 
-    addEvents() {
+    addEvents () {
         if (this._props.edit) {
             const input = this.getInputPhoto()
-            const photo = this._element?.querySelector(".profile-photo-inner") as HTMLElement
+            const photo = this._element?.querySelector('.profile-photo-inner') as HTMLElement
             if (input) {
                 this._element.onclick = () => input.click()
                 input.onchange = () => {
                     if (input.files && input.files[0]) {
-                        let reader = new FileReader()
+                        const reader = new FileReader()
                         reader.onload = (e: Event) => {
                             photo.innerHTML = `<img src="${(e.target as Indexed)?.result}" alt="photo"/>`
                         }
@@ -55,7 +59,7 @@ export class ProfilePhoto extends Block {
         }
     }
 
-    render() {
+    render () {
         return this.compile(`
             <div class="profile-photo-inner">
             {{# if photo }}

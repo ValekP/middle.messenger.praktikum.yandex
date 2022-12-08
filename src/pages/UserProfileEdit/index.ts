@@ -1,10 +1,10 @@
-import ButtonBack from "../../components/ButtonBack"
-import Profile from "../../layouts/Profile"
-import Page from "../../layouts/Page"
-import UserProfileEdit from "./userProfileEdit"
-import AuthController from "../../controllers/AuthController"
-import {router} from "../../index"
-import {webpath} from "../../webpath"
+import ButtonBack from '../../components/ButtonBack'
+import Profile from '../../layouts/Profile'
+import Page from '../../layouts/Page'
+import UserProfileEdit from './userProfileEdit'
+import AuthController from '../../controllers/AuthController'
+import { router } from '../../index'
+import { webpath } from '../../webpath'
 
 const buttonBack = new ButtonBack({
     link: webpath.profile

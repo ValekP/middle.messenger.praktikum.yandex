@@ -1,39 +1,39 @@
-import BaseAPI from "./BaseApi"
-import {TProfile} from "../../pages/UserProfile/userProfile"
-import {TChangePassword} from "../../pages/UserProfilePassword/userProfilePassword"
-import {TFindUser} from "./ChatApi"
+import BaseAPI from './BaseApi'
+import { TProfile } from '../../pages/UserProfile/userProfile'
+import { TChangePassword } from '../../pages/UserProfilePassword/userProfilePassword'
+import { TFindUser } from './ChatApi'
 
 class UserProfileAPI extends BaseAPI {
-    constructor() {
-        super({path: "/user"})
+    constructor () {
+        super({ path: '/user' })
     }
 
-    public updateProfile(data: TProfile) {
-        return this.put("/profile", {
-            data: data,
+    public updateProfile (data: TProfile) {
+        return this.put('/profile', {
+            data,
             withCredentials: true
         })
     }
 
-    public updatePassword(data: TChangePassword) {
-        return this.put("/password", {
-            data: data,
+    public updatePassword (data: TChangePassword) {
+        return this.put('/password', {
+            data,
             withCredentials: true
         })
     }
 
-    public updateAvatar(data: FormData) {
-        return this.put("/profile/avatar", {
+    public updateAvatar (data: FormData) {
+        return this.put('/profile/avatar', {
             headers: {},
             withCredentials: true,
-            data,
+            data
         })
     }
 
-    public findUser(data: TFindUser) {
-        return this.post("/search", {
+    public findUser (data: TFindUser) {
+        return this.post('/search', {
             withCredentials: true,
-            data,
+            data
         })
     }
 }

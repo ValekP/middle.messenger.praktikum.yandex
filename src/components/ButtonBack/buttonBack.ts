@@ -1,18 +1,18 @@
-import "./buttonBack.scss"
-import {router} from "../../index"
-import Block from "../../services/Block"
+import './buttonBack.scss'
+import { router } from '../../index'
+import Block from '../../services/Block'
 
 type ButtonBackProps = {
     link: string
 }
 
 export class ButtonBack extends Block {
-    constructor(props: ButtonBackProps) {
-        const {link} = props
-        super("div",
+    constructor (props: ButtonBackProps) {
+        const { link } = props
+        super('div',
             {
                 attr: {
-                    class: "back-sidebar"
+                    class: 'back-sidebar'
                 },
                 events: {
                     click: (e: Event) => {
@@ -24,7 +24,7 @@ export class ButtonBack extends Block {
         )
     }
 
-    render() {
+    render () {
         return this.compile(`
             <button class="btn-circle">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
